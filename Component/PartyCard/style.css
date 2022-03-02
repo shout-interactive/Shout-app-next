@@ -1,0 +1,23 @@
+.card-box {}
+
+@media (max-width: 400px) {
+    .card-box {
+        font-size: 1.2rem;
+        /* height: 14em; */
+    }
+    .card-box .title {
+        font-size: 1.2rem;
+    }
+    .card-box .avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+        background-color: red;
+    }
+    .card-box .btn-box {
+        width: 70%;
+    }
+    /* .badge {
+        display: none;
+    } */
+}
