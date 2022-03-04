@@ -7,7 +7,7 @@ const Wallet = Dynamic(() =>
 	}),
 )
 
-function wallet() {
+function musicpost() {
 	return (
 		<>
 			<Head>
@@ -19,4 +19,4 @@ function wallet() {
 	)
 }
 
-export default wallet
+export default musicpost
