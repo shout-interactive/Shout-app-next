@@ -114,9 +114,12 @@ export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
         </div>
         <Box className={classes.avatarGroupContainer}>
           <AvatarGroup
-            total={
-              Number(partyDetails?.Geust?.invites.length + partyDetails?.Geust?.geusts.length) || 20
-            }
+          // total={
+          //   Number(
+          //     partyDetails?.Geust?.invites.length +
+          //       partyDetails?.Geust?.geusts.length
+          //   ) || 20
+          // }
           >
             <Avatar alt="Remy Sharp" src="" />
             <Avatar alt="Travis Howard" src="" />
@@ -125,10 +128,10 @@ export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
           </AvatarGroup>
         </Box>
         <Box className={classes.partyCardTitleWrapper}>
-          <h4 className={classes.partyCardTitle}>{partyDetails?.name || "Anybody Cole"}</h4>
+          <h4 className={classes.partyCardTitle}>{/* {partyDetails?.name || "Anybody Cole"} */}</h4>
         </Box>
         <Box className={[classes.badge, classes.badgeContainer]}>
-          {moment(partyDetails?.date).format("Do MMM, h:mm a") || "5 Dec, 7:0"}
+          {/* {moment(partyDetails?.date).format("Do MMM, h:mm a") || "5 Dec, 7:0"} */}
         </Box>
       </CardContent>
     </Card>

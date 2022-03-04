@@ -1,5 +1,4 @@
 import { Container, Navbar, Nav } from "react-bootstrap";
-
 import styles from "./index.module.css";
 // const userCoin = localStorage.getItem("coins");
 // import { ReactComponent as CoinIcon } from "../../assest/images/coin.svg";
@@ -22,7 +21,9 @@ const HomePageHeader = ({ coinId, giftId, leaderId }) => {
     var suffixes = ["", "k", "m", "b", "t"];
     var suffixNum = Math.floor(("" + value).length / 3);
     var shortValue = parseFloat(
-      (suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(2)
+      (suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(
+        2
+      )
     );
     if (shortValue % 1 != 0) {
       shortValue = shortValue.toFixed(1);

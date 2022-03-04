@@ -1,25 +1,20 @@
 import { useState, useEffect } from "react";
 import { BsChevronLeft } from "react-icons/bs";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import { Container, Box, Button, Snackbar } from "@mui/material";
 import { LoadingIcon } from "../../Component/Loading/Loading";
-// import { getPartiesRequest } from "../../store/actions/get-parties";
-// import { createPartyRequest } from "../../store/actions/create-party";
 import { Header } from "../../Component/Header";
 import TabsComponent from "./tabs";
 import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
 import { useStyles } from "./style";
+import { useRouter } from "next/router";
 import styles from "./style.module.css";
-import ModalComponent from "../../Component/Modals";
 const ShoutParty = () => {
+  const route = useRouter();
   // const userId = localStorage.getItem("userId");
   // const dispatch = useDispatch();
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
-  // const { isLoading, error, isSuccessful, parties, message } = useSelector((s) => s.getParties);
-  // const { party } = useSelector((s) => s.onBoardScreen);
   const [isLoading, setIsLoading] = useState(false);
   // Dummy loading state above
   // New input for onboarding screens
@@ -73,9 +68,8 @@ const ShoutParty = () => {
         ) : (
           <div className="footer-box">
             <Box
-              id="createParty"
               className={styles["float-botton"]}
-              onClick={() => navigate("/party/create")}
+              onClick={() => route.push("/create")}
               sx={{
                 width: "20em",
                 margin: "1.5rem auto",
@@ -100,30 +94,6 @@ const ShoutParty = () => {
             </Box>
           </div>
         )}
-        <ModalComponent show={openModal} toggleModal={handleToggleModal}>
-          <Container className={classes.container}>
-            <Box className={classes.modalBox}>
-              <h4>Shout! Party</h4>
-              <span>Welcome to the Party. This is where all things party relative live</span>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "left" }}>
-                <Box onClick={() => onOPen()} sx={{ margin: "0.5rem 0rem", cursor: "pointer" }} s>
-                  <Button size="small" variant="text">
-                    Take A Tour
-                  </Button>
-                </Box>
-                <Box
-                  onClick={() => handleToggleModal(false)}
-                  sx={{ margin: "0.5rem 0rem", cursor: "pointer" }}
-                  s
-                >
-                  <Button size="small" variant="text">
-                    Skip Tour
-                  </Button>
-                </Box>
-              </div>
-            </Box>
-          </Container>
-        </ModalComponent>
       </Container>
     </>
   );
