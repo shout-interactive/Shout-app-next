@@ -4,7 +4,7 @@ import { Carousel } from "react-bootstrap";
 
 // import { dummyData } from '../../utils/homePageDummyData';
 
-import "./index.css";
+import styles from "./index.module.css";
 
 const CarouselComponent = () => {
   const [index, setIndex] = useState(0);
@@ -16,29 +16,29 @@ const CarouselComponent = () => {
     <Carousel className="" activeIndex={index} onSelect={handleSelect}>
       {/* {dummyData.map(({ Img }) => ( */}
       <Carousel.Item>
-        <div className="carousel-image-wrapper">
+        <div className={styles["carousel-image-wrapper"]}>
           <img
             src="https://res.cloudinary.com/de8vrxbqq/image/upload/v1644325905/shout/davido_zj6lcz.png"
             alt="davido"
-            className="carousel-image"
+            className={styles["carousel-image"]}
           />
         </div>
       </Carousel.Item>
       <Carousel.Item>
-        <div className="carousel-image-wrapper">
+        <div className={styles["carousel-image-wrapper"]}>
           <img
             src="https://res.cloudinary.com/de8vrxbqq/image/upload/v1644325905/shout/davido_zj6lcz.png"
             alt="davido"
-            className="carousel-image"
+            className={styles["carousel-image"]}
           />
         </div>
       </Carousel.Item>
       <Carousel.Item>
-        <div className="carousel-image-wrapper">
+        <div className={styles["carousel-image-wrapper"]}>
           <img
             src="https://res.cloudinary.com/de8vrxbqq/image/upload/v1644325905/shout/davido_zj6lcz.png"
             alt="davido"
-            className="carousel-image"
+            className={styles["carousel-image"]}
           />
         </div>
       </Carousel.Item>

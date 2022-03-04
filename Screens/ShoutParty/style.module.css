@@ -1,0 +1,16 @@
+.footer-box{
+   width: 100%;
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: 0;
+}
+
+.footer-box .float-botton {
+   position: fixed;
+   bottom: -24px;
+   width: calc(100vw - 0px);
+   background: #fff;
+   padding: 20px;
+   border-top: 1px solid #ddd;
+}
