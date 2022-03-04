@@ -64,6 +64,36 @@ const PartyDetails = () => {
     }
   };
 
+  const activities = [
+    {
+      color: "#FA9330",
+      label: "Guestlist",
+      Icon: GroupIcon,
+      link: "/party/details/guestlist",
+      id: "guestList",
+    },
+    {
+      color: "#FA4A0C",
+      label: "Gift goal",
+      Icon: RedeemIcon,
+      link: "/party/details/giftgoal",
+      id: "giftGoal",
+    },
+    {
+      color: "#B57BFF",
+      label: "Musicpost",
+      Icon: AudiotrackIcon,
+      link: "/party/details/musicpost",
+      id: "musicPost",
+    },
+    {
+      color: "#110066",
+      label: "Share",
+      Icon: RedoIcon,
+      id: "share",
+    },
+  ];
+
   // useEffect(() => {
   //   const tempData = localStorage.getItem("data");
   //   const tempPaid = localStorage.getItem("paid");
@@ -140,11 +170,11 @@ const PartyDetails = () => {
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
-            {/* {activities.map((activity, i) => (
+            {activities.map((activity, i) => (
               <Grid item xs={6}>
                 <Item key={i} data={activity} />
               </Grid>
-            ))} */}
+            ))}
           </Grid>
         </Box>
 
@@ -174,7 +204,11 @@ const PartyDetails = () => {
             variant="contained"
           >
             Join Party
-            {/* {tempPaid ? "Join party" : joined ? "4D:23H:13M:5S" : "Join party for 2000 🪙"} */}
+            {tempPaid
+              ? "Join party"
+              : joined
+              ? "4D:23H:13M:5S"
+              : "Join party for 2000 🪙"}
           </Button>
         </div>
 

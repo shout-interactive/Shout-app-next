@@ -1,0 +1,13 @@
+.title-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.title {
+  text-align: left;
+  width: 100%;
+  color: #0a1f44;
+}

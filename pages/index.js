@@ -6,8 +6,8 @@ import { CreateParty } from "./Screens/create party/index";
 export default function Home() {
   return (
     <div>
-      <CreateParty />
-      {/* <PartyDetails /> */}
+      {/* <CreateParty /> */}
+      <PartyDetails />
     </div>
   );
 }
