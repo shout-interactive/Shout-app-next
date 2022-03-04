@@ -1,10 +1,17 @@
 import { Container, Navbar, Stack } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { useStyles } from "./style";
 
-const NavHeader = ({ leftIcon, title, rightIcon, primary = false, leftLink, rightLink }) => {
-  const navigate = useNavigate();
+const NavHeader = ({
+  leftIcon,
+  title,
+  rightIcon,
+  primary = false,
+  leftLink,
+  rightLink,
+}) => {
+  // const navigate = useNavigate();
   const classes = useStyles(primary);
 
   const handleLeftLink = () => {
@@ -16,7 +23,11 @@ const NavHeader = ({ leftIcon, title, rightIcon, primary = false, leftLink, righ
   return (
     <Navbar className={classes.root}>
       <Container className="">
-        <Stack direction="horizontal" gap={3} className={classes.navHeaderContainer}>
+        <Stack
+          direction="horizontal"
+          gap={3}
+          className={classes.navHeaderContainer}
+        >
           <div onClick={handleLeftLink} className={classes.navItems}>
             {leftIcon}
           </div>

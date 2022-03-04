@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Container, Button, Typography, Grow } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
-import { useStyles } from "./styles";
+import { useStyles } from "./style";
 
 // import { verifyTokenRequest } from "../../store/actions/get-token";
 
 const LandingPage = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const classes = useStyles();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [loaded, setLoaded] = useState(false);
-  const { isLoading, error, isSuccessful, token, user, message } = useSelector(
-    (s) => s.verifyToken
-  );
+  // const { isLoading, error, isSuccessful, token, user, message } = useSelector(
+  //   (s) => s.verifyToken
+  // );
 
   const handleOnClick = async () => {
     navigate(`/home`);
@@ -53,7 +53,9 @@ const LandingPage = () => {
           <img className={classes.root} src={"/favicon.svg"} alt="Shout logo" />
         </Button>
       </Grow>
-      <Typography sx={{ color: "#14B363" }}>Click image above to enter</Typography>
+      <Typography sx={{ color: "#14B363" }}>
+        Click image above to enter
+      </Typography>
     </Container>
   );
 };
