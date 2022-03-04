@@ -22,7 +22,7 @@ const TabPanel = (props) => {
   );
 };
 
-const TabsComponent = ({ partyTab, enterParty, shareParty }) => {
+const TabsComponent = () => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -41,7 +41,6 @@ const TabsComponent = ({ partyTab, enterParty, shareParty }) => {
     <Box sx={{ marginBottom: "90px" }}>
       <Box className={classes.tabsWrapper}>
         <Tabs
-          id={partyTab}
           className={classes.tabs}
           value={value}
           onChange={handleChange}
@@ -52,7 +51,7 @@ const TabsComponent = ({ partyTab, enterParty, shareParty }) => {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <MyInvites enterParty={enterParty} shareParty={shareParty} />
+        <MyInvites />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <MyParties />

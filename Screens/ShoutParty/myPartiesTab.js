@@ -4,29 +4,24 @@ import { Container } from "@mui/material";
 import Title from "../../Component/TitleComponent";
 import PartyCard from "../../Component/PartyCard/index.js";
 // import ButtonComponent from "../../components/Button";
-// import { dummyNextPartyData, dummyUpcomingPartyData } from "../../utils/partyData";
+import { dummyNextPartyData, dummyUpcomingPartyData } from "../../utils/partyData";
 
 const MyParties = () => {
-  const { isLoading, error, isSuccessful, myParties, message } = useSelector((s) => s.getParties);
-  // const handleSend = () => {};
-
   return (
     <Container className="invite-tab-container">
       <Title title="Next party" />
-
-      {/* {parties[0]?.map((data) => ( */}
       <PartyCard
-        data={myParties[0]}
+        data={dummyNextPartyData[0]}
         secondary="#FA9330"
         header="25px"
         paid={false}
         badge="#F5AD65"
         button="#14B363"
       />
-      {/* ))} */}
+
       <Title title="Upcoming party" />
 
-      {myParties?.map((data, i) => (
+      {dummyUpcomingPartyData?.map((data, i) => (
         <PartyCard
           key={i}
           data={data}

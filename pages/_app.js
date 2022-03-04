@@ -12,8 +12,8 @@ const theme = createTheme({
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <CssBaseline />
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Container disableGutters maxWidth="sm">
           <Component {...pageProps} />
         </Container>

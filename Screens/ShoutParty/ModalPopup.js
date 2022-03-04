@@ -5,7 +5,6 @@ import ClearRoundedIcon from "@mui/icons-material/Clear";
 import { useStyles } from "./style";
 
 const ModalPopup = ({ show, toggleModal }) => {
-  const navigate = useNavigate();
   const classes = useStyles();
 
   const handleEnterParty = () => {

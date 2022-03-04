@@ -37,31 +37,18 @@ const ShoutParty = () => {
     setEnabled(true);
     handleToggleModal(false);
   };
-  const handleDisableModal = () => {
-    dispatch(onboardParty());
-  };
-  useEffect(() => {
-    setTimeout(() => {
-      if (party) {
-        handleToggleModal(false);
-      } else {
-        handleToggleModal(true);
-      }
-    }, 2000);
-  }, []);
 
-  // const navigate = useNavigate();
   const classes = useStyles();
 
   const fetchParties = () => {
-    const obj = `{ user: ${userId} }`;
+    const obj = `{ user: ${"userId"} }`;
 
     dispatch(getPartiesRequest(obj));
   };
 
-  useEffect(() => {
-    fetchParties();
-  }, []);
+  // useEffect(() => {
+  //   fetchParties();
+  // }, []);
 
   const handleToggleDrawer = (open) => {
     setToggleDrawer(open);
@@ -73,7 +60,7 @@ const ShoutParty = () => {
         <Header
           type="nav"
           title="🎉 Shout! Party"
-          leftLink="/"
+          leftLink="/home"
           rightLink={"/"}
           leftIcon={<BsChevronLeft />}
           primary

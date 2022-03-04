@@ -39,20 +39,20 @@ const HomePageHeader = ({ coinId, giftId, leaderId }) => {
         </Navbar.Brand>
         <Nav>
           <Nav onClick={handleNavigateToWallet}>
-            <div className={styles.badgeHeader} id={coinId}>
-              <img src={"/assets/coin.png"} alt="Coin" style={{ display: "none" }} />0
+            <div className={styles["badge-header"]}>
+              <img src={"/assets/coin.png"} alt="Coin" />0
               {/* {userCoin === "undefined" ? intToString(2000) : intToString(userCoin)} */}
             </div>
           </Nav>
 
           <Nav onClick={handleNavigateToLeaderBoard}>
-            <div className={styles.badgeHeader} id={leaderId}>
+            <div className={styles["badge-header"]} id={leaderId}>
               <img src={"/assets/cup.svg"} alt="Leaderboard" />
             </div>
           </Nav>
 
           <Nav onClick={handleNavigateToLeaderBoard} style={{ paddingRight: 0 }}>
-            <div className={styles.badgeHeader} id={giftId}>
+            <div className={styles["badge-header"]} id={giftId}>
               <img src={"/assets/gift-box.svg"} alt="Gift box" />
             </div>
           </Nav>

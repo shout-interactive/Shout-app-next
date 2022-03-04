@@ -33,7 +33,7 @@ const PartyCard = ({
 
   const classes = useStyles(props);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleOnClick = () => {
     localStorage.setItem("data", JSON.stringify(data));
@@ -42,7 +42,7 @@ const PartyCard = ({
   };
 
   return (
-    <Card className={`card-box ${classes.squareBox}`}>
+    <Card className={`${styles["card-box"]} ${classes.squareBox}`}>
       <Box sx={{ width: "100%" }}>
         <CardContent className={`${classes.squareContent}`}>
           <Stack className={classes.stack} direction="horizontal" gap={2}>
@@ -50,7 +50,7 @@ const PartyCard = ({
               Party start on {moment(data?.date).format("Do MMM, h:mm a") || "5 Dec, 7:0"}
             </div>
             <div className={classes.badge}>
-              <IoMdShareAlt id={shareParty} />
+              <IoMdShareAlt />
             </div>
           </Stack>
           <Box className={classes.partyCardTitleWrapper}>
@@ -84,9 +84,9 @@ const PartyCard = ({
 export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
   const [data, setData] = useState();
   const [, setPaid] = useState();
-  const { isLoading, error, isSuccessful, partyDetails, message } = useSelector(
-    (s) => s.getPartyDetails
-  );
+  // const { isLoading, error, isSuccessful, partyDetails, message } = useSelector(
+  //   (s) => s.getPartyDetails
+  // );
 
   useEffect(() => {
     // const tempData = localStorage.getItem("data");

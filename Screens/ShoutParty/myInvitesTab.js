@@ -11,12 +11,8 @@ import { useStyles } from "./style";
 import ModalPopup from "./ModalPopup";
 const MyInvites = () => {
   const classes = useStyles();
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
   const [partyModal, setPartyModal] = useState(false);
 
-  // const { isLoading, error, isSuccessful, parties, message } = useSelector((s) => s.getParties);
-  // const handleSend = () => {};
   const handleOnClick = (data, paid) => {
     localStorage.setItem("data", JSON.stringify(data));
     localStorage.setItem("paid", paid);

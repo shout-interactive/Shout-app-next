@@ -1,12 +1,12 @@
 import { Container, Navbar, Stack } from "react-bootstrap";
-
+import { useRouter } from "next/router";
 import { useStyles } from "./style";
 
 const NavHeader = ({ leftIcon, title, rightIcon, primary = false, leftLink, rightLink }) => {
   const classes = useStyles(primary);
-
+  const route = useRouter();
   const handleLeftLink = () => {
-    navigate(leftLink);
+    route.push(leftLink);
   };
   const handleRightLink = () => {
     navigate(rightLink);
