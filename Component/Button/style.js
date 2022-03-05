@@ -8,6 +8,9 @@ export const useStyles = makeStyles((theme) => ({
         padding: (large) => (large ? ".8rem" : ".4rem"),
         borderRadius: "8px",
         cursor: "pointer",
+        "&:hover": {
+            backgroundColor: "#122463 !important",
+        },
     },
     buttonTitle: {
         margin: "0 !important",

@@ -1,0 +1,57 @@
+.img {
+    width: 100%;
+    height: 100%;
+}
+
+.modalBox {
+    width: 20em;
+    height: 18em;
+    background-color: #ffffff;
+    margin-top: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.containerDetail {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 120px;
+    color: green;
+    border-radius: 20px;
+    margin: 20px auto;
+}
+
+.btnRemove {
+    position: absolute;
+    right: 20px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    top: 20px;
+    color: black;
+}
+
+.getBtn {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 auto;
+    position: relative;
+    top: 30px;
+}

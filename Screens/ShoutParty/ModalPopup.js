@@ -3,10 +3,10 @@ import ModalComponent from "../../Component/Modals";
 import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
 import { useStyles } from "./style";
-
+import { useRouter } from "next/router";
 const ModalPopup = ({ show, toggleModal }) => {
   const classes = useStyles();
-
+  const route = useRouter();
   const handleEnterParty = () => {
     // if (userCoin >= 200) {
     //   navigate("/live/celebrant");
@@ -14,7 +14,7 @@ const ModalPopup = ({ show, toggleModal }) => {
     //   handleToggleModal(false);
     // //   handleMoreCoinModal(true);
     // }
-    navigate("/live/celebrant");
+    route.push("/live");
   };
   return (
     <Container>

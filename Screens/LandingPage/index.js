@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Button, Typography, Grow } from "@mui/material";
+import { useRouter } from "next/router";
 import Link from "next/link";
 // import { useDispatch, useSelector } from "react-redux";
 
@@ -10,12 +11,8 @@ import { useStyles } from "./style";
 const LandingPage = () => {
   // const dispatch = useDispatch();
   const classes = useStyles();
-  // const navigate = useNavigate();
-
+  // const route
   const [loaded, setLoaded] = useState(false);
-  // const { isLoading, error, isSuccessful, token, user, message } = useSelector(
-  //   (s) => s.verifyToken
-  // );
 
   return (
     <Container
@@ -41,7 +38,7 @@ const LandingPage = () => {
               marginBottom: "1rem",
             }}
           >
-            <img className={classes.root} src={"/favicon.png"} alt="Shout logo" />
+            <img className={classes.root} src={"/assest/images/shoutLogo.svg"} alt="Shout logo" />
           </Button>
         </Link>
       </Grow>

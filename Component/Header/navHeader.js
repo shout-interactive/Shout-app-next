@@ -9,7 +9,7 @@ const NavHeader = ({ leftIcon, title, rightIcon, primary = false, leftLink, righ
     route.push(leftLink);
   };
   const handleRightLink = () => {
-    navigate(rightLink);
+    // route.push(rightLink);
   };
   return (
     <Navbar className={classes.root}>

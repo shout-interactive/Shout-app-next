@@ -26,20 +26,12 @@ const CarouselComponent = () => {
       </Carousel.Item>
       <Carousel.Item>
         <div className={styles["carousel-image-wrapper"]}>
-          <img
-            src="https://res.cloudinary.com/de8vrxbqq/image/upload/v1644325905/shout/davido_zj6lcz.png"
-            alt="davido"
-            className={styles["carousel-image"]}
-          />
+          <img src="/assest/images/wizkid.png" alt="davido" className={styles["carousel-image"]} />
         </div>
       </Carousel.Item>
       <Carousel.Item>
         <div className={styles["carousel-image-wrapper"]}>
-          <img
-            src="https://res.cloudinary.com/de8vrxbqq/image/upload/v1644325905/shout/davido_zj6lcz.png"
-            alt="davido"
-            className={styles["carousel-image"]}
-          />
+          <img src="/assest/images/cuppy.jpg" alt="davido" className={styles["carousel-image"]} />
         </div>
       </Carousel.Item>
       {/* ))} */}

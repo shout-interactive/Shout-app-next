@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 // import { useSelector } from "react-redux";
-
+import { useRouter } from "next/router";
 import { Box, Container, Paper, Grid, Typography, IconButton, Button } from "@mui/material";
 import ReactPlayer from "react-player";
 import GroupIcon from "@mui/icons-material/Group";
@@ -20,6 +20,7 @@ import ButtonComponent from "../../Component/Button";
 // const { localStorage } = window;
 
 const PartyDetails = () => {
+  const route = useRouter();
   // const userCoin = localStorage.getItem("coins");
   const classes = useStyles();
   const [, setData] = useState();
@@ -60,21 +61,21 @@ const PartyDetails = () => {
       color: "#FA9330",
       label: "Guestlist",
       Icon: GroupIcon,
-      link: "/party/details/guestlist",
+      link: "/details/guestlist",
       id: "guestList",
     },
     {
       color: "#FA4A0C",
       label: "Gift goal",
       Icon: RedeemIcon,
-      link: "/party/details/giftgoal",
+      link: "details/giftgoal",
       id: "giftGoal",
     },
     {
       color: "#B57BFF",
       label: "Musicpost",
       Icon: AudiotrackIcon,
-      link: "/party/details/musicpost",
+      link: "details/musicpost",
       id: "musicPost",
     },
     {
@@ -108,7 +109,7 @@ const PartyDetails = () => {
   const Item = ({ data: { color, label, Icon, link, id } }) => (
     <Paper
       id={id}
-      onClick={() => navigate(link)}
+      onClick={() => route.push(link)}
       sx={{ backgroundColor: color, cursor: "pointer" }}
       className={classes.paper}
     >
@@ -121,21 +122,6 @@ const PartyDetails = () => {
 
   return (
     <>
-      {/* <Tour
-        steps={steps}
-        isOpen={enabled}
-        onRequestClose={onExit}
-        className="helper"
-        disableKeyboardNavigation={true}
-        lastStepNextButton={<Button>Okay</Button>}
-        nextButton={<Button>Next</Button>}
-        prevButton={<div>{}</div>}
-        rounded={5}
-        showNavigationNumber={false}
-        accentColor="#091D50"
-        showNumber={false}
-        maskSpace={5}
-      /> */}
       <PartyCardTwo
         onClick={() => handleToggleDrawer(true)}
         header="0"

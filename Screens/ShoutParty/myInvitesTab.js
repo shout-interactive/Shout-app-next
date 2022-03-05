@@ -5,24 +5,24 @@ import PartyCard from "../../Component/PartyCard/index.js";
 import { LoadingIcon } from "../../Component/Loading/Loading";
 import { featuredParty } from "../../utils/partyData";
 import { dummyUpcomingPartyData } from "../../utils/partyData";
-
+import { useRouter } from "next/router";
 import { useStyles } from "./style";
 // import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
 import ModalPopup from "./ModalPopup";
 const MyInvites = () => {
   const classes = useStyles();
   const [partyModal, setPartyModal] = useState(false);
-
+  const route = useRouter();
   const handleOnClick = (data, paid) => {
     localStorage.setItem("data", JSON.stringify(data));
     localStorage.setItem("paid", paid);
     navigate("/party/details", { state: { data: data, paid: paid } });
   };
 
-  const enterMyParty = (data, id) => {
-    const checkParty = data?.filter((element) => element.id === id);
-    dispatch(getPartyDetailsRequest(checkParty));
-    navigate("/party/details");
+  const enterMyParty = () => {
+    // const checkParty = data?.filter((element) => element.id === id);
+    // dispatch(getPartyDetailsRequest(checkParty));
+    route.push("/detail");
   };
 
   const handleToggleModal = (open) => {
@@ -62,7 +62,7 @@ const MyInvites = () => {
             header="25px"
             badge="#4d4c83"
             // () => handleOnClick(data, true)
-            partyBtnFunction={() => enterMyParty(parties, data.id)}
+            partyBtnFunction={() => enterMyParty()}
           />
         ))}
       </Container>
