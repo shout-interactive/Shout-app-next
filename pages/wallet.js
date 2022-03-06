@@ -1,11 +1,12 @@
 import Head from "next/head"
 import Dynamic from "next/dynamic"
+import Wallet from "../Screens/Wallet/index"
 
-const Wallet = Dynamic(() =>
-	import("../Screens/Wallet/index", {
-		ssr: false,
-	}),
-)
+// const Wallet = Dynamic(() =>
+// 	import("../Screens/Wallet/index", {
+// 		ssr: false,
+// 	}),
+// )
 
 function wallet() {
 	return (

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, Fragment } from "react"
 import Dynamic from "next/dynamic"
 import { BsChevronLeft } from "react-icons/bs"
 import ClearIcon from "@mui/icons-material/Clear"
@@ -176,8 +176,8 @@ const Wallet = () => {
 					<Header
 						type="nav"
 						title="Wallet"
-						leftLink="/"
-						rightLink={"/"}
+						leftLink="/home"
+						rightLink={"/home"}
 						leftIcon={<BsChevronLeft />}
 						rightIcon={<ClearRoundedIcon />}
 					/>
@@ -228,11 +228,11 @@ const Wallet = () => {
 						</Typography>
 					</Container>
 
-					{coinBundles.map((item) => (
-						<>
+					{coinBundles.map((item, index) => (
+						<Fragment key={index}>
 							{coinBundleItem(item)}
 							<Divider />
-						</>
+						</Fragment>
 					))}
 				</Card>
 				<WalletPaymentDrawer
