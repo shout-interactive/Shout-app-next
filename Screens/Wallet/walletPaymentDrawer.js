@@ -93,7 +93,7 @@ const WalletPaymentDrawer = ({
 			/>
 			<Box>
 				{paymentMethodData.map((method, index) => (
-					<Fragment key={index}>_renderitems(method)</Fragment>
+					<Fragment key={index}>{_renderitems(method)}</Fragment>
 				))}
 			</Box>
 		</Container>
