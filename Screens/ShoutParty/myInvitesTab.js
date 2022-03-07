@@ -35,25 +35,16 @@ const MyInvites = () => {
         <Title title="Featured parties" />
 
         {featuredParty?.map((data, i) => (
-          <PartyCard
-            key={i}
-            data={data}
-            paid={true}
-            secondary="#40B464"
-            header="25px"
-            badge="#bfd9ba"
-            button="#091d50"
-            partyBtnFunction={() => handleToggleModal(true)}
-          />
+          <PartyCard key={i} data={data} paid={true} secondary="#40B464" header="25px" badge="#bfd9ba" button="#091d50" partyBtnFunction={() => handleToggleModal(true)} />
         ))}
         <ModalPopup show={partyModal} toggleModal={handleToggleModal} />
       </Container>
       <Container className={classes.inviteTabContainer}>
         <Title title="Upcoming parties" />
 
-        {dummyUpcomingPartyData?.map((data) => (
+        {dummyUpcomingPartyData?.map((data, i) => (
           <PartyCard
-            key={data.id}
+            key={i}
             id={data.id}
             data={data}
             paid={true}

@@ -52,15 +52,7 @@ const ShoutParty = () => {
   return (
     <>
       <Container className={classes.root}>
-        <Header
-          type="nav"
-          title="🎉 Shout! Party"
-          leftLink="/home"
-          rightLink={"/"}
-          leftIcon={<BsChevronLeft />}
-          primary
-          rightIcon={<TodayRoundedIcon />}
-        />
+        <Header type="nav" title="🎉 Shout! Party" leftLink="/home" rightLink={"/"} leftIcon={<BsChevronLeft />} primary rightIcon={<TodayRoundedIcon />} />
         <TabsComponent />
 
         {isLoading ? (
