@@ -393,6 +393,28 @@ export const CreateParty = () => {
               {/* {isLoading ? "Loading..." : "Create"} */}create
             </Button>
           </Box>
+          <Box
+            id="createParty"
+            onClick={handleGoBack}
+            // onClick={userCoin >= 100 ? handleGoBack : () => handleToggleModal(true)}
+            sx={{ margin: "2rem 0rem", cursor: "pointer", flex: "1" }}
+            className={classes.buttonWrapper}
+          >
+            <Button
+              sx={{
+                backgroundColor: "#110066",
+                color: "white",
+                textTransform: "capitalize",
+                fontWeight: "bold",
+                padding: ".8rem 0rem",
+                borderRadius: "10px",
+              }}
+              variant="contained"
+              fullWidth
+            >
+              {/* {isLoading ? "Loading..." : "Create"} */}create
+            </Button>
+          </Box>
           {/* {isSuccessful && (
             <Snackbar
               open={openSnackbar}

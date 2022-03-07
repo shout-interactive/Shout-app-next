@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 export const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     width: "100%",
   },
   /* tabs styles begins here */
@@ -51,7 +51,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: "#ffffff",
     marginTop: "20px",
     borderRadius: "10px",
-    // display: "flex",
+    display: "flex",
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
