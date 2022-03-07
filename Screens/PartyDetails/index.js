@@ -8,7 +8,6 @@ import RedeemIcon from "@mui/icons-material/Redeem";
 import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 import RedoIcon from "@mui/icons-material/Redo";
 import ModalComponent from "../../Component/Modals";
-
 import ButtomDrawer from "./bottomDrawer";
 import { PartyCardTwo } from "../../Component/PartyCard";
 import Title from "../../Component/TitleComponent";
@@ -48,12 +47,13 @@ const PartyDetails = () => {
     setMoreCoinModal(open);
   };
   const handleEnterParty = () => {
-    if (userCoin >= 200) {
-      navigate("/live/celebrant");
-    } else {
-      handleToggleModal(false);
-      handleMoreCoinModal(true);
-    }
+    // if (userCoin >= 200) {
+    //   navigate("/live");
+    // } else {
+    //   handleToggleModal(false);
+    //   handleMoreCoinModal(true);
+    // }
+    route.push("/live");
   };
 
   const activities = [
