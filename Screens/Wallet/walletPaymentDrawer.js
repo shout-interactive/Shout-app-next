@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { Box, SwipeableDrawer, Typography, Container } from "@mui/material"
 import Divider from "@mui/material/Divider"
 import { BsChevronLeft } from "react-icons/bs"
@@ -91,7 +91,11 @@ const WalletPaymentDrawer = ({
 				leftIcon={<BsChevronLeft onClick={() => handleGoBack()} />}
 				primary
 			/>
-			<Box>{paymentMethodData.map((method) => _renderitems(method))}</Box>
+			<Box>
+				{paymentMethodData.map((method, index) => (
+					<Fragment key={index}>{_renderitems(method)}</Fragment>
+				))}
+			</Box>
 		</Container>
 	)
 

@@ -2,17 +2,22 @@ import { useEffect, useState } from "react";
 import { Container, Button, Typography, Grow } from "@mui/material";
 import { useRouter } from "next/router";
 import Link from "next/link";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useStyles } from "./style";
 
-// import { verifyTokenRequest } from "../../store/actions/get-token";
+import { verifyTokenRequest } from "../../store/actions/get-token";
 
 const LandingPage = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const classes = useStyles();
   // const route
   const [loaded, setLoaded] = useState(false);
+
+  useEffect(async () => {
+    const userData = await dispatch(verifyTokenRequest());
+    console.log(userData);
+  }, []);
 
   return (
     <Container

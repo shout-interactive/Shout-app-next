@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, Fragment } from "react"
 import {
 	Box,
 	SwipeableDrawer,
@@ -102,36 +102,34 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
 	]
 
 	const _renderitems = (data) => (
-		<>
-			<Container
+		<Container
+			sx={{
+				cursor: "pointer",
+				width: "100%",
+				display: "flex",
+				flexDirection: "row",
+				padding: "1rem 0rem",
+				alignItems: "center",
+				justifyContent: "space-between",
+			}}
+			onClick={() => handleSelect(data.key)}
+		>
+			<Box sx={{ width: "5%" }}>{data.leftIcon}</Box>
+			<Typography
 				sx={{
-					cursor: "pointer",
-					width: "100%",
-					display: "flex",
-					flexDirection: "row",
-					padding: "1rem 0rem",
-					alignItems: "center",
-					justifyContent: "space-between",
+					width: "90%",
+					marginLeft: ".5rem",
+					fontWeight: "400",
+					fontSize: "1.3rem",
+					color: "#121163",
 				}}
-				onClick={() => handleSelect(data.key)}
 			>
-				<Box sx={{ width: "5%" }}>{data.leftIcon}</Box>
-				<Typography
-					sx={{
-						width: "90%",
-						marginLeft: ".5rem",
-						fontWeight: "400",
-						fontSize: "1.3rem",
-						color: "#121163",
-					}}
-				>
-					{data.name}
-				</Typography>
-				<Box sx={{ width: "5%" }}>
-					{selectedIndex === data.key ? data.rightSelectedIcon : data.rightIcon}
-				</Box>
-			</Container>
-		</>
+				{data.name}
+			</Typography>
+			<Box sx={{ width: "5%" }}>
+				{selectedIndex === data.key ? data.rightSelectedIcon : data.rightIcon}
+			</Box>
+		</Container>
 	)
 
 	const list = () => (
@@ -168,11 +166,11 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
 				>
 					Payment methods
 				</Typography>
-				{paymentMethodData.map((method) => (
-					<>
+				{paymentMethodData.map((method, index) => (
+					<Fragment key={index}>
 						{_renderitems(method)}
 						<Divider />
-					</>
+					</Fragment>
 				))}
 			</Box>
 			<Box

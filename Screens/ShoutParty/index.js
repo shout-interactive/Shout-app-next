@@ -61,12 +61,12 @@ const ShoutParty = () => {
           primary
           rightIcon={<TodayRoundedIcon />}
         />
-        <TabsComponent partyTab="partyTab" enterParty="enterparty" shareParty="shareparty" />
+        <TabsComponent />
 
         {isLoading ? (
           <LoadingIcon fullscreen />
         ) : (
-          <div className="footer-box">
+          <div className={styles["footer-box"]}>
             <Box
               className={styles["float-botton"]}
               onClick={() => route.push("/create")}
