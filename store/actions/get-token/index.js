@@ -6,7 +6,7 @@ import {
 } from "../../actionTypes";
 import { API } from "../../../utils/Axios";
 
-export const token = process.env.REACT_APP_TEMP_TOKEN;
+export const token = process.env.NEXT_PUBLIC_API_TEMP_TOKEN;
 
 const verifyTokenStart = () => {
   return { type: VERIFY_TOKEN_START };

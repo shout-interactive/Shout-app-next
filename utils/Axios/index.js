@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as _ from "lodash";
-export const apiUrl = process.env.REACT_APP_API_URL;
+export const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const API = async (callObj, dispatch) => {
   const { path, method, data = null, header = false } = callObj;
