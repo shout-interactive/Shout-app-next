@@ -9,7 +9,7 @@ const NavHeader = ({ leftIcon, title, rightIcon, primary = false, leftLink, righ
     route.push(leftLink);
   };
   const handleRightLink = () => {
-    // route.push(rightLink);
+    rightLink;
   };
   return (
     <Navbar className={classes.root}>
@@ -19,7 +19,7 @@ const NavHeader = ({ leftIcon, title, rightIcon, primary = false, leftLink, righ
             {leftIcon}
           </div>
           <div className={classes.navItems}>{title}</div>
-          <div className={classes.navItems} onClick={handleRightLink}>
+          <div className={classes.navItems} onClick={() => handleRightLink()}>
             {rightIcon}
           </div>
         </Stack>

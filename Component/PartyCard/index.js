@@ -5,7 +5,7 @@ import { IoMdShareAlt } from "react-icons/io";
 import { BsChevronLeft } from "react-icons/bs";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import moment from "moment";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ButtonComponent from "../Button";
 import { Header } from "../../Component/Header";
@@ -33,7 +33,6 @@ const PartyCard = ({
 
   const classes = useStyles(props);
 
-  // const navigate = useNavigate();
 
   const handleOnClick = () => {
     localStorage.setItem("data", JSON.stringify(data));
@@ -84,9 +83,9 @@ const PartyCard = ({
 export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
   const [data, setData] = useState();
   const [, setPaid] = useState();
-  // const { isLoading, error, isSuccessful, partyDetails, message } = useSelector(
-  //   (s) => s.getPartyDetails
-  // );
+  const { isLoading, error, isSuccessful, partyDetails, message } = useSelector(
+    (s) => s.getPartyDetails
+  );
 
   useEffect(() => {
     // const tempData = localStorage.getItem("data");
@@ -114,12 +113,12 @@ export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
         </div>
         <Box className={classes.avatarGroupContainer}>
           <AvatarGroup
-          // total={
-          //   Number(
-          //     partyDetails?.Geust?.invites.length +
-          //       partyDetails?.Geust?.geusts.length
-          //   ) || 20
-          // }
+          total={
+            Number(
+              partyDetails?.Geust?.invites.length +
+                partyDetails?.Geust?.geusts.length
+            ) || 20
+          }
           >
             <Avatar alt="Remy Sharp" src="" />
             <Avatar alt="Travis Howard" src="" />
@@ -128,10 +127,10 @@ export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
           </AvatarGroup>
         </Box>
         <Box className={classes.partyCardTitleWrapper}>
-          <h4 className={classes.partyCardTitle}>{/* {partyDetails?.name || "Anybody Cole"} */}</h4>
+          <h4 className={classes.partyCardTitle}>{partyDetails?.party?.name || "Anybody Cole"}</h4>
         </Box>
         <Box className={[classes.badge, classes.badgeContainer]}>
-          {/* {moment(partyDetails?.date).format("Do MMM, h:mm a") || "5 Dec, 7:0"} */}
+          {moment(partyDetails?.party?.date).format("Do MMM, h:mm a") || "5 Dec, 7:0"}
         </Box>
       </CardContent>
     </Card>

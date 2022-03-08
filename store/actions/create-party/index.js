@@ -31,7 +31,7 @@ export const createPartyRequest = (payload) => {
       const callObj = {
         method: "POST",
         path: `party/create`,
-        data: null,
+        data: payload,
       };
 
       const data = await API(callObj);

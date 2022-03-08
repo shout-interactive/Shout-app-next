@@ -1,15 +1,16 @@
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { useRouter } from "next/router";
-
+import {useEffect} from "react"
 import styles from "./index.module.css";
-// const userCoin = localStorage.getItem("coins");
-// import { ReactComponent as CoinIcon } from "../../assest/images/coin.svg";
-// import { ReactComponent as GiftIcon } from "../../assest/images/gift.svg";
-// import { ReactComponent as TrophyIcon } from "../../assest/images/trophy.svg";
 
 import { useStyles } from "./style";
 
+
 const HomePageHeader = ({ coinId, giftId, leaderId }) => {
+  if (typeof window !== 'undefined') {
+  // Perform localStorage action
+ const userCoin = localStorage.getItem("coin");
+}
   // const classes = useStyles();
   const router = useRouter();
 
@@ -22,6 +23,11 @@ const HomePageHeader = ({ coinId, giftId, leaderId }) => {
   const handleNavigateToGifts = () => {
     router.push("/gift");
   };
+  useEffect(() =>{
+
+  })
+      
+
   function intToString(value) {
     var suffixes = ["", "k", "m", "b", "t"];
     var suffixNum = Math.floor(("" + value).length / 3);
@@ -44,8 +50,8 @@ const HomePageHeader = ({ coinId, giftId, leaderId }) => {
         <Nav>
           <Nav onClick={handleNavigateToWallet}>
             <div className={styles["badge-header"]}>
-              <img src={"/assets/coin.png"} alt="Coin" />0
-              {/* {userCoin === "undefined" ? intToString(2000) : intToString(userCoin)} */}
+              <img src={"/assets/coin.png"} alt="Coin" />
+              {userCoin === "undefined" ? intToString(2000) : intToString(userCoin)}
             </div>
           </Nav>
 

@@ -7,43 +7,44 @@ import TabsComponent from "./tabs";
 import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
 import { useStyles } from "./style";
 import { useRouter } from "next/router";
+import { getPartiesRequest } from "../../store/actions/get-parties";
+import { useDispatch, useSelector } from "react-redux";
+
 import styles from "./style.module.css";
 const ShoutParty = () => {
   const route = useRouter();
-  // const userId = localStorage.getItem("userId");
-  // const dispatch = useDispatch();
+  if (typeof window !== 'undefined') {
+  // Perform localStorage action
+  const userId = localStorage.getItem("userId");
+
+}
+  const dispatch = useDispatch();
+  const { isLoading, error, isSuccessful, parties, message } = useSelector((s) => s.getParties);
+
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  // Dummy loading state above
-  // New input for onboarding screens
+
 
   const [openModal, setOpenModal] = useState(false);
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
-  const [enabled, setEnabled] = useState(false);
-  const onExit = () => {
-    setEnabled(false);
-  };
 
-  const onOPen = () => {
-    setEnabled(true);
-    handleToggleModal(false);
-  };
 
   const classes = useStyles();
 
   const fetchParties = () => {
-    const obj = `{ user: ${"userId"} }`;
+    const obj = {
+      user:localStorage.getItem("userId")
+    }
 
     dispatch(getPartiesRequest(obj));
   };
 
-  // useEffect(() => {
-  //   fetchParties();
-  // }, []);
+  useEffect(() => {
+    fetchParties();
+  }, []);
 
   const handleToggleDrawer = (open) => {
     setToggleDrawer(open);

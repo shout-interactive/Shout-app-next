@@ -15,8 +15,8 @@ import { useStyles } from "./style";
 import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
 import ButtonComponent from "../../Component/Button";
+import { useSelector } from "react-redux";
 
-// const { localStorage } = window;
 
 const PartyDetails = () => {
   const route = useRouter();
@@ -31,7 +31,7 @@ const PartyDetails = () => {
   const [joined, setJoined] = useState(false);
   const [tempPaid, setTempPaid] = useState(paid);
   const [toggle, setToggle] = useState(false);
-  // const { isLoading, partyDetails } = useSelector((s) => s.getPartyDetails);
+  const { isLoading, partyDetails } = useSelector((s) => s.getPartyDetails);
 
   const onExit = () => {
     setEnabled(false);
@@ -154,7 +154,7 @@ const PartyDetails = () => {
         <Title title="About Party" />
         <Box>
           <Typography>
-            I love football and food, I’m a product manager and I love to have fun and party 🎉
+          {partyDetails?.party.description}
           </Typography>
         </Box>
 

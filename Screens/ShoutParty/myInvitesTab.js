@@ -4,13 +4,15 @@ import Title from "../../Component/TitleComponent";
 import PartyCard from "../../Component/PartyCard/index.js";
 import { LoadingIcon } from "../../Component/Loading/Loading";
 import { featuredParty } from "../../utils/partyData";
-import { dummyUpcomingPartyData } from "../../utils/partyData";
 import { useRouter } from "next/router";
 import { useStyles } from "./style";
-// import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
+import {useSelector, useDispatch} from "react-redux"
+import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
 import ModalPopup from "./ModalPopup";
 const MyInvites = () => {
+const dispatch = useDispatch()
   const classes = useStyles();
+    const { isLoading, error, isSuccessful, parties, message } = useSelector((s) => s.getParties);
   const [partyModal, setPartyModal] = useState(false);
   const route = useRouter();
   const handleOnClick = (data, paid) => {
@@ -19,10 +21,18 @@ const MyInvites = () => {
     navigate("/party/details", { state: { data: data, paid: paid } });
   };
 
-  const enterMyParty = () => {
-    // const checkParty = data?.filter((element) => element.id === id);
-    // dispatch(getPartyDetailsRequest(checkParty));
+  const enterMyParty = (data, id) => {
+      const userId =localStorage.getItem("userId")
+    const checkParty = data?.filter((element) => element.id === id);
+    const obj = {
+      id:checkParty[0].id,
+      user:userId
+    }
+    dispatch(getPartyDetailsRequest(obj));
     route.push("/detail");
+    console.log(checkParty)
+    console.log(checkParty[0].id)
+
   };
 
   const handleToggleModal = (open) => {
@@ -51,7 +61,7 @@ const MyInvites = () => {
       <Container className={classes.inviteTabContainer}>
         <Title title="Upcoming parties" />
 
-        {dummyUpcomingPartyData?.map((data) => (
+        {parties?.map((data) => (
           <PartyCard
             key={data.id}
             id={data.id}
@@ -62,7 +72,7 @@ const MyInvites = () => {
             header="25px"
             badge="#4d4c83"
             // () => handleOnClick(data, true)
-            partyBtnFunction={() => enterMyParty()}
+            partyBtnFunction={() => enterMyParty(parties, data.id)}
           />
         ))}
       </Container>

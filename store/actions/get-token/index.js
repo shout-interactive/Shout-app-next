@@ -6,8 +6,9 @@ import {
 } from "../../actionTypes";
 import { API } from "../../../utils/Axios";
 
-export const token = process.env.NEXT_PUBLIC_API_TEMP_TOKEN;
-
+// export const token = process.env.NEXT_PUBLIC_API_TEMP_TOKEN;
+export const token =
+  "eyJpZCI6IjIwN2IwNDY0LTE5N2UtNDkwYi1hYmM2LTA0M2NlYjRiYTU3MSIsImZpcnN0bmFtZSI6IkF3YSIsImxhc3RuYW1lIjoiTWFyaWFtIiwibWlkZGxlbmFtZSI6bnVsbCwicHJvbm91bmNlIjpudWxsLCJlbWFpbCI6ImF3YUBnbWFpbC5jb20iLCJwaG9uZSI6bnVsbCwicm9sZSI6WyJ1c2VyIl0sInBlcm1pc3Npb25zIjpbInVzZXIiXSwiY29udGFjdHMiOm51bGwsImlzT25ib2FyZGVkIjpmYWxzZSwiY3JlYXRlZEF0IjoiMjAyMi0wMy0wN1QxMTo1ODoyMy45NDNaIiwidXBkYXRlZEF0IjoiMjAyMi0wMy0wN1QxMTo1ODoyMy45NDNaIiwiQ29udGFjdCI6bnVsbH0=";
 const verifyTokenStart = () => {
   return { type: VERIFY_TOKEN_START };
 };

@@ -14,8 +14,8 @@ import {
   OutlinedInput,
   Input,
 } from "@mui/material";
-
-// import { useDispatch, useSelector } from "react-redux";
+import { createPartyRequest } from "../../store/actions/create-party";
+import { useDispatch, useSelector } from "react-redux";
 import { BsChevronLeft } from "react-icons/bs";
 import VideocamSharpIcon from "@mui/icons-material/VideocamSharp";
 import { useStyles } from "./style";
@@ -28,6 +28,11 @@ import { useRouter } from "next/router";
 
 export const CreateParty = () => {
   const classes = useStyles();
+  const userId = localStorage.getItem("userId");
+  const userCoin = localStorage.getItem("coin");
+  // console.log(userId, userCoin);
+  const { isLoading, error, isSuccessful, message } = useSelector((s) => s.createParty);
+  const dispatch = useDispatch();
   const [openAlert, setOpenAlert] = useState(true);
   const route = useRouter();
   const [partyuser, setSelectedPartyUser] = useState("myself one");
@@ -114,11 +119,13 @@ export const CreateParty = () => {
     },
   ];
 
-  const handleClose = () => {
-    setOpenAlert(false);
+  const handleCloseAlert = () => {
+    setTimeout(() => {
+      setOPenSnackBar(false);
+    }, 2000);
   };
   const handleGetCoin = () => {
-    navigate("/wallet");
+    route.push("/wallet");
   };
 
   const handleChangePartyUser = (event) => {
@@ -139,29 +146,28 @@ export const CreateParty = () => {
     setSelectedPartyGuests([...event.target.value]);
   };
 
-  const handleGoBack = async () => {
-    // if (!partyName && !partyDate && !partyDesc) {
-    //   setErr(true);
-    // } else if (partyName && partyDate && partyDesc) {
-    //   setErr(false);
-    //   const obj = {
-    //     owner: partyuser,
-    //     name: partyName,
-    //     date: partyDate,
-    //     description: partyDesc,
-    //     Geust: {
-    //       invites: [],
-    //       geusts: partyGuests,
-    //     },
-    //     user: userId,
-    //   };
-    //   dispatch(createPartyRequest(obj));
+  const handleCreateParty = async () => {
+    if (!partyName && !partyDate && !partyDesc) {
+      setErr(true);
+    } else if (partyName && partyDate && partyDesc) {
+      setErr(false);
+      const obj = {
+        owner: "bright",
+        name: partyName,
+        date: partyDate,
+        description: partyDesc,
+        geusts: [],
+        user: localStorage.getItem("userId")
+      };
+      
+      dispatch(createPartyRequest(JSON.stringify(obj)));
 
-    //   resetState();
-    //   setTimeout(() => {
-    //     navigate("/party");
-    //   }, 2000);
-    route.push("/detail");
+      resetState();
+      setTimeout(() => {
+       route.push("/detail");
+      }, 2000);
+      
+    }
   };
 
   const resetState = () => {
@@ -179,7 +185,7 @@ export const CreateParty = () => {
           type="nav"
           title="New Shout! Party"
           leftLink="/party"
-          leftIcon={<BsChevronLeft onClick={() => handleGoBack()} />}
+          leftIcon={<BsChevronLeft onClick={() => handleCreateParty()} />}
           primary
         />
 
@@ -345,8 +351,8 @@ export const CreateParty = () => {
 
           <Box
             id="createParty"
-            onClick={handleGoBack}
-            // onClick={userCoin >= 100 ? handleGoBack : () => handleToggleModal(true)}
+            // onClick={handleCreateParty}
+            onClick={userCoin >= 100 ? handleCreateParty : () => handleToggleModal(true)}
             sx={{ margin: "2rem 0rem", cursor: "pointer", flex: "1" }}
             className={classes.buttonWrapper}
           >
@@ -362,25 +368,29 @@ export const CreateParty = () => {
               variant="contained"
               fullWidth
             >
-              {/* {isLoading ? "Loading..." : "Create"} */}create
+              {isLoading ? (
+                <img
+                  src="/assest/images/Shoutassets/loader.gif"
+                  alt=""
+                  style={{ width: "40px", height: "40px" }}
+                />
+              ) : (
+                "Create"
+              )}
             </Button>
           </Box>
-          {/* {isSuccessful && (
+          {isSuccessful && (
             <Snackbar
               open={openSnackbar}
               autoHideDuration={6000}
               onClose={() => setOPenSnackBar(false)}
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
             >
-              <Alert
-                onClose={() => setOPenSnackBar(false)}
-                severity="success"
-                sx={{ width: "100%" }}
-              >
+              <Alert onClose={handleCloseAlert} severity="success" sx={{ width: "100%" }}>
                 Party Created Successfully!
               </Alert>
             </Snackbar>
-          )} */}
+          )}
         </Box>
         <ModalComponent show={openModal} toggleModal={handleToggleModal}>
           <Container className={classes.container}>

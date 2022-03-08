@@ -8,7 +8,15 @@ import { useStyles } from "./style";
 
 import { verifyTokenRequest } from "../../store/actions/get-token";
 
-const LandingPage = () => {
+export const getStaticProps = async () => {
+  const userData = await dispatch(verifyTokenRequest());
+  return {
+    props: {
+      user: userData,
+    },
+  };
+};
+const LandingPage = ({ user }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   // const route
@@ -16,8 +24,15 @@ const LandingPage = () => {
 
   useEffect(async () => {
     const userData = await dispatch(verifyTokenRequest());
-    console.log(userData);
-  }, []);
+    if (typeof window !== 'undefined') {
+  // Perform localStorage action
+  localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("token", userData.token);
+    localStorage.setItem("coin", userData.coin);
+    localStorage.setItem("userId", userData.user.id);
+}
+   
+  });
 
   return (
     <Container

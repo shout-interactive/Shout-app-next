@@ -21,7 +21,7 @@ export const getPartyDetailsCleanUp = () => {
   return { type: GET_PARTY_DETAILS_CLEANUP };
 };
 
-export const getPartyDetailsRequest = () => {
+export const getPartyDetailsRequest = (payload) => {
   return async (dispatch) => {
     dispatch(getPartyDetailsStart());
 
@@ -29,7 +29,7 @@ export const getPartyDetailsRequest = () => {
       const callObj = {
         method: "POST",
         path: `party/details`,
-        data: null,
+        data: payload,
       };
 
       const data = await API(callObj);

@@ -19,15 +19,15 @@ export const getPartiesCleanUp = () => {
   return { type: GET_PARTIES_CLEANUP };
 };
 
-export const getPartiesRequest = () => {
+export const getPartiesRequest = (payload) => {
   return async (dispatch) => {
     dispatch(getPartiesStart());
 
     try {
       const callObj = {
-        method: "GET",
+        method: "POST",
         path: `party`,
-        data: null,
+        data: payload,
       };
 
       const data = await API(callObj);
