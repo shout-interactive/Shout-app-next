@@ -154,7 +154,7 @@ const PartyDetails = () => {
         <Title title="About Party" />
         <Box>
           <Typography>
-          {partyDetails?.party.description}
+          {partyDetails?.party?.description}
           </Typography>
         </Box>
 

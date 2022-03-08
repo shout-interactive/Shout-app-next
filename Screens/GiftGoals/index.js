@@ -14,6 +14,7 @@ import ClearRoundedIcon from "@mui/icons-material/Clear";
 // import { ReactComponent as BeachImage } from "../../assest/images/beach.svg";
 import styles from "./style.module.css";
 import { Header } from "../../Component/Header";
+import axios from "axios"
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
