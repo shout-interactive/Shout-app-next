@@ -175,7 +175,7 @@ const PartyDetails = () => {
             size="medium"
             variant="contained"
           >
-            Join Party
+            
             {tempPaid ? "Join party" : joined ? "4D:23H:13M:5S" : "Join party for 2000 🪙"}
           </Button>
         </div>

@@ -164,7 +164,7 @@ export const CreateParty = () => {
 
       resetState();
       setTimeout(() => {
-       route.push("/detail");
+       route.push("/party");
       }, 2000);
       
     }

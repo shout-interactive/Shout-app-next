@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { BsChevronLeft } from "react-icons/bs";
 // import { useDispatch, useSelector } from "react-redux";
 // import SearchIcon from "@mui/icons-material/Search";
@@ -63,6 +63,17 @@ const GiftGoals = () => {
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
+  const fetchGoals = async () =>{
+  const response = await axios({
+    method:"POST",
+    url:"http://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift/all"
+  })
+  console.log(response)
+}
+
+  useEffect(() =>{
+    fetchGoals()
+  })
 
   return (
     <Container className={styles.root}>
