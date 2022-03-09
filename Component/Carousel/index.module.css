@@ -4,6 +4,8 @@
     width: 100%;
     padding-bottom: 38%;
     cursor: pointer;
+    object-fit: cover;
+    object-position: top;
 }
 
 .carousel-image {
@@ -12,4 +14,6 @@
     width: 100%;
     left: 0;
     top: 0;
+    object-fit: cover;
+    object-position: top;
 }
