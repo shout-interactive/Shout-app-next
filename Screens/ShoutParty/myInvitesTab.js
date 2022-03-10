@@ -12,7 +12,7 @@ import ModalPopup from "./ModalPopup";
 const MyInvites = () => {
 const dispatch = useDispatch()
   const classes = useStyles();
-    const { isLoading, error, isSuccessful, parties, message } = useSelector((s) => s.getParties);
+    const {  parties } = useSelector((s) => s.getParties);
   const [partyModal, setPartyModal] = useState(false);
   const route = useRouter();
   const handleOnClick = (data, paid) => {

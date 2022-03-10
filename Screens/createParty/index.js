@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react";
 import {
   Container,
   Box,
-  SwipeableDrawer,
+ 
   TextField,
-  MenuItem,
+ 
   Typography,
   Button,
-  Avatar,
+
   Snackbar,
   Alert,
-  Select,
-  OutlinedInput,
-  Input,
+
 } from "@mui/material";
 import { createPartyRequest } from "../../store/actions/create-party";
 import { useDispatch, useSelector } from "react-redux";
