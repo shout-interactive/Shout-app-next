@@ -45,16 +45,7 @@ const dispatch = useDispatch()
         <Title title="Featured parties" />
 
         {featuredParty?.map((data, i) => (
-          <PartyCard
-            key={i}
-            data={data}
-            paid={true}
-            secondary="#40B464"
-            header="25px"
-            badge="#bfd9ba"
-            button="#091d50"
-            partyBtnFunction={() => handleToggleModal(true)}
-          />
+          <PartyCard key={i} data={data} paid={true} secondary="#40B464" header="25px" badge="#bfd9ba" button="#091d50" partyBtnFunction={() => handleToggleModal(true)} />
         ))}
         <ModalPopup show={partyModal} toggleModal={handleToggleModal} />
       </Container>
@@ -63,8 +54,8 @@ const dispatch = useDispatch()
 
         {parties?.map((data) => (
           <PartyCard
-            key={data.id}
-            id={data.id}
+            key={data?.id}
+            id={data?.id}
             data={data}
             paid={true}
             button="#14B363"

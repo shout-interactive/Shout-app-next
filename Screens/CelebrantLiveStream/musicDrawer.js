@@ -20,7 +20,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ModalComponent from "../../Component/Modals";
 import QueueMusicRoundedIcon from "@mui/icons-material/QueueMusicRounded";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
-
+import ButtonComponent from "../../Component/Button";
 import { useStyles } from "./style";
 
 // const { localStorage } = window
@@ -286,6 +286,7 @@ const MusicDrawer = ({ show, toggleDrawer }) => {
               className={classes.btnRemove}
               onClick={() => handleToggleModal(false)}
             />
+
             <Box
               onClick={() => handleToggleModal(false)}
               sx={{ margin: "2rem 0rem", cursor: "pointer" }}

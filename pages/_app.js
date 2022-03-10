@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { Provider } from "react-redux";
 import { useStore } from "../store/store";
+import ClientOnly from "./clientOnly";
 
 const theme = createTheme({
   typography: {
@@ -20,7 +21,9 @@ function MyApp({ Component, pageProps }) {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Container disableGutters maxWidth="sm">
-            <Component {...pageProps} />
+            <ClientOnly>
+              <Component {...pageProps} />
+            </ClientOnly>
           </Container>
         </ThemeProvider>
       </Provider>

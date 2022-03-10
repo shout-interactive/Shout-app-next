@@ -1301,6 +1301,11 @@
   dependencies:
     "esutils" "^2.0.2"
 
+"dom-confetti@0.2.2":
+  "integrity" "sha512-+UVH9Y85qmpTnbmFURwLWjqLIykyIrsNSRkPX/eFlBuOURz9RDX8JoZHnajZHyFuCV0w/K3+tZK0ztfoTw6ejg=="
+  "resolved" "https://registry.npmjs.org/dom-confetti/-/dom-confetti-0.2.2.tgz"
+  "version" "0.2.2"
+
 "dom-helpers@^5.0.1", "dom-helpers@^5.2.0", "dom-helpers@^5.2.1":
   "integrity" "sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA=="
   "resolved" "https://registry.npmjs.org/dom-helpers/-/dom-helpers-5.2.1.tgz"
@@ -2686,6 +2691,13 @@
   dependencies:
     "@babel/polyfill" "^7.4.4"
     "prop-types" "^15.7.2"
+
+"react-dom-confetti@^0.2.0":
+  "integrity" "sha512-+XRTi+WlCrcRN2dTjdEopOaPFtS7hpaHRRQ0sHiVRGqpchKz4QVh3i+6eLEEpNHYpN2VgPmhjvJ/vnjmUYhlIQ=="
+  "resolved" "https://registry.npmjs.org/react-dom-confetti/-/react-dom-confetti-0.2.0.tgz"
+  "version" "0.2.0"
+  dependencies:
+    "dom-confetti" "0.2.2"
 
 "react-dom@^16.3.0 || ^17.0.0-0", "react-dom@^16.8.0  || ^17.0.0", "react-dom@^16.8.0 || ^17.0.0", "react-dom@^17.0.0", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@>= 16.8.0", "react-dom@>=16.14.0", "react-dom@>=16.6.0", "react-dom@17.0.2":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="

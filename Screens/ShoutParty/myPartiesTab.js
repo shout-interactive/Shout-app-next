@@ -53,6 +53,7 @@ const MyParties = () => {
 
         />
       ))}
+      {/* {parties.length === 0 && <p>You have no party, create party</p> } */}
     </Container>
   );
 };

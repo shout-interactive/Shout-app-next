@@ -49,7 +49,7 @@ const HomePageHeader = () => {
       >
         <Navbar.Brand>
           {/* <img src={"/assest/images/shoutLogo.svg"} alt="shout" /> */}
-          <p className={styles.title}> Hi {user?.firstname} </p>
+          <h1 className={styles.title}> Hi, {user?.firstname || "Champ!"} </h1>
         </Navbar.Brand>
         <Nav>
           <Nav onClick={handleNavigateToWallet}>

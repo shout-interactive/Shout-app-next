@@ -95,15 +95,30 @@ const Wallet = () => {
           cursor: "pointer",
         }}
       >
-        <Typography sx={{ color: "#0A1F44", fontWeight: "bold", textAlign: "center" }}>
-          {item.value}
-        </Typography>
+        <Typography sx={{ color: "#0A1F44", fontWeight: "bold", textAlign: "center" }}>{item.value}</Typography>
       </Box>
     </Container>
   );
 
   return (
     <>
+      {/* <Tour
+        onAfterOpen={disableBody}
+        onBeforeClose={enableBody}
+        steps={steps}
+        isOpen={enabled}
+        onRequestClose={onExit}
+        className="helper"
+        disableKeyboardNavigation={true}
+        lastStepNextButton={<Button>Okay</Button>}
+        nextButton={<Button>Next</Button>}
+        prevButton={<div>{}</div>}
+        rounded={5}
+        showNavigationNumber={false}
+        accentColor="#091D50"
+        showNumber={false}
+        maskSpace={5}
+      /> */}
       <Container className={`${styles.rootContainer} ${classes.root}`}>
         <Card
           // className={styles.card}
@@ -117,9 +132,8 @@ const Wallet = () => {
             type="nav"
             title="Wallet"
             leftLink="/home"
-            rightLink={() => route.push("/home")}
             leftIcon={<BsChevronLeft />}
-            rightIcon={<ClearRoundedIcon />}
+            rightIcon={<ClearRoundedIcon onClick={() => route.push("/home")} />}
           />
           <Box
             sx={{
@@ -157,33 +171,21 @@ const Wallet = () => {
           }}
         >
           <Container sx={{ margin: "1.5rem 0rem 2rem 0rem" }}>
-            <Typography
-              variant="h4"
-              sx={{ fontWeight: "bold", fontSize: "1.5rem", color: "#121163" }}
-            >
+            <Typography variant="h4" sx={{ fontWeight: "bold", fontSize: "1.5rem", color: "#121163" }}>
               Buy Coins
             </Typography>
-            <Typography sx={{ fontSize: "0.8rem", color: "#121163" }}>
-              Get more coins to gift your friends and win more!
-            </Typography>
+            <Typography sx={{ fontSize: "0.8rem", color: "#121163" }}>Get more coins to gift your friends and win more!</Typography>
           </Container>
 
-          {coinBundles.map((item, i) => (
-            <>
-              {coinBundleItem(item, i)}
+          {coinBundles.map((item, index) => (
+            <Fragment key={index}>
+              {coinBundleItem(item)}
               <Divider />
-            </>
+            </Fragment>
           ))}
         </Card>
-        <WalletPaymentDrawer
-          show={togglePaymentDrawer}
-          toggleDrawer={handleTogglePaymentDrawer}
-          toggleFundWalletDrawer={handleToggleFundWalletDrawer}
-        />
-        <FundWalletDrawer
-          show={toggleFundWalletDrawer}
-          toggleDrawer={handleToggleFundWalletDrawer}
-        />
+        <WalletPaymentDrawer show={togglePaymentDrawer} toggleDrawer={handleTogglePaymentDrawer} toggleFundWalletDrawer={handleToggleFundWalletDrawer} />
+        <FundWalletDrawer show={toggleFundWalletDrawer} toggleDrawer={handleToggleFundWalletDrawer} />
       </Container>
     </>
   );

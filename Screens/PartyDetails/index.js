@@ -1,15 +1,7 @@
 import { useState, useEffect } from "react";
 // import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import {
-  Box,
-  Container,
-  Paper,
-  Grid,
-  Typography,
-  IconButton,
-  Button,
-} from "@mui/material";
+import { Box, Container, Paper, Grid, Typography, IconButton, Button } from "@mui/material";
 import VideocamSharpIcon from "@mui/icons-material/VideocamSharp";
 
 import ReactPlayer from "react-player";
@@ -41,11 +33,8 @@ const PartyDetails = () => {
   const [toggle, setToggle] = useState(false);
   const { isLoading, partyDetails } = useSelector((s) => s.getPartyDetails);
 
-  const onExit = () => {
-    setEnabled(false);
-  };
   const handleGetCoin = () => {
-    navigate("/wallet");
+    route.push("/wallet");
   };
 
   const handleToggleModal = (open) => {
@@ -55,13 +44,12 @@ const PartyDetails = () => {
     setMoreCoinModal(open);
   };
   const handleEnterParty = () => {
-    // if (userCoin >= 200) {
-    //   navigate("/live");
-    // } else {
-    //   handleToggleModal(false);
-    //   handleMoreCoinModal(true);
-    // }
-    route.push("/live");
+    if (userCoin >= 200) {
+      route.push("/live");
+    } else {
+      handleToggleModal(false);
+      handleMoreCoinModal(true);
+    }
   };
 
   const activities = [
@@ -150,10 +138,7 @@ const PartyDetails = () => {
           </Box>
         ) : (
           <>
-            <Box
-              id="videoInvite"
-              sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
-            >
+            <Box id="videoInvite" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
               <input
                 style={{ display: "none" }}
                 type="file"
@@ -203,22 +188,14 @@ const PartyDetails = () => {
               sx={{ width: "100%", margin: "7px auto" }}
               onClick={() => route.push("/editparty")}
             >
-              <ButtonComponent
-                title="Upload a Video"
-                button="#110166"
-                width="100%"
-              />
+              <ButtonComponent title="Upload a Video" button="#110166" width="100%" />
             </Box>
           </>
         )}
 
         <Title title="Activities" />
         <Box className={classes.activitiesWrapper}>
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          >
+          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {activities.map((activity, i) => (
               <Grid item xs={6}>
                 <Item key={i} data={activity} />
@@ -249,11 +226,7 @@ const PartyDetails = () => {
             size="medium"
             variant="contained"
           >
-            {tempPaid
-              ? "Join party"
-              : joined
-              ? "4D:23H:13M:5S"
-              : "Join party for 2000 🪙"}
+            {tempPaid ? "Join party" : joined ? "4D:23H:13M:5S" : "Join party for 2000 🪙"}
           </Button>
         </div>
 
@@ -302,6 +275,9 @@ const PartyDetails = () => {
                     borderColor: "#162767",
                     width: "200px",
                     margin: "0 10px",
+                    height: "45px",
+                    borderRadius: "10px",
+                    color: "#162767",
                   }}
                 >
                   Cancel
@@ -313,6 +289,9 @@ const PartyDetails = () => {
                     backgroundColor: "#162767",
                     width: "200px",
                     margin: "0 10px",
+                    height: "45px",
+                    borderRadius: "10px",
+                    color: "#fff",
                   }}
                 >
                   Okay
@@ -321,17 +300,10 @@ const PartyDetails = () => {
             </Box>
           </Container>
         </ModalComponent>
-        <ModalComponent
-          show={moreCoinModal}
-          toggleModal={() => setMoreCoinModal(false)}
-        >
+        <ModalComponent show={moreCoinModal} toggleModal={() => setMoreCoinModal(false)}>
           <Container className={classes.myContainer}>
             <Box className={classes.modalBox}>
-              <img
-                src={"/assest/images/coinImg.png"}
-                alt=""
-                className={classes.icon}
-              />
+              <img src={"/assest/images/coinImg.png"} alt="" className={classes.icon} />
               <Typography
                 sx={{
                   padding: "0 40px",
@@ -349,6 +321,7 @@ const PartyDetails = () => {
                 title="Get Coins"
                 handleClick={handleGetCoin}
                 button="#162767"
+                width="100%"
               />
             </Box>
           </Container>
