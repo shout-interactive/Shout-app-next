@@ -14,32 +14,15 @@ import {
   OutlinedInput,
   Input,
 } from "@mui/material";
-import Link from "@mui/material/Link";
-
-// import { useDispatch, useSelector } from "react-redux";
-import CelebrationIcon from "@mui/icons-material/Celebration";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import CakeIcon from "@mui/icons-material/Cake";
-import SendIcon from "@mui/icons-material/Send";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { BsChevronLeft } from "react-icons/bs";
-import VideocamSharpIcon from "@mui/icons-material/VideocamSharp";
-import { useStyles } from "../../pages/Screens/create party/style";
-// import { Header } from "./../../../Component/Header/index";
-import ClearRoundedIcon from "@mui/icons-material/Clear";
-import coinImg from "../../../assest/images/coinImg.png";
-import ModalComponent from "../../Component/Modals";
-import ButtonComponent from "../../Component/Button";
-import AddIcon from "@mui/icons-material/Add";
-
+import { useStyles } from "./style";
 import { FormLabel } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
-
 import { Header } from "../../Component/Header/index";
 import FormControl from "@mui/material/FormControl";
-
+import { useRouter } from "next/router";
 export const AddCalendar = () => {
   const classes = useStyles();
+  const route = useRouter();
   const [openAlert, setOpenAlert] = useState(true);
 
   const [partyuser, setSelectedPartyUser] = useState("myself one");
@@ -47,9 +30,10 @@ export const AddCalendar = () => {
   const [partyDate, setSelectedPartyDate] = useState("");
   const [partyDesc, setSelectedPartyDesc] = useState("");
   const [partyGuests, setSelectedPartyGuests] = useState([]);
+  const [description, setDescription] = useState("");
+  const [eventName, setEventName] = useState("");
   const [repeat, setRepeat] = useState("");
   const [birthday, setBirthday] = useState("");
-  const [enabled, setEnabled] = useState(true);
   const [err, setErr] = useState(false);
   const handleChange = (event) => {
     setRepeat(event.target.value);
@@ -57,13 +41,7 @@ export const AddCalendar = () => {
   const handleChangeBirthday = (event) => {
     setBirthday(event.target.value);
   };
-  const onExit = () => {
-    setEnabled(false);
-  };
-  //const { enqueueSnackbar } = useSnackbar();
-  // const [selectedIndexArr, setSelectedIndexArray] = useState([]);
 
-  // const handleCreate = () => {};
   const preventDefault = (event) => event.preventDefault();
   const [openModal, setOpenModal] = useState(false);
   const handleToggleModal = (open) => {
@@ -76,22 +54,17 @@ export const AddCalendar = () => {
         sx={{
           height: "400px",
           width: "100%",
-
           borderRadius: "0px",
         }}
       >
         <Header
           type="nav"
           title="Add Calendar Event"
-          leftLink="/party"
-          leftIcon={<BsChevronLeft onClick={() => handleGoBack()} />}
-          rightLink=""
+          leftLink="/mycalendar"
+          leftIcon={<BsChevronLeft onClick={() => route.push("/mycalendar")} />}
           primary
         />
-        <Box
-          id="partyName"
-          sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
-        >
+        <Box sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
           <FormLabel
             required
             sx={{
@@ -105,12 +78,11 @@ export const AddCalendar = () => {
           </FormLabel>
           <TextField
             error={err}
-            // helperText="⚠ You need more coins to send this amount."
             id="outlined-select-currency"
             fullWidth
             placeholder="David's 25th Birthday Bash"
-            // value={partyName}
-            // onChange={handleChangePartyName}
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
             sx={{
               "& .css-nnbavb": { float: "left" },
               "& .MuiOutlinedInput-root": { borderRadius: "20px" },
@@ -119,7 +91,6 @@ export const AddCalendar = () => {
         </Box>
 
         <Box
-          id="editCalendar"
           // onClick={handleGoBack}
           // onClick={userCoin >= 100 ? handleGoBack : () => handleToggleModal(true)}
           sx={{
@@ -132,7 +103,7 @@ export const AddCalendar = () => {
             justifyContent: "space-between",
             borderRadius: "20px",
           }}
-          className={classes.buttonWrapper}
+          // className={classes.buttonWrapper}
         >
           <Typography
             sx={{
@@ -175,7 +146,7 @@ export const AddCalendar = () => {
             justifyContent: "space-between",
             borderRadius: "20px",
           }}
-          className={classes.buttonWrapper}
+          // className={classes.buttonWrapper}
         >
           <Typography
             sx={{
@@ -248,15 +219,11 @@ export const AddCalendar = () => {
           <TextField
             error={err}
             multiline
-            // type="multiline"
-            // id="outlined-select-currency"
             minRows={4}
             style={{ width: "100%", padding: "0.5rem" }}
-            // maxRows={4}
-            // fullWidth
             placeholder="Come and have a blast and party with me as I turn 25! 🍾"
-            // value={partyDesc}
-            // onChange={handleChangePartyDesc}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             sx={{
               "& .css-nnbavb": { float: "left" },
               "& .MuiOutlinedInput-root": { borderRadius: "20px" },
@@ -265,8 +232,6 @@ export const AddCalendar = () => {
         </Box>
 
         <Box
-          // onClick={handleGoBack}
-          // onClick={userCoin >= 100 ? handleGoBack : () => handleToggleModal(true)}
           sx={{
             margin: "17rem 0rem",
             cursor: "pointer",
@@ -280,6 +245,7 @@ export const AddCalendar = () => {
         >
           <Button
             sx={{
+              display: "none",
               backgroundColor: "#110066",
               color: "white",
               textTransform: "capitalize",
@@ -291,7 +257,7 @@ export const AddCalendar = () => {
             variant="outlined"
             fullWidth
           >
-            {/* {isLoading ? "Loading..." : "Create"} */}Save
+            Save
           </Button>
         </Box>
       </Box>

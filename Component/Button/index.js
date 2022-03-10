@@ -2,9 +2,17 @@ import { Button } from "@mui/material";
 
 import { useStyles } from "./style";
 
-const ButtonComponent = ({ button, title, large, handleClick, secondary }) => {
+const ButtonComponent = ({
+  width,
+  button,
+  title,
+  large,
+  handleClick,
+  secondary,
+}) => {
   const props = {
     button: button,
+    width: width,
   };
   const classes = useStyles(props);
 
@@ -15,7 +23,12 @@ const ButtonComponent = ({ button, title, large, handleClick, secondary }) => {
   );
 };
 
-export const LeaderBoardButton = ({ title, handleClick, selected, secondary }) => {
+export const LeaderBoardButton = ({
+  title,
+  handleClick,
+  selected,
+  secondary,
+}) => {
   const classes = useStyles(selected);
   return (
     <Button

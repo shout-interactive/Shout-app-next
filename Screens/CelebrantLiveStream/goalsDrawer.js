@@ -2,7 +2,9 @@ import React from "react";
 import { Box, SwipeableDrawer, Stack, Typography, Avatar } from "@mui/material";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import CloseIcon from "@mui/icons-material/Close";
-import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
 import Img from "react-cloudinary-lazy-image";
 
@@ -70,7 +72,11 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
       }}
     >
       <Box sx={{ width: "10%" }}>
-        <Avatar variant="rounded" alt="Trevor Henderson" src="/static/images/avatar/1.jpg" />
+        <Avatar
+          variant="rounded"
+          alt="Trevor Henderson"
+          src="/static/images/avatar/1.jpg"
+        />
       </Box>
       <Box
         sx={{
@@ -105,7 +111,10 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
         >
           <div />
           <DragHandleIcon />
-          <CloseIcon onClick={() => toggleDrawer(false)} sx={{ cursor: "pointer" }} />
+          <CloseIcon
+            onClick={() => toggleDrawer(false)}
+            sx={{ cursor: "pointer" }}
+          />
         </Stack>
         <Typography sx={{ color: "#0A1F44", fontWeight: "bold" }} variant="h5">
           Gift goal
@@ -175,8 +184,12 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
               >
                 2 Week Trip to Dubai
               </Typography>
-              <Typography variant="p" sx={{ color: "#818FA3", fontSize: "1rem" }}>
-                A 2 week all expense paid trip to Dubai brought to you by Emirate Airline.
+              <Typography
+                variant="p"
+                sx={{ color: "#818FA3", fontSize: "1rem" }}
+              >
+                A 2 week all expense paid trip to Dubai brought to you by
+                Emirate Airline.
               </Typography>
             </Box>
           </Box>
@@ -208,7 +221,10 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
         </Box>
 
         <Box sx={{ width: "100%", marginTop: "2rem" }}>
-          <Typography sx={{ color: "#0A1F44", fontWeight: "bold" }} variant="h6">
+          <Typography
+            sx={{ color: "#0A1F44", fontWeight: "bold" }}
+            variant="h6"
+          >
             Contributors
           </Typography>
           {contributorsData.map((data) => contributorsItem(data))}

@@ -13,31 +13,30 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./style.module.css";
 const ShoutParty = () => {
   const route = useRouter();
-  if (typeof window !== 'undefined') {
-  // Perform localStorage action
-  const userId = localStorage.getItem("userId");
-
-}
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    const userId = localStorage.getItem("userId");
+  }
   const dispatch = useDispatch();
-  const { isLoading, error, isSuccessful, parties, message } = useSelector((s) => s.getParties);
+  const { isLoading, error, isSuccessful, parties, message } = useSelector(
+    (s) => s.getParties
+  );
 
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
-
 
   const [openModal, setOpenModal] = useState(false);
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
 
-
   const classes = useStyles();
 
   const fetchParties = () => {
     const obj = {
-      user:localStorage.getItem("userId")
-    }
+      user: localStorage.getItem("userId"),
+    };
 
     dispatch(getPartiesRequest(obj));
   };
@@ -57,10 +56,11 @@ const ShoutParty = () => {
           type="nav"
           title="🎉 Shout! Party"
           leftLink="/home"
-          rightLink={"/"}
           leftIcon={<BsChevronLeft />}
           primary
-          rightIcon={<TodayRoundedIcon />}
+          rightIcon={
+            <TodayRoundedIcon onClick={() => route.push("/mycalendar")} />
+          }
         />
         <TabsComponent />
 

@@ -1,7 +1,17 @@
 import { useState, useEffect } from "react";
 // import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { Box, Container, Paper, Grid, Typography, IconButton, Button } from "@mui/material";
+import {
+  Box,
+  Container,
+  Paper,
+  Grid,
+  Typography,
+  IconButton,
+  Button,
+} from "@mui/material";
+import VideocamSharpIcon from "@mui/icons-material/VideocamSharp";
+
 import ReactPlayer from "react-player";
 import GroupIcon from "@mui/icons-material/Group";
 import RedeemIcon from "@mui/icons-material/Redeem";
@@ -16,11 +26,9 @@ import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
 import ButtonComponent from "../../Component/Button";
 import { useSelector } from "react-redux";
-
-
 const PartyDetails = () => {
   const route = useRouter();
-  // const userCoin = localStorage.getItem("coins");
+
   const classes = useStyles();
   const [, setData] = useState();
   const [paid, setPaid] = useState();
@@ -130,19 +138,87 @@ const PartyDetails = () => {
       />
       <Container className={classes.container}>
         <Title title="Welcome message" />
-        <Box className={classes.playerBox} id="welcome">
-          <ReactPlayer
-            style={{ borderRadius: "25px", backgroundColor: "black" }}
-            width="100%"
-            height="100%"
-            className={classes.player}
-            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-          />
-        </Box>
+        {partyDetails?.party?.vedio ? (
+          <Box className={classes.playerBox} id="welcome">
+            <ReactPlayer
+              style={{ borderRadius: "25px", backgroundColor: "black" }}
+              width="100%"
+              height="100%"
+              className={classes.player}
+              url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+            />
+          </Box>
+        ) : (
+          <>
+            <Box
+              id="videoInvite"
+              sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
+            >
+              <input
+                style={{ display: "none" }}
+                type="file"
+                accept="video/*"
+                className="video-box"
+                id="video-input"
+              />
+              <label htmlFor="video-input">
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "10em",
+                    margin: "0 auto",
+                    backgroundColor: "#C1C7D1",
+                    border: "1px dashed #110066",
+                    borderRadius: "5px",
+                    padding: "4.5rem",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: "flex",
+                    flexDirection: "column",
+                    cursor: "pointer",
+                  }}
+                >
+                  {/* <Input type="file" accept="image/*" className="video-box" /> */}
+                  <VideocamSharpIcon
+                    sx={{
+                      marginBottom: "1rem",
+                      fontWeight: "bold",
+                      fontSize: "3rem",
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      marginBottom: ".7rem",
+                      fontWeight: "bold",
+                      fontSize: "1rem",
+                      textAlign: "center",
+                    }}
+                  >
+                    Record or upload a video message to your guests
+                  </Typography>
+                </Box>
+              </label>
+            </Box>
+            <Box
+              sx={{ width: "100%", margin: "7px auto" }}
+              onClick={() => route.push("/editparty")}
+            >
+              <ButtonComponent
+                title="Upload a Video"
+                button="#110166"
+                width="100%"
+              />
+            </Box>
+          </>
+        )}
 
         <Title title="Activities" />
         <Box className={classes.activitiesWrapper}>
-          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
             {activities.map((activity, i) => (
               <Grid item xs={6}>
                 <Item key={i} data={activity} />
@@ -153,9 +229,7 @@ const PartyDetails = () => {
 
         <Title title="About Party" />
         <Box>
-          <Typography>
-          {partyDetails?.party?.description}
-          </Typography>
+          <Typography>{partyDetails?.party?.description}</Typography>
         </Box>
 
         <div className={classes.buttonWrapper} id="join">
@@ -175,8 +249,11 @@ const PartyDetails = () => {
             size="medium"
             variant="contained"
           >
-            
-            {tempPaid ? "Join party" : joined ? "4D:23H:13M:5S" : "Join party for 2000 🪙"}
+            {tempPaid
+              ? "Join party"
+              : joined
+              ? "4D:23H:13M:5S"
+              : "Join party for 2000 🪙"}
           </Button>
         </div>
 
@@ -244,10 +321,17 @@ const PartyDetails = () => {
             </Box>
           </Container>
         </ModalComponent>
-        <ModalComponent show={moreCoinModal} toggleModal={() => setMoreCoinModal(false)}>
+        <ModalComponent
+          show={moreCoinModal}
+          toggleModal={() => setMoreCoinModal(false)}
+        >
           <Container className={classes.myContainer}>
             <Box className={classes.modalBox}>
-              <img src={"/assest/images/coinImg.png"} alt="" className={classes.icon} />
+              <img
+                src={"/assest/images/coinImg.png"}
+                alt=""
+                className={classes.icon}
+              />
               <Typography
                 sx={{
                   padding: "0 40px",
@@ -261,32 +345,11 @@ const PartyDetails = () => {
                 className={classes.btnRemove}
                 onClick={() => handleToggleModal(false)}
               />
-              <ButtonComponent title="Get Coins" handleClick={handleGetCoin} button="#162767" />
-              {/* <Box
-                onClick={handleGetCoin}
-                sx={{ margin: "2rem 0rem", cursor: "pointer" }}
-                // className={classes.getBtn}
-              >
-                <div
-                  className={classes.getBtn}
-                  style={{
-                    color: "white",
-                    backgroundColor: "#162767",
-                    width: "100%",
-                    height: "40px",
-                    justifyContent: "center",
-                    display: "flex",
-                    alignItems: "center",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                    margin: "0 auto",
-                  }}
-                  variant="contained"
-                  fullWidth
-                >
-                  Get Coins
-                </div>
-              </Box> */}
+              <ButtonComponent
+                title="Get Coins"
+                handleClick={handleGetCoin}
+                button="#162767"
+              />
             </Box>
           </Container>
         </ModalComponent>

@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
-// import { Box, , Tab, Tabs } from "@mui/material";
-
-import {Calendar} from "./calendar";
-
-
+import React, { useState } from "react";
+import { Container, Box, Typography, Button } from "@mui/material";
 import { useStyles } from "./style";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import EventTab from "./EventTab";
+import Otherevent from "./OtherEvent";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -22,7 +21,7 @@ const TabPanel = (props) => {
   );
 };
 
-const TabsComponent = () => {
+const TableTab = () => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -46,18 +45,25 @@ const TabsComponent = () => {
           onChange={handleChange}
           aria-label="shout party tabs"
         >
-          <Tab className={classes.tab} label="My Events" {...a11yProps(0, "My Events")} />
-          <Tab className={classes.tab} label="All Events" {...a11yProps(1, "All Events")} />
+          <Tab
+            className={classes.tab}
+            label="My invites"
+            {...a11yProps(0, "invites")}
+          />
+          <Tab
+            className={classes.tab}
+            label="My parties"
+            {...a11yProps(1, "parties")}
+          />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <Calendar />
+        <EventTab />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Calendar />
+        <Otherevent />
       </TabPanel>
     </Box>
   );
 };
-
-export default TabsComponent;
+export default TableTab;

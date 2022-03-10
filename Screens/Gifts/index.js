@@ -3,13 +3,18 @@ import { BsChevronLeft } from "react-icons/bs";
 import { Container, Box, Typography } from "@mui/material";
 import { Header } from "../../Component/Header";
 import ButtonComponent from "../../Component/Button";
+import GiftGoalDrawer from "./GiftDrawer";
 const GiftScreen = () => {
+  const [toggleGoalDrawer, setToggleGoalDrawer] = useState(false);
+  const handleToggleGoalDrawer = (open) => {
+    setToggleGoalDrawer(open);
+  };
   return (
     <Container className="">
       <Header
         type="nav"
         title="Gift goal"
-        leftLink="/home"
+        leftLink="/detail"
         leftIcon={<BsChevronLeft />}
         primary
       />
@@ -41,11 +46,23 @@ const GiftScreen = () => {
         >
           No Gifts
         </Typography>
-        <Typography variant="p" sx={{ color: "#818FA3", fontSize: "1.2rem" }}>
+        <Typography
+          variant="p"
+          sx={{ color: "#818FA3", fontSize: "1.2rem", marginBottom: "40px" }}
+        >
           You have not selected a gift goal
         </Typography>
-        <ButtonComponent title={"Select Gift goal"} button="#110066" />
+        <ButtonComponent
+          title={"Select Gift goal"}
+          button="#110066"
+          width="50%"
+          handleClick={() => handleToggleGoalDrawer(true)}
+        />
       </Box>
+      <GiftGoalDrawer
+        show={toggleGoalDrawer}
+        toggleDrawer={handleToggleGoalDrawer}
+      />
     </Container>
   );
 };
