@@ -21,7 +21,7 @@ const HomeScreen = () => {
   useEffect(() => {
     setTimeout(() => {
       setSplash(!splash);
-    }, 1100);
+    }, 1500);
   }, []);
 
   const config = {

@@ -25,9 +25,7 @@ const HomePageHeader = ({ coinId, giftId, leaderId }) => {
   function intToString(value) {
     var suffixes = ["", "k", "m", "b", "t"];
     var suffixNum = Math.floor(("" + value).length / 3);
-    var shortValue = parseFloat(
-      (suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(2)
-    );
+    var shortValue = parseFloat((suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(2));
     if (shortValue % 1 != 0) {
       shortValue = shortValue.toFixed(1);
     }
@@ -38,14 +36,13 @@ const HomePageHeader = ({ coinId, giftId, leaderId }) => {
     <Navbar className="">
       <Container className={styles.navHeaderWrapper} style={{ margin: "0 20px" }}>
         <Navbar.Brand>
-          <img src={"/assest/images/shoutLogo.svg"} alt="shout" />
-          {/* <h1 className="title"> Home </h1> */}
+          {/* <img src={"/assest/images/shoutLogo.svg"} alt="shout" /> */}
+          <h1 className={styles.title}> Hi, Oluwaseun </h1>
         </Navbar.Brand>
         <Nav>
           <Nav onClick={handleNavigateToWallet}>
             <div className={styles["badge-header"]}>
-              <img src={"/assets/coin.png"} alt="Coin" />0
-              {/* {userCoin === "undefined" ? intToString(2000) : intToString(userCoin)} */}
+              <img src={"/assets/coin.png"} alt="Coin" />0{/* {userCoin === "undefined" ? intToString(2000) : intToString(userCoin)} */}
             </div>
           </Nav>
 

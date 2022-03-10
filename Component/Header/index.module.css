@@ -4,7 +4,15 @@
 
 .title {
     font-weight: bold;
-    color: #000000;
+    color: #0A1F44;
+    font-size: 2vw;
+
+}
+
+@media screen and (max-width: 900px) {
+    .title {
+        font-size: 5.5vw;
+    }
 }
 
 .badge-header {

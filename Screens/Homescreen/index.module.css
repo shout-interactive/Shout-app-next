@@ -133,7 +133,7 @@
 
 .shoutimage {
     position: absolute;
-    right: 5px;
+    right: -5px;
     bottom: -1px;
     width: 370px;
     animation: pop-champ 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
@@ -186,9 +186,9 @@
 
 .playimg {
     position: absolute;
-    right: 0px;
+    right: -46px;
     bottom: 0px;
-    width: 260px;
+    width: 282px;
     /* animation: pulse 1s both; */
     /* transform: translate3d(0, 0, 0); */
     /* animation-iteration-count: 1; */
@@ -268,7 +268,7 @@
 
 .auctionImg {
     position: absolute;
-    right: 7px;
+    right: -27px;
     bottom: 0px;
     width: 260px;
     /* animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; */
