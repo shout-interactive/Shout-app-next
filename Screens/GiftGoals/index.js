@@ -1,8 +1,6 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BsChevronLeft } from "react-icons/bs";
-// import { useDispatch, useSelector } from "react-redux";
-// import SearchIcon from "@mui/icons-material/Search";
-// import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import { useDispatch, useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
 import { Container, Box, Stack, Typography, Button, TextField } from "@mui/material";
 import ModalComponent from "../../Component/Modals";
@@ -10,11 +8,11 @@ import ModalComponent from "../../Component/Modals";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import CheckCircleOutlineRounded from "@mui/icons-material/CheckCircleOutlineRounded";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
-// import { createGiftSend } from "../../store/actions/create-gift";
+import { createGiftSend } from "../../store/actions/create-gift";
 // import { ReactComponent as BeachImage } from "../../assest/images/beach.svg";
 import styles from "./style.module.css";
 import { Header } from "../../Component/Header";
-import axios from "axios"
+import axios from "axios";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -30,18 +28,18 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const GiftGoals = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [amount, setAMount] = useState();
   const [error, setError] = useState(false);
   const [coins, setCoins] = useState(0);
   const [totalCoins, setTotalCoins] = useState(140000);
-  // const {
-  //   isLoading,
-  //   error: err,
-  //   isSuccessful,
-  //   partyDetails,
-  //   message,
-  // } = useSelector((s) => s.createGift);
+  const {
+    isLoading,
+    error: err,
+    isSuccessful,
+    partyDetails,
+    message,
+  } = useSelector((s) => s.createGift);
   const [openModal, setOpenModal] = useState(false);
 
   const handleSend = () => {
@@ -58,23 +56,23 @@ const GiftGoals = () => {
       setTimeout(() => {
         setOpenModal(true);
       }, 3000);
-      setAMount();
+      setAMount("");
     }
   };
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
-  const fetchGoals = async () =>{
-  const response = await axios({
-    method:"POST",
-    url:"http://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift/all"
-  })
-  console.log(response)
-}
+  const fetchGoals = async () => {
+    const response = await axios({
+      method: "POST",
+      url: "http://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift/all",
+    });
+    console.log(response);
+  };
 
-  useEffect(() =>{
-    fetchGoals()
-  })
+  useEffect(() => {
+    fetchGoals();
+  });
 
   return (
     <Container className={styles.root}>
@@ -156,7 +154,8 @@ const GiftGoals = () => {
             variant="h5"
             sx={{ color: "#110066", marginTop: ".3rem", fontSize: "1rem", fontWeight: "bold" }}
           >
-            {/* {`${isSuccessful ? coins : 0} / ${totalCoins}`} Coins */}0 coins
+            {coins / totalCoins} Coins
+            {`${isSuccessful ? coins : 0} / ${totalCoins}`} Coins
           </Typography>
         </Box>
       </Box>
@@ -167,7 +166,8 @@ const GiftGoals = () => {
             Coins
           </Typography>
           <Typography variant="p" sx={{ color: "#818FA3", fontSize: "1rem" }}>
-            {/* {isSuccessful ? coins : 0} */}0 Coins Available
+            {/* {isSuccessful ? coins : 0} */}
+            {coins}
           </Typography>
         </Stack>
         <Box
@@ -217,7 +217,7 @@ const GiftGoals = () => {
         </Button>
       </Box>
       <ModalComponent show={openModal} toggleModal={handleToggleModal}>
-        <Container className={styles.containerDetails}>
+        <Container className={styles.containerDetail}>
           <Box className={styles.modalBox}>
             <CheckCircleOutlineRounded className={styles.icon} />
 

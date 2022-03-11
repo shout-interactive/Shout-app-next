@@ -1,17 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Box,
- 
-  TextField,
- 
-  Typography,
-  Button,
-
-  Snackbar,
-  Alert,
-
-} from "@mui/material";
+import { Container, Box, TextField, Typography, Button, Snackbar, Alert } from "@mui/material";
 import { createPartyRequest } from "../../store/actions/create-party";
 import { useDispatch, useSelector } from "react-redux";
 import { BsChevronLeft } from "react-icons/bs";
@@ -23,13 +11,16 @@ import ButtonComponent from "../../Component/Button";
 import { FormLabel } from "@mui/material";
 import { Header } from "../../Component/Header";
 import { useRouter } from "next/router";
+import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
 
 export const CreateParty = () => {
   const classes = useStyles();
   const userId = localStorage.getItem("userId");
   const userCoin = localStorage.getItem("coin");
   // console.log(userId, userCoin);
-  const { isLoading, error, isSuccessful, message } = useSelector((s) => s.createParty);
+  const { parties } = useSelector((s) => s.getParties);
+
+  const { isLoading, partyData } = useSelector((s) => s.createParty);
   const dispatch = useDispatch();
   const [openAlert, setOpenAlert] = useState(true);
   const route = useRouter();
@@ -46,76 +37,6 @@ export const CreateParty = () => {
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
-  const party_users = [
-    {
-      key: 1,
-      value: "myself one",
-      label: "Myself One",
-    },
-    {
-      key: 2,
-      value: "myself two",
-      label: "Myself Two",
-    },
-    {
-      key: 3,
-      value: "myself three",
-      label: "Myself Three",
-    },
-    {
-      key: 4,
-      value: "myself four",
-      label: "Myself four",
-    },
-    {
-      key: 5,
-      value: "myself five",
-      label: "Myself five",
-    },
-  ];
-
-  const guests = [
-    {
-      key: 1,
-      name: "David Doe",
-      value: "David Doe",
-    },
-    {
-      key: 2,
-      name: "Ayo Cole",
-      value: "Ayo Cole",
-    },
-    {
-      key: 3,
-      name: "Oliver Hansen",
-      value: "Oliver Hansen",
-    },
-    {
-      key: 4,
-      name: "Van Henry",
-      value: "Van Henry",
-    },
-    {
-      key: 5,
-      name: "April Tucker",
-      value: "April Tucker",
-    },
-    {
-      Key: 6,
-      name: "Ralph Hubbard",
-      value: "Ralph Hubbard",
-    },
-    {
-      key: 7,
-      name: "Omar Alexander",
-      value: "Omar Alexander",
-    },
-    {
-      key: 8,
-      name: "Carlos Abbott",
-      value: "Carlos Abbott",
-    },
-  ];
 
   const handleCloseAlert = () => {
     setTimeout(() => {
@@ -145,6 +66,7 @@ export const CreateParty = () => {
   };
 
   const handleCreateParty = async () => {
+    console.log("create party");
     if (!partyName && !partyDate && !partyDesc) {
       setErr(true);
     } else if (partyName && partyDate && partyDesc) {
@@ -155,18 +77,24 @@ export const CreateParty = () => {
         date: partyDate,
         description: partyDesc,
         geusts: [],
-        user: localStorage.getItem("userId")
+        user: localStorage.getItem("userId"),
       };
-      
+
       dispatch(createPartyRequest(JSON.stringify(obj)));
 
       resetState();
       setTimeout(() => {
-       route.push("/party");
-      }, 2000);
-      
+        parties.filter((element) => element.id === partyData?.id);
+        const getDetail = {
+          id: partyData?.id,
+          user: localStorage.getItem("userId"),
+        };
+        dispatch(getPartyDetailsRequest(getDetail));
+        route.push("/detail");
+      }, 7000);
     }
   };
+  console.log(partyData?.id);
 
   const resetState = () => {
     setSelectedPartyUser("myself one");
@@ -183,7 +111,7 @@ export const CreateParty = () => {
           type="nav"
           title="New Shout! Party"
           leftLink="/party"
-          leftIcon={<BsChevronLeft onClick={() => handleCreateParty()} />}
+          leftIcon={<BsChevronLeft onClick={() => route.push("/party")} />}
           primary
         />
 
@@ -350,7 +278,7 @@ export const CreateParty = () => {
           <Box
             id="createParty"
             // onClick={handleCreateParty}
-            onClick={userCoin >= 100 ? handleCreateParty : () => handleToggleModal(true)}
+            onClick={userCoin >= 100 ? () => handleCreateParty() : () => handleToggleModal(true)}
             sx={{ margin: "2rem 0rem", cursor: "pointer", flex: "1" }}
             className={classes.buttonWrapper}
           >
@@ -368,19 +296,20 @@ export const CreateParty = () => {
             >
               {isLoading ? (
                 <img
+                  aria-disabled
                   src="/assest/images/Shoutassets/loader.gif"
                   alt=""
-                  style={{ width: "40px", height: "40px" }}
+                  style={{ width: "25px", height: "25px" }}
                 />
               ) : (
                 "Create"
               )}
             </Button>
           </Box>
-          {isSuccessful && (
+          {/* {isSuccessful ? (
             <Snackbar
               open={openSnackbar}
-              autoHideDuration={6000}
+              autoHideDuration={2000}
               onClose={() => setOPenSnackBar(false)}
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
             >
@@ -388,7 +317,9 @@ export const CreateParty = () => {
                 Party Created Successfully!
               </Alert>
             </Snackbar>
-          )}
+          ) : (
+            ""
+          )} */}
         </Box>
         <ModalComponent show={openModal} toggleModal={handleToggleModal}>
           <Container className={classes.container}>

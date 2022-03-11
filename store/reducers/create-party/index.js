@@ -12,7 +12,13 @@ const createPartyReducer = (state = createParty, action) => {
     case CREATE_PARTY_START:
       return { ...state, isLoading: true };
     case CREATE_PARTY_SUCCESS:
-      return { ...state, isLoading: false, isSuccessful: true, message: action.message };
+      return {
+        ...state,
+        isLoading: false,
+        isSuccessful: true,
+        message: action.message,
+        partyData: action.payload,
+      };
     case CREATE_PARTY_FAIL:
       return { ...state, error: action.payload, isLoading: false, message: action.message };
     case CREATE_PARTY_CLEANUP:

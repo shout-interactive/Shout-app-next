@@ -27,7 +27,7 @@ export const createGiftSend = (payload) => {
       const callObj = {
         method: "POST",
         path: `party/goal`,
-        data: null,
+        data: payload,
       };
       const data = await API(callObj);
       console.log(data, "GIft sent");
