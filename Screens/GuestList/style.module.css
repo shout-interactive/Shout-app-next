@@ -1,0 +1,59 @@
+.buttonWrapper {
+    width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+
+/**Bottom drawer styles */
+
+
+/* .bottomDrawerContainer {
+	} */
+
+.bottomDrawerWrapper {
+    padding: 0rem 1rem;
+}
+
+.bottomDrawerHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.listWrapper {}
+
+.listItem {
+    padding: 0.6rem 0rem;
+}
+
+.listItemStack {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    background-color: #818fa3;
+    padding: 1rem 0rem;
+    border-radius: 13px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: "capitalize";
+}
+
+
+/**Bottom drawer styles */
+
+.selectedFriendsWrapper {
+    padding: 1.5rem 1rem;
+}
+
+.selectedFriendsItemWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: "center";
+}

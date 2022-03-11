@@ -1,0 +1,62 @@
+.navHeaderWrapper {
+    padding: 0 !important;
+}
+
+.title {
+    font-weight: bold;
+    color: #0A1F44;
+    font-size: 2vw;
+
+}
+
+@media screen and (max-width: 900px) {
+    .title {
+        font-size: 5.5vw;
+    }
+}
+
+.badge-header {
+    background-color: #f0f2f4;
+    color: #818fa3;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem;
+    flex-direction: row;
+    width: auto;
+    height: 2.5rem;
+    margin-right: 5px;
+    cursor: pointer;
+    /* display: none; */
+}
+
+.badge-header img {
+    width: 22px;
+}
+
+
+/* nav header styles starts */
+
+.navHeaderContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+}
+
+.nav-items {
+    font-weight: bolder;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+.colored {
+    color: #0a1f44;
+}
+
+
+/* nav header styles ends */

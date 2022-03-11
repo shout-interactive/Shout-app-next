@@ -1,0 +1,17 @@
+.rootContainer {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.coin {
+	height: 40px;
+	width: 40px;
+	margin-right: 5px;
+}
+
+/* .card {
+	/* background: url(v03_wave-19.jpg), #110066;
+	background-blend-mode: hard-light, normal; */
+/* align-content: center;
+	border: "2px solid red";
+} */

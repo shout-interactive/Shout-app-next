@@ -20,6 +20,7 @@ export const useStyles = makeStyles((theme) => ({
         width: "100%",
     },
     stack: {
+        // didplay: "none",
         width: "100%",
         display: "flex",
         flexDirection: "row",
