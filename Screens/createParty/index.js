@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box, TextField, Typography, Button, Snackbar, Alert } from "@mui/material";
-import { createPartyRequest } from "../../store/actions/create-party";
+import { createPartyCleanUp, createPartyRequest } from "../../store/actions/create-party";
 import { useDispatch, useSelector } from "react-redux";
 import { BsChevronLeft } from "react-icons/bs";
 import VideocamSharpIcon from "@mui/icons-material/VideocamSharp";
@@ -12,6 +12,7 @@ import { FormLabel } from "@mui/material";
 import { Header } from "../../Component/Header";
 import { useRouter } from "next/router";
 import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
+import { createPartyCleanUp } from "../../store/actions/create-party";
 
 export const CreateParty = () => {
   const classes = useStyles();
@@ -81,7 +82,7 @@ export const CreateParty = () => {
       };
 
       dispatch(createPartyRequest(JSON.stringify(obj)));
-
+      // const newParty = localStorage.setItem("partyData?.id")
       resetState();
       setTimeout(() => {
         parties.filter((element) => element.id === partyData?.id);
@@ -91,7 +92,8 @@ export const CreateParty = () => {
         };
         dispatch(getPartyDetailsRequest(getDetail));
         route.push("/detail");
-      }, 7000);
+      }, 4000);
+      dispatch(createPartyCleanUp());
     }
   };
   console.log(partyData?.id);
