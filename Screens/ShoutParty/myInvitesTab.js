@@ -6,13 +6,15 @@ import { LoadingIcon } from "../../Component/Loading/Loading";
 import { featuredParty } from "../../utils/partyData";
 import { useRouter } from "next/router";
 import { useStyles } from "./style";
-import {useSelector, useDispatch} from "react-redux"
+import { useSelector, useDispatch } from "react-redux";
 import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
 import ModalPopup from "./ModalPopup";
 const MyInvites = () => {
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const classes = useStyles();
-    const {  parties } = useSelector((s) => s.getParties);
+  const { invite } = useSelector((s) => s.getInvite);
+
+  const { parties } = useSelector((s) => s.getParties);
   const [partyModal, setPartyModal] = useState(false);
   const route = useRouter();
   const handleOnClick = (data, paid) => {
@@ -22,17 +24,16 @@ const dispatch = useDispatch()
   };
 
   const enterMyParty = (data, id) => {
-      const userId =localStorage.getItem("userId")
+    const userId = localStorage.getItem("userId");
     const checkParty = data?.filter((element) => element.id === id);
     const obj = {
-      id:checkParty[0].id,
-      user:userId
-    }
+      id: checkParty[0].id,
+      user: userId,
+    };
     dispatch(getPartyDetailsRequest(obj));
     route.push("/detail");
-    console.log(checkParty)
-    console.log(checkParty[0].id)
-
+    console.log(checkParty);
+    console.log(checkParty[0].id);
   };
 
   const handleToggleModal = (open) => {
@@ -45,14 +46,23 @@ const dispatch = useDispatch()
         <Title title="Featured parties" />
 
         {featuredParty?.map((data, i) => (
-          <PartyCard key={i} data={data} paid={true} secondary="#40B464" header="25px" badge="#bfd9ba" button="#091d50" partyBtnFunction={() => handleToggleModal(true)} />
+          <PartyCard
+            key={i}
+            data={data}
+            paid={true}
+            secondary="#40B464"
+            header="25px"
+            badge="#bfd9ba"
+            button="#091d50"
+            partyBtnFunction={() => handleToggleModal(true)}
+          />
         ))}
         <ModalPopup show={partyModal} toggleModal={handleToggleModal} />
       </Container>
       <Container className={classes.inviteTabContainer}>
         <Title title="Upcoming parties" />
 
-        {parties?.map((data) => (
+        {invite?.map((data) => (
           <PartyCard
             key={data?.id}
             id={data?.id}
@@ -66,6 +76,7 @@ const dispatch = useDispatch()
             partyBtnFunction={() => enterMyParty(parties, data.id)}
           />
         ))}
+        {invite.length === 0 && "You have not been invited to any party"}
       </Container>
     </>
   );

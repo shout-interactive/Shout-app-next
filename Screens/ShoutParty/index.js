@@ -9,18 +9,17 @@ import { useStyles } from "./style";
 import { useRouter } from "next/router";
 import { getPartiesRequest } from "../../store/actions/get-parties";
 import { useDispatch, useSelector } from "react-redux";
-
+import { getInviteRequest } from "../../store/actions/get-invited";
 import styles from "./style.module.css";
 const ShoutParty = () => {
   const route = useRouter();
+  let userId;
   if (typeof window !== "undefined") {
     // Perform localStorage action
-    const userId = localStorage.getItem("userId");
+    userId = localStorage.getItem("userId");
   }
   const dispatch = useDispatch();
-  const { isLoading, error, isSuccessful, parties, message } = useSelector(
-    (s) => s.getParties
-  );
+  const { isLoading, error, isSuccessful, parties, message } = useSelector((s) => s.getParties);
 
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
@@ -41,8 +40,17 @@ const ShoutParty = () => {
     dispatch(getPartiesRequest(obj));
   };
 
+  const fetchInvite = () => {
+    const obj = {
+      user: localStorage.getItem("userId"),
+    };
+
+    dispatch(getInviteRequest(obj));
+  };
+
   useEffect(() => {
     fetchParties();
+    fetchInvite();
   }, []);
 
   const handleToggleDrawer = (open) => {
@@ -58,9 +66,7 @@ const ShoutParty = () => {
           leftLink="/home"
           leftIcon={<BsChevronLeft />}
           primary
-          rightIcon={
-            <TodayRoundedIcon onClick={() => route.push("/mycalendar")} />
-          }
+          rightIcon={<TodayRoundedIcon onClick={() => route.push("/mycalendar")} />}
         />
         <TabsComponent />
 

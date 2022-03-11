@@ -210,10 +210,10 @@ export const AddCalendar = () => {
 
           <Box
             sx={{
-              marginTop: "auto",
+              marginTop: "4rem",
               position: "relative",
               bottom: "10px",
-              width: "90%",
+              width: "100%",
               cursor: "pointer",
               display: "flex",
             }}

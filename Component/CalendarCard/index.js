@@ -5,14 +5,15 @@ import CelebrationIcon from "@mui/icons-material/Celebration";
 import HomeIcon from "@mui/icons-material/Home";
 import { useStyles } from "./style";
 import { Paper, Typography, Box } from "@mui/material";
-
+import { useRouter } from "next/router";
 const CalenderCard = ({ backgroundColor, data }) => {
   const props = {
     backgroundColor: backgroundColor,
   };
   const classes = useStyles(props);
+  const route = useRouter();
   return (
-    <Paper className={classes.paperBox}>
+    <Paper className={classes.paperBox} onClick={() => route.push("/calendar/invitecalendar")}>
       <Box
         sx={{
           width: "100%",
