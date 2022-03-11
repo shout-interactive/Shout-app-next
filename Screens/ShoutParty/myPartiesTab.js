@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
 import { useStyles } from "./style";
 import { useRouter } from "next/router";
+import { getPartiesRequest } from "../../store/actions/get-parties";
+import { useEffect } from "react";
 const MyParties = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -23,6 +25,16 @@ const MyParties = () => {
     route.push("/detail");
     console.log(checkParty);
     console.log(checkParty[0].id);
+  };
+  const fetchParties = () => {
+    const obj = {
+      user: localStorage.getItem("userId"),
+    };
+
+    dispatch(getPartiesRequest(obj));
+  };
+  useEffect = () => {
+    fetchParties();
   };
   return (
     <Container className="invite-tab-container">
@@ -48,7 +60,7 @@ const MyParties = () => {
           secondary="#050C50"
           header="25px"
           badge="#4d4c83"
-          partyBtnFunction={() => enterMyParty(parties, data.id)}
+          partyBtnFunction={() => enterMyParty(parties, data?.id)}
         />
       ))}
       {/* {parties.length === 0 && <p>You have no party, create party</p> } */}

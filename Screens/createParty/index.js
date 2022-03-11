@@ -12,7 +12,6 @@ import { FormLabel } from "@mui/material";
 import { Header } from "../../Component/Header";
 import { useRouter } from "next/router";
 import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
-import { createPartyCleanUp } from "../../store/actions/create-party";
 
 export const CreateParty = () => {
   const classes = useStyles();
