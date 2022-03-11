@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
 
 	useEffect(() => {
 		const handleRouteChange = (url, { shallow }) => setLoading(false)
-		router.events.on("routeChangeStart", handleRouteChange)
+		router.events.on("routeChangeComplete", handleRouteChange)
 	}, [router])
 
 	return (
