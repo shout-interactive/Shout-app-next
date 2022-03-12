@@ -247,12 +247,8 @@ export const CreateParty = () => {
             <TextField
               error={err}
               multiline
-              // type="multiline"
-              // id="outlined-select-currency"
               minRows={4}
               style={{ width: "100%", padding: "0.5rem" }}
-              // maxRows={4}
-              // fullWidth
               placeholder="Come and have a blast and party with me as I turn 25! 🍾"
               value={partyDesc}
               onChange={handleChangePartyDesc}

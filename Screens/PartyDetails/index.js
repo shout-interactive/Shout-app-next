@@ -197,8 +197,8 @@ const PartyDetails = () => {
         <Box className={classes.activitiesWrapper}>
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {activities.map((activity, i) => (
-              <Grid item xs={6}>
-                <Item key={i} data={activity} />
+              <Grid item xs={6} key={i}>
+                <Item data={activity} />
               </Grid>
             ))}
           </Grid>

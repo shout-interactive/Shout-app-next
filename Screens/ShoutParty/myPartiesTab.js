@@ -33,9 +33,7 @@ const MyParties = () => {
 
     dispatch(getPartiesRequest(obj));
   };
-  useEffect = () => {
-    fetchParties();
-  };
+
   return (
     <Container className="invite-tab-container">
       <Title title="Next party" />
