@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Provider } from "react-redux";
 import { useStore } from "../store/store";
-import ClientOnly from "./clientOnly";
+import ClientOnly from "../utils/clientOnly";
 import Loader from "../Component/Loading/AppLoader";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
