@@ -33,7 +33,6 @@ const PartyCard = ({
 
   const classes = useStyles(props);
 
-
   const handleOnClick = () => {
     localStorage.setItem("data", JSON.stringify(data));
     localStorage.setItem("paid", paid);
@@ -46,7 +45,7 @@ const PartyCard = ({
         <CardContent className={`${classes.squareContent}`}>
           <Stack className={classes.stack} direction="horizontal" gap={2}>
             <div className={`${styles.badge} ${classes.badge}`}>
-               {moment(data?.date).format("Do MMM, h:mm a") || "5 Dec, 7:0"}
+              {moment(data?.date).format("Do MMM, h:mm a") || "5 Dec, 7:0"}
             </div>
             <div className={classes.badge}>
               <IoMdShareAlt />
@@ -58,19 +57,22 @@ const PartyCard = ({
             </h4>
           </Box>
           <div className={classes.avatarGroupContainer}>
-            {data?.Geust?.invites.length + data?.Geust?.geusts.length === 0 ? <Typography sx={{color:"white", fontWeight:"bold"}}>Add guests</Typography>: <AvatarGroup
-              total={Number(data?.Geust?.invites.length + data?.Geust?.geusts.length) || 20}
-            >
-              {data?.Geust?.geusts.map((guestData, i) => (
-                <Avatar
-                  key={i}
-                  className="avatar"
-                  alt={guestData?.username}
-                  src={guestData?.profile_pic}
-                />
-              ))}
-            </AvatarGroup>}
-           
+            {data?.Geust?.invites.length + data?.Geust?.geusts.length === 0 ? (
+              <Typography sx={{ color: "white", fontWeight: "bold" }}>Add guests</Typography>
+            ) : (
+              <AvatarGroup
+                total={Number(data?.Geust?.invites.length + data?.Geust?.geusts.length) || 20}
+              >
+                {data?.Geust?.geusts.map((guestData, i) => (
+                  <Avatar
+                    key={i}
+                    className="avatar"
+                    alt={guestData?.username}
+                    src={guestData?.profile_pic}
+                  />
+                ))}
+              </AvatarGroup>
+            )}
           </div>
           <div className={`${styles["btn-box"]} ${classes.buttonContainer}`}>
             <ButtonComponent handleClick={partyBtnFunction} title="Enter Party" button={button} />
@@ -113,21 +115,26 @@ export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
           />
         </div>
         <Box className={classes.avatarGroupContainer}>
-          {partyDetails?.Geust?.invites.length +
-                partyDetails?.Geust?.geusts.length === 0 ?<><Typography sx={{color:"white", fontWeight:"bold"}}>Your invite seems empty, </Typography> <p>Invite Guest</p></> : <AvatarGroup
-          total={
-            Number(
-              partyDetails?.Geust?.invites.length +
-                partyDetails?.Geust?.geusts.length
-            ) || 20
-          }
-          >
-            <Avatar alt="Remy Sharp" src="" />
-            <Avatar alt="Travis Howard" src="" />
-            <Avatar alt="Agnes Walker" src="" />
-            <Avatar alt="Trevor Henderson" src="" />
-          </AvatarGroup>}
-         
+          {partyDetails?.Geust?.invites.length + partyDetails?.Geust?.geusts.length === 0 ? (
+            <>
+              <Typography sx={{ color: "white", fontWeight: "bold" }}>
+                Your invite seems empty,{" "}
+              </Typography>{" "}
+              <p>Invite Guest</p>
+            </>
+          ) : (
+            <AvatarGroup
+              total={
+                Number(partyDetails?.Geust?.invites.length + partyDetails?.Geust?.geusts.length) ||
+                20
+              }
+            >
+              <Avatar alt="Remy Sharp" src="" />
+              <Avatar alt="Travis Howard" src="" />
+              <Avatar alt="Agnes Walker" src="" />
+              <Avatar alt="Trevor Henderson" src="" />
+            </AvatarGroup>
+          )}
         </Box>
         <Box className={classes.partyCardTitleWrapper}>
           <h4 className={classes.partyCardTitle}>{partyDetails?.party?.name || "Anybody Cole"}</h4>

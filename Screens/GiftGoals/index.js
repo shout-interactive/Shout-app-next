@@ -155,7 +155,7 @@ const GiftGoals = () => {
             sx={{ color: "#110066", marginTop: ".3rem", fontSize: "1rem", fontWeight: "bold" }}
           >
             {coins / totalCoins} Coins
-            {`${isSuccessful ? coins : 0} / ${totalCoins}`} Coins
+            {/* {`${isSuccessful ? coins : 0} / ${totalCoins}`} Coins */}
           </Typography>
         </Box>
       </Box>

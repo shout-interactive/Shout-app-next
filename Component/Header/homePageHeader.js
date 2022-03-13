@@ -31,22 +31,16 @@ const HomePageHeader = () => {
     var suffixes = ["", "k", "m", "b", "t"];
     var suffixNum = Math.floor(("" + value).length / 3);
     var shortValue = parseFloat(
-      (suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(
-        2
-      )
+      (suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(2)
     );
     if (shortValue % 1 != 0) {
       shortValue = shortValue.toFixed(1);
     }
     return shortValue + suffixes[suffixNum];
   }
-  // console.log(coinId);
   return (
     <Navbar className="">
-      <Container
-        className={styles.navHeaderWrapper}
-        style={{ margin: "0 20px" }}
-      >
+      <Container className={styles.navHeaderWrapper} style={{ margin: "0 20px" }}>
         <Navbar.Brand>
           {/* <img src={"/assest/images/shoutLogo.svg"} alt="shout" /> */}
           <h1 className={styles.title}> Hi, {user?.firstname || "Champ!"} </h1>
@@ -55,9 +49,7 @@ const HomePageHeader = () => {
           <Nav onClick={handleNavigateToWallet}>
             <div className={styles["badge-header"]}>
               <img src={"/assets/coin.png"} alt="Coin" />
-              {userCoin === "undefined"
-                ? intToString(2000)
-                : intToString(userCoin)}
+              {userCoin === "undefined" ? intToString(2000) : intToString(userCoin)}
             </div>
           </Nav>
 
@@ -67,14 +59,14 @@ const HomePageHeader = () => {
             </div>
           </Nav>
 
-          <Nav
+          {/* <Nav
             onClick={handleNavigateToLeaderBoard}
             style={{ paddingRight: 0 }}
           >
             <div className={styles["badge-header"]}>
               <img src={"/assets/gift-box.svg"} alt="Gift box" />
             </div>
-          </Nav>
+          </Nav> */}
         </Nav>
       </Container>
     </Navbar>

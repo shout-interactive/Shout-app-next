@@ -12,43 +12,60 @@ import { FormLabel } from "@mui/material";
 import { Header } from "../../Component/Header";
 import { useRouter } from "next/router";
 import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
-
+import PersonRemoveAlt1OutlinedIcon from "@mui/icons-material/PersonRemoveAlt1Outlined";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import { generate } from "shortid";
 export const CreateParty = () => {
   const classes = useStyles();
-  const userId = localStorage.getItem("userId");
+  // localstorage data
   const userCoin = localStorage.getItem("coin");
-  // console.log(userId, userCoin);
-  const { parties } = useSelector((s) => s.getParties);
 
+  // useSelector and dispatch
+  const { parties } = useSelector((s) => s.getParties);
   const { isLoading, partyData } = useSelector((s) => s.createParty);
   const dispatch = useDispatch();
-  const [openAlert, setOpenAlert] = useState(true);
+
+  // route
   const route = useRouter();
-  const [partyuser, setSelectedPartyUser] = useState("myself one");
+
+  // Input value fields
   const [partyName, setSelectedPartyName] = useState("");
   const [partyDate, setSelectedPartyDate] = useState("");
   const [partyDesc, setSelectedPartyDesc] = useState("");
-  const [partyGuests, setSelectedPartyGuests] = useState([]);
   const [openSnackbar, setOPenSnackBar] = useState(true);
-  const [enabled, setEnabled] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const [err, setErr] = useState(false);
 
-  const [openModal, setOpenModal] = useState(false);
+  const inputGuestField = [
+    {
+      type: "text",
+      id: "1",
+      guestName: "",
+    },
+  ];
+  const [guest, setGuest] = useState(inputGuestField);
+  const guestName = guest.map((guest) => guest.guestName);
+  // console.log(guestName);
+  // add new guest input field
+  const addInput = () => {
+    setGuest((s) => {
+      return [
+        ...s,
+        {
+          id: generate(),
+          type: "text",
+          value: "",
+        },
+      ];
+    });
+  };
+
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
 
-  const handleCloseAlert = () => {
-    setTimeout(() => {
-      setOPenSnackBar(false);
-    }, 2000);
-  };
   const handleGetCoin = () => {
     route.push("/wallet");
-  };
-
-  const handleChangePartyUser = (event) => {
-    setSelectedPartyUser(event.target.value);
   };
 
   const handleChangePartyName = (event) => {
@@ -59,10 +76,6 @@ export const CreateParty = () => {
   };
   const handleChangePartyDesc = (event) => {
     setSelectedPartyDesc(event.target.value);
-  };
-
-  const handleAddPartyGuest = (event) => {
-    setSelectedPartyGuests([...event.target.value]);
   };
 
   const handleCreateParty = async () => {
@@ -76,7 +89,7 @@ export const CreateParty = () => {
         name: partyName,
         date: partyDate,
         description: partyDesc,
-        geusts: [],
+        geusts: guestName,
         user: localStorage.getItem("userId"),
       };
 
@@ -95,14 +108,10 @@ export const CreateParty = () => {
       dispatch(createPartyCleanUp());
     }
   };
-  console.log(partyData?.id);
-
   const resetState = () => {
-    setSelectedPartyUser("myself one");
     setSelectedPartyName("");
     setSelectedPartyDate("");
     setSelectedPartyDesc("");
-    setSelectedPartyGuests([]);
   };
 
   return (
@@ -123,7 +132,7 @@ export const CreateParty = () => {
             justifyContent: "center",
           }}
         >
-          <Box id="partyName" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
+          <Box sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
             <FormLabel
               required
               sx={{
@@ -148,6 +157,76 @@ export const CreateParty = () => {
                 "& .MuiOutlinedInput-root": { borderRadius: "20px" },
               }}
             />
+          </Box>
+          <Box sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <FormLabel
+                required
+                sx={{
+                  marginBottom: ".7rem",
+                  fontWeight: "bold",
+                  fontSize: "1rem",
+                  color: "#0a1f44",
+                  paddingRight: "5px",
+                  // height: "50px",
+                  // background: "blue",
+                }}
+              >
+                Add Guest
+              </FormLabel>
+              <PersonAddAltIcon
+                onClick={addInput}
+                sx={{ cursor: "pointer" }}
+                style={{ position: "relative", top: "-5px" }}
+              />
+            </div>
+
+            {guest.map((item) => (
+              <Box
+                key={item.id}
+                sx={{
+                  display: "flex",
+                  marginBottom: "15px",
+                  alignItems: "center",
+                }}
+              >
+                <TextField
+                  error={err}
+                  // id="outlined-select-currency"
+                  id={item.id}
+                  placeholder="Guest email"
+                  value={item.guestName}
+                  onChange={(e) =>
+                    setGuest((currentGuest) =>
+                      currentGuest.map((x) =>
+                        x.id === item.id
+                          ? {
+                              ...x,
+                              guestName: e.target.value,
+                            }
+                          : x
+                      )
+                    )
+                  }
+                  sx={{
+                    "& .css-nnbavb": { float: "left" },
+                    "& .MuiOutlinedInput-root": { borderRadius: "20px" },
+                    width: "550px",
+                    paddingRight: "8px",
+                  }}
+                />
+                {guest.length === 1 ? (
+                  ""
+                ) : (
+                  <PersonRemoveAlt1OutlinedIcon
+                    style={{ cursor: "pointer" }}
+                    onClick={() =>
+                      setGuest((currentGuest) => currentGuest.filter((x) => x.id !== item.id))
+                    }
+                  />
+                )}
+              </Box>
+            ))}
           </Box>
 
           <Box id="date" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
