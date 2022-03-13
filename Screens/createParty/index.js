@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Container, Box, TextField, Typography, Button, Snackbar, Alert } from "@mui/material";
-import { createPartyCleanUp, createPartyRequest } from "../../store/actions/create-party";
+import {
+  Container,
+  Box,
+  TextField,
+  Typography,
+  Button,
+  Snackbar,
+  Alert,
+} from "@mui/material";
+import {
+  createPartyCleanUp,
+  createPartyRequest,
+} from "../../store/actions/create-party";
 import { useDispatch, useSelector } from "react-redux";
 import { BsChevronLeft } from "react-icons/bs";
 import VideocamSharpIcon from "@mui/icons-material/VideocamSharp";
@@ -123,7 +134,10 @@ export const CreateParty = () => {
             justifyContent: "center",
           }}
         >
-          <Box id="partyName" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
+          <Box
+            id="partyName"
+            sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
+          >
             <FormLabel
               required
               sx={{
@@ -150,7 +164,10 @@ export const CreateParty = () => {
             />
           </Box>
 
-          <Box id="date" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
+          <Box
+            id="date"
+            sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
+          >
             <FormLabel
               required
               sx={{
@@ -177,7 +194,10 @@ export const CreateParty = () => {
               }}
             />
           </Box>
-          <Box id="videoInvite" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
+          <Box
+            id="videoInvite"
+            sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
+          >
             <Typography
               sx={{
                 marginBottom: ".7rem",
@@ -233,7 +253,10 @@ export const CreateParty = () => {
               </Box>
             </label>
           </Box>
-          <Box id="description" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
+          <Box
+            id="description"
+            sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
+          >
             <Typography
               sx={{
                 marginBottom: ".7rem",
@@ -275,7 +298,11 @@ export const CreateParty = () => {
           <Box
             id="createParty"
             // onClick={handleCreateParty}
-            onClick={userCoin >= 100 ? () => handleCreateParty() : () => handleToggleModal(true)}
+            onClick={
+              userCoin >= 100
+                ? () => handleCreateParty()
+                : () => handleToggleModal(true)
+            }
             sx={{ margin: "2rem 0rem", cursor: "pointer", flex: "1" }}
             className={classes.buttonWrapper}
           >
@@ -321,7 +348,11 @@ export const CreateParty = () => {
         <ModalComponent show={openModal} toggleModal={handleToggleModal}>
           <Container className={classes.container}>
             <Box className={classes.modalBox}>
-              <img src={"/assest/images/coinImg.png"} alt="" className={classes.icon} />
+              <img
+                src={"/assest/images/coinImg.png"}
+                alt=""
+                className={classes.icon}
+              />
               <Typography
                 sx={{
                   padding: "0 40px",
@@ -335,7 +366,10 @@ export const CreateParty = () => {
                 className={classes.btnRemove}
                 onClick={() => handleToggleModal(false)}
               />
-              <Box onClick={handleGetCoin} sx={{ margin: "2rem 0rem", cursor: "pointer" }}>
+              <Box
+                onClick={handleGetCoin}
+                sx={{ margin: "2rem 0rem", cursor: "pointer" }}
+              >
                 <ButtonComponent title="Get Coins" button="#162767" />
               </Box>
             </Box>

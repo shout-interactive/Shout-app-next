@@ -1,16 +1,23 @@
 import { useState, Fragment } from "react";
 import Dynamic from "next/dynamic";
 import { BsChevronLeft } from "react-icons/bs";
-import ClearIcon from "@mui/icons-material/Clear";
-import { Container, Button, Box, Card, Typography, Divider } from "@mui/material";
-import Tour from "reactour";
+import {
+  Container,
+  // Button,
+  Box,
+  Card,
+  Typography,
+  Divider,
+} from "@mui/material";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
 import { useRouter } from "next/router";
 import { Header } from "../../Component/Header";
-import WalletPaymentDrawer from "./walletPaymentDrawer";
-import FundWalletDrawer from "./fundWalletDrawer";
+const WalletPaymentDrawer = Dynamic(() => import("./walletPaymentDrawer"));
+const FundWalletDrawer = Dynamic(() => import("./fundWalletDrawer"));
 import { useStyles } from "./style";
 import styles from "./style.module.css";
+// import ClearIcon from "@mui/icons-material/Clear";
+// import Tour from "reactour";
 
 const coinBundles = [
   {
@@ -95,7 +102,11 @@ const Wallet = () => {
           cursor: "pointer",
         }}
       >
-        <Typography sx={{ color: "#0A1F44", fontWeight: "bold", textAlign: "center" }}>{item.value}</Typography>
+        <Typography
+          sx={{ color: "#0A1F44", fontWeight: "bold", textAlign: "center" }}
+        >
+          {item.value}
+        </Typography>
       </Box>
     </Container>
   );
@@ -171,10 +182,15 @@ const Wallet = () => {
           }}
         >
           <Container sx={{ margin: "1.5rem 0rem 2rem 0rem" }}>
-            <Typography variant="h4" sx={{ fontWeight: "bold", fontSize: "1.5rem", color: "#121163" }}>
+            <Typography
+              variant="h4"
+              sx={{ fontWeight: "bold", fontSize: "1.5rem", color: "#121163" }}
+            >
               Buy Coins
             </Typography>
-            <Typography sx={{ fontSize: "0.8rem", color: "#121163" }}>Get more coins to gift your friends and win more!</Typography>
+            <Typography sx={{ fontSize: "0.8rem", color: "#121163" }}>
+              Get more coins to gift your friends and win more!
+            </Typography>
           </Container>
 
           {coinBundles.map((item, index) => (
@@ -184,8 +200,15 @@ const Wallet = () => {
             </Fragment>
           ))}
         </Card>
-        <WalletPaymentDrawer show={togglePaymentDrawer} toggleDrawer={handleTogglePaymentDrawer} toggleFundWalletDrawer={handleToggleFundWalletDrawer} />
-        <FundWalletDrawer show={toggleFundWalletDrawer} toggleDrawer={handleToggleFundWalletDrawer} />
+        <WalletPaymentDrawer
+          show={togglePaymentDrawer}
+          toggleDrawer={handleTogglePaymentDrawer}
+          toggleFundWalletDrawer={handleToggleFundWalletDrawer}
+        />
+        <FundWalletDrawer
+          show={toggleFundWalletDrawer}
+          toggleDrawer={handleToggleFundWalletDrawer}
+        />
       </Container>
     </>
   );
