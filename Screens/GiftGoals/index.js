@@ -66,7 +66,7 @@ const GiftGoals = () => {
   const fetchGoals = async () => {
     const response = await axios({
       method: "POST",
-      url: "http://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift/all",
+      url: "https://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift/all",
     });
     console.log(response);
   };
