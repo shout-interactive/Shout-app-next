@@ -6,13 +6,13 @@ import {
 } from "../../actionTypes";
 import { API } from "../../../utils/Axios";
 
-const token = ""
+const token = "";
 
 const getPartyDetailsStart = () => {
   return { type: GET_PARTY_DETAILS_START };
 };
 const getPartyDetailsSucess = (payload, message) => {
-  return { type: GET_PARTY_DETAILS_SUCCESS, payload, message};
+  return { type: GET_PARTY_DETAILS_SUCCESS, payload, message };
 };
 const getPartyDetailsFail = (payload) => {
   return { type: GET_PARTY_DETAILS_FAIL, payload };
@@ -23,7 +23,7 @@ export const getPartyDetailsCleanUp = () => {
 
 export const getPartyDetailsRequest = (payload) => {
   return async (dispatch) => {
-    dispatch(getPartyDetailsStart());
+    await dispatch(getPartyDetailsStart());
 
     try {
       const callObj = {
@@ -34,11 +34,11 @@ export const getPartyDetailsRequest = (payload) => {
 
       const data = await API(callObj);
       if (data) {
-        dispatch(getPartyDetailsSucess(data, data.message ='Successful'));
-       
-        return data
+        await dispatch(getPartyDetailsSucess(data, (data.message = "Successful")));
+
+        return data;
       } else {
-        dispatch(getPartyDetailsFail(data.data, data.message ='Failed'));
+        await dispatch(getPartyDetailsFail(data.data, (data.message = "Failed")));
       }
     } catch (e) {
       const error = e?.response?.data?.error;
@@ -49,7 +49,7 @@ export const getPartyDetailsRequest = (payload) => {
       } else {
         errorResponse = ["Something went wrong. please try again"];
       }
-      dispatch(getPartyDetailsFail([], errorResponse));
+      await dispatch(getPartyDetailsFail([], errorResponse));
     }
   };
 };

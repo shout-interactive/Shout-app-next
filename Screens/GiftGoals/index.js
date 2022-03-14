@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
 import { Container, Box, Stack, Typography, Button, TextField } from "@mui/material";
 import ModalComponent from "../../Component/Modals";
+import { getPartiesRequest } from "../../store/actions/get-parties";
 
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import CheckCircleOutlineRounded from "@mui/icons-material/CheckCircleOutlineRounded";
@@ -69,9 +70,17 @@ const GiftGoals = () => {
     });
     console.log(response);
   };
+  const fetchParties = () => {
+    const obj = {
+      user: localStorage.getItem("userId"),
+    };
+
+    dispatch(getPartiesRequest(obj));
+  };
 
   useEffect(() => {
     fetchGoals();
+    fetchParties();
   });
 
   return (

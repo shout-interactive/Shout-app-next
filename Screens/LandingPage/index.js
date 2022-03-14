@@ -23,12 +23,12 @@ const LandingPage = ({ user }) => {
 
   useEffect(async () => {
     const userData = await dispatch(verifyTokenRequest());
-    console.log(userData);
+    // console.log(userData);
     if (typeof window !== "undefined") {
       // Perform localStorage action
       if (userData) {
         localStorage.setItem("user", JSON.stringify(userData));
-        localStorage.setItem("token", userData.token);
+        sessionStorage.setItem("token", userData.token);
         localStorage.setItem("coin", userData.coin);
         localStorage.setItem("userId", userData.user.id);
         setTimeout(() => router.push("/home"), 1000);

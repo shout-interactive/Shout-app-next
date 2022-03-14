@@ -35,7 +35,7 @@ export const CreateParty = () => {
   const [openSnackbar, setOPenSnackBar] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [err, setErr] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const inputGuestField = [
     {
       type: "text",
@@ -79,7 +79,6 @@ export const CreateParty = () => {
   };
 
   const handleCreateParty = async () => {
-    console.log("create party");
     if (!partyName && !partyDate && !partyDesc) {
       setErr(true);
     } else if (partyName && partyDate && partyDesc) {
@@ -93,25 +92,29 @@ export const CreateParty = () => {
         user: localStorage.getItem("userId"),
       };
 
-      dispatch(createPartyRequest(JSON.stringify(obj)));
-      // const newParty = localStorage.setItem("partyData?.id")
+      dispatch(createPartyRequest(obj));
       resetState();
       setTimeout(() => {
-        parties.filter((element) => element.id === partyData?.id);
-        const getDetail = {
-          id: partyData?.id,
-          user: localStorage.getItem("userId"),
-        };
-        dispatch(getPartyDetailsRequest(getDetail));
-        route.push("/detail");
-      }, 4000);
-      dispatch(createPartyCleanUp());
+        route.push("/party");
+      }, 3000);
+
+      // setTimeout(() => {
+      //   const getDetail = {
+      //     id: partyData.id,
+      //     user: localStorage.getItem("userId"),
+      //   };
+      //   dispatch(getPartyDetailsRequest(getDetail));
+      //   route.push("/detail");
+      // }, 5000);
     }
   };
+
+  // console.log("my party", parties[0]);
   const resetState = () => {
     setSelectedPartyName("");
     setSelectedPartyDate("");
     setSelectedPartyDesc("");
+    // setGuest("");
   };
 
   return (

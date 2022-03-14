@@ -32,6 +32,7 @@ const PartyDetails = () => {
   const [tempPaid, setTempPaid] = useState(paid);
   const [toggle, setToggle] = useState(false);
   const { isLoading, partyDetails } = useSelector((s) => s.getPartyDetails);
+  const { partyData } = useSelector((s) => s.createParty);
 
   const handleGetCoin = () => {
     route.push("/wallet");
@@ -82,14 +83,6 @@ const PartyDetails = () => {
     },
   ];
 
-  // useEffect(() => {
-  //   const tempData = localStorage.getItem("data");
-  //   const tempPaid = localStorage.getItem("paid");
-
-  //   setData(JSON.parse(tempData));
-  //   setPaid(tempPaid);
-  // }, []);
-
   const handleClick = () => {
     if (!tempPaid) {
       setTempPaid(true);
@@ -115,6 +108,7 @@ const PartyDetails = () => {
       <Typography className={classes.label}>{label}</Typography>
     </Paper>
   );
+  console.log(partyData?.id);
 
   return (
     <>

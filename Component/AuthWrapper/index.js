@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { verifyTokenRequest } from "../../store/actions/get-token";
 const AuthWrapper = ({ children }) => {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.verifyToken.isSuccessful);
+  const isAuthenticated =
+    useSelector((state) => state.verifyToken.isSuccessful) || sessionStorage.getItem("token");
   const router = useRouter();
 
   useEffect(() => {

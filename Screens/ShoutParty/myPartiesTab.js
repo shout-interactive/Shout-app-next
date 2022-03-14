@@ -8,6 +8,8 @@ import { useStyles } from "./style";
 import { useRouter } from "next/router";
 import { getPartiesRequest } from "../../store/actions/get-parties";
 import { useEffect } from "react";
+import styles from "./style.module.css";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 const MyParties = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -61,7 +63,14 @@ const MyParties = () => {
           partyBtnFunction={() => enterMyParty(parties, data?.id)}
         />
       ))}
-      {/* {parties.length === 0 && <p>You have no party, create party</p> } */}
+      {parties.length === 0 && (
+        <div className={styles.noParty}>
+          <p>You have not created any party</p>
+          <div>
+            <KeyboardDoubleArrowDownIcon className={styles.icon} />
+          </div>
+        </div>
+      )}
     </Container>
   );
 };

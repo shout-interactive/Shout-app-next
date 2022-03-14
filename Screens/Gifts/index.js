@@ -4,8 +4,23 @@ import { Container, Box, Typography } from "@mui/material";
 import { Header } from "../../Component/Header";
 import ButtonComponent from "../../Component/Button";
 import GiftGoalDrawer from "./GiftDrawer";
+import { getPartiesRequest } from "../../store/actions/get-parties";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 const GiftScreen = () => {
+  const dispatch = useDispatch();
   const [toggleGoalDrawer, setToggleGoalDrawer] = useState(false);
+
+  const fetchParties = () => {
+    const obj = {
+      user: localStorage.getItem("userId"),
+    };
+
+    dispatch(getPartiesRequest(obj));
+  };
+  useEffect(() => {
+    fetchParties();
+  });
   const handleToggleGoalDrawer = (open) => {
     setToggleGoalDrawer(open);
   };
@@ -30,11 +45,7 @@ const GiftScreen = () => {
           minHeight: "50vh",
         }}
       >
-        <img
-          src="/assets/giftboxx.png"
-          alt=""
-          style={{ width: "150px", padding: "10px 0" }}
-        />
+        <img src="/assets/giftboxx.png" alt="" style={{ width: "150px", padding: "10px 0" }} />
         <Typography
           variant="h4"
           sx={{
@@ -46,10 +57,7 @@ const GiftScreen = () => {
         >
           No Gifts
         </Typography>
-        <Typography
-          variant="p"
-          sx={{ color: "#818FA3", fontSize: "1.2rem", marginBottom: "40px" }}
-        >
+        <Typography variant="p" sx={{ color: "#818FA3", fontSize: "1.2rem", marginBottom: "40px" }}>
           You have not selected a gift goal
         </Typography>
         <ButtonComponent
@@ -59,10 +67,7 @@ const GiftScreen = () => {
           handleClick={() => handleToggleGoalDrawer(true)}
         />
       </Box>
-      <GiftGoalDrawer
-        show={toggleGoalDrawer}
-        toggleDrawer={handleToggleGoalDrawer}
-      />
+      <GiftGoalDrawer show={toggleGoalDrawer} toggleDrawer={handleToggleGoalDrawer} />
     </Container>
   );
 };

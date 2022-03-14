@@ -5,14 +5,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import ButtonComponent from "../../Component/Button";
 import { useStyles } from "./style";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
+
 const GiftGoalDrawer = ({ show, toggleDrawer }) => {
   let giftId;
   let userId;
   const { partyDetails } = useSelector((s) => s.getPartyDetails);
   const [allGift, setAllGift] = useState([]);
   const route = useRouter();
+  const dispatch = useDispatch();
   if (typeof window !== "undefined") {
     // Perform localStorage action
     giftId = localStorage.getItem("giftId");
@@ -39,7 +42,14 @@ const GiftGoalDrawer = ({ show, toggleDrawer }) => {
     });
     console.log(response.data);
     console.log("click");
-    route.push("/detail");
+    setTimeout(() => {
+      const getDetail = {
+        id: partyDetails?.party.id,
+        user: localStorage.getItem("userId"),
+      };
+      dispatch(getPartyDetailsRequest(getDetail));
+      route.push("/detail");
+    }, 2000);
   };
   useEffect(() => {
     getAllGiftOptions();
@@ -67,16 +77,10 @@ const GiftGoalDrawer = ({ show, toggleDrawer }) => {
         >
           <div />
           <DragHandleIcon />
-          <CloseIcon
-            onClick={() => toggleDrawer(false)}
-            sx={{ cursor: "pointer" }}
-          />
+          <CloseIcon onClick={() => toggleDrawer(false)} sx={{ cursor: "pointer" }} />
         </Stack>
         <Box sx={{ width: "100%" }}>
-          <Typography
-            sx={{ color: "#0A1F44", fontWeight: "bold" }}
-            variant="h5"
-          >
+          <Typography sx={{ color: "#0A1F44", fontWeight: "bold" }} variant="h5">
             Gifts
           </Typography>
           <Typography sx={{ color: "#0A1F44" }} variant="body1">

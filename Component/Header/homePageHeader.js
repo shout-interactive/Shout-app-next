@@ -15,7 +15,6 @@ const HomePageHeader = () => {
   useEffect(() => {}, []);
   // const classes = useStyles();
   const router = useRouter();
-  console.log(userCoin);
   const handleNavigateToLeaderBoard = () => {
     router.push("/leaderboard");
   };

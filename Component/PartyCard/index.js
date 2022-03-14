@@ -115,7 +115,9 @@ export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
           />
         </div>
         <Box className={classes.avatarGroupContainer}>
-          {partyDetails?.Geust?.invites.length + partyDetails?.Geust?.geusts.length === 0 ? (
+          {partyDetails?.party?.Geust?.invites.length +
+            partyDetails?.party?.Geust?.geusts.length ===
+          0 ? (
             <>
               <Typography sx={{ color: "white", fontWeight: "bold" }}>
                 Your invite seems empty,{" "}
@@ -125,8 +127,10 @@ export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
           ) : (
             <AvatarGroup
               total={
-                Number(partyDetails?.Geust?.invites.length + partyDetails?.Geust?.geusts.length) ||
-                20
+                Number(
+                  partyDetails?.party?.Geust?.invites.length +
+                    partyDetails?.party?.Geust?.geusts.length
+                ) || 20
               }
             >
               <Avatar alt="Remy Sharp" src="" />
