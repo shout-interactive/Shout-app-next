@@ -21,7 +21,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-shoutappnext-dev-70220-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
         "logicalId": "hostingamplifyhosting"
       },
-      "lastPushTimeStamp": "2022-03-14T14:16:21.918Z",
+      "lastPushTimeStamp": "2022-03-14T18:11:16.977Z",
       "output": {},
       "lastPushDirHash": "CWerARbG8hLpRrtqK0P5XMlrKos="
     }
