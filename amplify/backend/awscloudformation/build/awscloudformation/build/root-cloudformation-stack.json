@@ -155,9 +155,9 @@
     "hostingamplifyhosting": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-shoutv1next-dev-21957-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-shoutappnext-dev-70220-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
         "Parameters": {
-          "appId": "dgqqwx71zaj2v",
+          "appId": "d30wv9kxw1zprk",
           "type": "manual",
           "env": "dev"
         }
