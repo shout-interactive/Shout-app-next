@@ -38,7 +38,7 @@ const GiftGoalDrawer = ({ show, toggleDrawer }) => {
         gift: giftId,
         user: userId,
       },
-      url: "http://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift",
+      url: "https://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift",
     });
     console.log(response.data);
     console.log("click");
