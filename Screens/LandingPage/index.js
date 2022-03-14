@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useStyles } from "./style";
-
 import { verifyTokenRequest } from "../../store/actions/get-token";
 
 export const getStaticProps = async () => {
@@ -17,7 +15,7 @@ export const getStaticProps = async () => {
 const LandingPage = ({ user }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const classes = useStyles();
+  // const classes = useStyles();
   // const route
   const [loaded, setLoaded] = useState(false);
 
