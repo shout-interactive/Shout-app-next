@@ -25,7 +25,7 @@ const GiftGoalDrawer = ({ show, toggleDrawer }) => {
   const getAllGiftOptions = async () => {
     const response = await axios({
       method: "POST",
-      url: "http://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift/all",
+      url: "https://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift/all",
     });
     setAllGift(response.data.gifts);
     console.log(response.data.gifts);
