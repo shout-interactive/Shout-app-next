@@ -2,7 +2,7 @@ import axios from "axios";
 import * as _ from "lodash";
 // export const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export const apiUrl = "https://dev-server.shoutng.com/";
+export const apiUrl = "https://dev-server.shoutng.com/v1/";
 export const API = async (callObj, dispatch) => {
   const { path, method, data = null, header = false } = callObj;
 

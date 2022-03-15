@@ -25,7 +25,7 @@ const GiftGoalDrawer = ({ show, toggleDrawer }) => {
   const getAllGiftOptions = async () => {
     const response = await axios({
       method: "POST",
-      url: "https://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift/all",
+      url: "https://dev-server.shoutng.com/v1/party/gift/all",
     });
     setAllGift(response.data.gifts);
     console.log(response.data.gifts);
@@ -38,7 +38,8 @@ const GiftGoalDrawer = ({ show, toggleDrawer }) => {
         gift: giftId,
         user: userId,
       },
-      url: "https://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift",
+      url: "https://dev-server.shoutng.com/v1/party/gift",
+      
     });
     console.log(response.data);
     console.log("click");
