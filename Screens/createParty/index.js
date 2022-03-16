@@ -1,20 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Box,
-  SwipeableDrawer,
-  TextField,
-  MenuItem,
-  Typography,
-  Button,
-  Avatar,
-  Snackbar,
-  Alert,
-  Select,
-  OutlinedInput,
-  Input,
-} from "@mui/material";
-import { createPartyRequest } from "../../store/actions/create-party";
+import { Container, Box, TextField, Typography, Button, Snackbar, Alert } from "@mui/material";
+import { createPartyCleanUp, createPartyRequest } from "../../store/actions/create-party";
 import { useDispatch, useSelector } from "react-redux";
 import { BsChevronLeft } from "react-icons/bs";
 import VideocamSharpIcon from "@mui/icons-material/VideocamSharp";
@@ -25,111 +11,61 @@ import ButtonComponent from "../../Component/Button";
 import { FormLabel } from "@mui/material";
 import { Header } from "../../Component/Header";
 import { useRouter } from "next/router";
-
+import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
+import PersonRemoveAlt1OutlinedIcon from "@mui/icons-material/PersonRemoveAlt1Outlined";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import { generate } from "shortid";
 export const CreateParty = () => {
   const classes = useStyles();
-  const userId = localStorage.getItem("userId");
+  // localstorage data
   const userCoin = localStorage.getItem("coin");
-  // console.log(userId, userCoin);
-  const { isLoading, error, isSuccessful, message } = useSelector((s) => s.createParty);
+
+  // useSelector and dispatch
+  const { parties } = useSelector((s) => s.getParties);
+  const { isLoading, partyData } = useSelector((s) => s.createParty);
   const dispatch = useDispatch();
-  const [openAlert, setOpenAlert] = useState(true);
+
+  // route
   const route = useRouter();
-  const [partyuser, setSelectedPartyUser] = useState("myself one");
+
+  // Input value fields
   const [partyName, setSelectedPartyName] = useState("");
   const [partyDate, setSelectedPartyDate] = useState("");
   const [partyDesc, setSelectedPartyDesc] = useState("");
-  const [partyGuests, setSelectedPartyGuests] = useState([]);
   const [openSnackbar, setOPenSnackBar] = useState(true);
-  const [enabled, setEnabled] = useState(true);
-  const [err, setErr] = useState(false);
-
   const [openModal, setOpenModal] = useState(false);
+  const [err, setErr] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const inputGuestField = [
+    {
+      type: "text",
+      id: "1",
+      guestName: "",
+    },
+  ];
+  const [guest, setGuest] = useState(inputGuestField);
+  const guestName = guest.map((guest) => guest.guestName);
+  // console.log(guestName);
+  // add new guest input field
+  const addInput = () => {
+    setGuest((s) => {
+      return [
+        ...s,
+        {
+          id: generate(),
+          type: "text",
+          value: "",
+        },
+      ];
+    });
+  };
+
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
-  const party_users = [
-    {
-      key: 1,
-      value: "myself one",
-      label: "Myself One",
-    },
-    {
-      key: 2,
-      value: "myself two",
-      label: "Myself Two",
-    },
-    {
-      key: 3,
-      value: "myself three",
-      label: "Myself Three",
-    },
-    {
-      key: 4,
-      value: "myself four",
-      label: "Myself four",
-    },
-    {
-      key: 5,
-      value: "myself five",
-      label: "Myself five",
-    },
-  ];
 
-  const guests = [
-    {
-      key: 1,
-      name: "David Doe",
-      value: "David Doe",
-    },
-    {
-      key: 2,
-      name: "Ayo Cole",
-      value: "Ayo Cole",
-    },
-    {
-      key: 3,
-      name: "Oliver Hansen",
-      value: "Oliver Hansen",
-    },
-    {
-      key: 4,
-      name: "Van Henry",
-      value: "Van Henry",
-    },
-    {
-      key: 5,
-      name: "April Tucker",
-      value: "April Tucker",
-    },
-    {
-      Key: 6,
-      name: "Ralph Hubbard",
-      value: "Ralph Hubbard",
-    },
-    {
-      key: 7,
-      name: "Omar Alexander",
-      value: "Omar Alexander",
-    },
-    {
-      key: 8,
-      name: "Carlos Abbott",
-      value: "Carlos Abbott",
-    },
-  ];
-
-  const handleCloseAlert = () => {
-    setTimeout(() => {
-      setOPenSnackBar(false);
-    }, 2000);
-  };
   const handleGetCoin = () => {
     route.push("/wallet");
-  };
-
-  const handleChangePartyUser = (event) => {
-    setSelectedPartyUser(event.target.value);
   };
 
   const handleChangePartyName = (event) => {
@@ -142,10 +78,6 @@ export const CreateParty = () => {
     setSelectedPartyDesc(event.target.value);
   };
 
-  const handleAddPartyGuest = (event) => {
-    setSelectedPartyGuests([...event.target.value]);
-  };
-
   const handleCreateParty = async () => {
     if (!partyName && !partyDate && !partyDesc) {
       setErr(true);
@@ -156,26 +88,33 @@ export const CreateParty = () => {
         name: partyName,
         date: partyDate,
         description: partyDesc,
-        geusts: [],
-        user: localStorage.getItem("userId")
+        geusts: guestName,
+        user: localStorage.getItem("userId"),
       };
-      
-      dispatch(createPartyRequest(JSON.stringify(obj)));
 
+      dispatch(createPartyRequest(obj));
       resetState();
       setTimeout(() => {
-       route.push("/party");
-      }, 2000);
-      
+        route.push("/party");
+      }, 3000);
+
+      // setTimeout(() => {
+      //   const getDetail = {
+      //     id: partyData.id,
+      //     user: localStorage.getItem("userId"),
+      //   };
+      //   dispatch(getPartyDetailsRequest(getDetail));
+      //   route.push("/detail");
+      // }, 5000);
     }
   };
 
+  // console.log("my party", parties[0]);
   const resetState = () => {
-    setSelectedPartyUser("myself one");
     setSelectedPartyName("");
     setSelectedPartyDate("");
     setSelectedPartyDesc("");
-    setSelectedPartyGuests([]);
+    // setGuest("");
   };
 
   return (
@@ -185,7 +124,7 @@ export const CreateParty = () => {
           type="nav"
           title="New Shout! Party"
           leftLink="/party"
-          leftIcon={<BsChevronLeft onClick={() => handleCreateParty()} />}
+          leftIcon={<BsChevronLeft onClick={() => route.push("/party")} />}
           primary
         />
 
@@ -196,7 +135,7 @@ export const CreateParty = () => {
             justifyContent: "center",
           }}
         >
-          <Box id="partyName" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
+          <Box sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
             <FormLabel
               required
               sx={{
@@ -221,6 +160,76 @@ export const CreateParty = () => {
                 "& .MuiOutlinedInput-root": { borderRadius: "20px" },
               }}
             />
+          </Box>
+          <Box sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <FormLabel
+                required
+                sx={{
+                  marginBottom: ".7rem",
+                  fontWeight: "bold",
+                  fontSize: "1rem",
+                  color: "#0a1f44",
+                  paddingRight: "5px",
+                  // height: "50px",
+                  // background: "blue",
+                }}
+              >
+                Add Guest
+              </FormLabel>
+              <PersonAddAltIcon
+                onClick={addInput}
+                sx={{ cursor: "pointer" }}
+                style={{ position: "relative", top: "-5px" }}
+              />
+            </div>
+
+            {guest.map((item) => (
+              <Box
+                key={item.id}
+                sx={{
+                  display: "flex",
+                  marginBottom: "15px",
+                  alignItems: "center",
+                }}
+              >
+                <TextField
+                  error={err}
+                  // id="outlined-select-currency"
+                  id={item.id}
+                  placeholder="Guest email"
+                  value={item.guestName}
+                  onChange={(e) =>
+                    setGuest((currentGuest) =>
+                      currentGuest.map((x) =>
+                        x.id === item.id
+                          ? {
+                              ...x,
+                              guestName: e.target.value,
+                            }
+                          : x
+                      )
+                    )
+                  }
+                  sx={{
+                    "& .css-nnbavb": { float: "left" },
+                    "& .MuiOutlinedInput-root": { borderRadius: "20px" },
+                    width: "550px",
+                    paddingRight: "8px",
+                  }}
+                />
+                {guest.length === 1 ? (
+                  ""
+                ) : (
+                  <PersonRemoveAlt1OutlinedIcon
+                    style={{ cursor: "pointer" }}
+                    onClick={() =>
+                      setGuest((currentGuest) => currentGuest.filter((x) => x.id !== item.id))
+                    }
+                  />
+                )}
+              </Box>
+            ))}
           </Box>
 
           <Box id="date" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
@@ -320,12 +329,8 @@ export const CreateParty = () => {
             <TextField
               error={err}
               multiline
-              // type="multiline"
-              // id="outlined-select-currency"
               minRows={4}
               style={{ width: "100%", padding: "0.5rem" }}
-              // maxRows={4}
-              // fullWidth
               placeholder="Come and have a blast and party with me as I turn 25! 🍾"
               value={partyDesc}
               onChange={handleChangePartyDesc}
@@ -352,7 +357,7 @@ export const CreateParty = () => {
           <Box
             id="createParty"
             // onClick={handleCreateParty}
-            onClick={userCoin >= 100 ? handleCreateParty : () => handleToggleModal(true)}
+            onClick={userCoin >= 100 ? () => handleCreateParty() : () => handleToggleModal(true)}
             sx={{ margin: "2rem 0rem", cursor: "pointer", flex: "1" }}
             className={classes.buttonWrapper}
           >
@@ -370,19 +375,20 @@ export const CreateParty = () => {
             >
               {isLoading ? (
                 <img
+                  aria-disabled
                   src="/assest/images/Shoutassets/loader.gif"
                   alt=""
-                  style={{ width: "40px", height: "40px" }}
+                  style={{ width: "25px", height: "25px" }}
                 />
               ) : (
                 "Create"
               )}
             </Button>
           </Box>
-          {isSuccessful && (
+          {/* {isSuccessful ? (
             <Snackbar
               open={openSnackbar}
-              autoHideDuration={6000}
+              autoHideDuration={2000}
               onClose={() => setOPenSnackBar(false)}
               anchorOrigin={{ vertical: "top", horizontal: "right" }}
             >
@@ -390,7 +396,9 @@ export const CreateParty = () => {
                 Party Created Successfully!
               </Alert>
             </Snackbar>
-          )}
+          ) : (
+            ""
+          )} */}
         </Box>
         <ModalComponent show={openModal} toggleModal={handleToggleModal}>
           <Container className={classes.container}>

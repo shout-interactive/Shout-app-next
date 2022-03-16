@@ -86,12 +86,12 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: "center",
     },
     icon: {
-        fontSize: "5rem",
+        fontSize: "6rem",
         color: "#FA943E",
         borderRadius: "20px",
         margin: "20px auto",
         position: "relative",
-        left: "40%",
+        left: "35%",
     },
     btnRemove: {
         position: "absolute",

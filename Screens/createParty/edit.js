@@ -22,21 +22,21 @@ import VideocamSharpIcon from "@mui/icons-material/VideocamSharp";
 import { useStyles } from "./style";
 // import { Header } from "./../../../Component/Header/index";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
-import coinImg from "../../../assest/images/coinImg.png";
-import ModalComponent from "./../../../Component/Modals";
-import ButtonComponent from "../../../Component/Button";
-
+import ModalComponent from "../../Component/Modals";
+import ButtonComponent from "../../Component/Button";
+import { useRouter } from "next/router";
 import { FormLabel } from "@mui/material";
 // import "./style.js";
 // import { createPartyRequest } from "../../store/actions/create-party";
 // import { Navigate } from "react-router-dom";
-import { Header } from "./../../../Component/Header/index";
+import { Header } from "../../Component/Header/index";
 // const userCoin = localStorage.getItem("coins");
 // const userId = localStorage.getItem("userId");
 
 //
 export const EditParty = () => {
   const classes = useStyles();
+  const route = useRouter();
   const [openAlert, setOpenAlert] = useState(true);
 
   const [partyuser, setSelectedPartyUser] = useState("myself one");
@@ -195,7 +195,7 @@ export const EditParty = () => {
         <Header
           type="nav"
           title="Edit Shout! Party"
-          leftLink="/party"
+          leftLink="/detail"
           leftIcon={<BsChevronLeft onClick={() => handleGoBack()} />}
           rightIcon={<MoreHorizIcon onClick={() => handleGoBack()} />}
           rightLink=""
@@ -416,6 +416,7 @@ export const EditParty = () => {
               }}
               variant="outlined"
               fullWidth
+              onClick={() => route.push("/detail")}
             >
               {/* {isLoading ? "Loading..." : "Create"} */}Cancel
             </Button>
@@ -440,7 +441,7 @@ export const EditParty = () => {
         <ModalComponent show={openModal} toggleModal={handleToggleModal}>
           <Container className={classes.container}>
             <Box className={classes.modalBox}>
-              <img src={coinImg} alt="" className={classes.icon} />
+              <img src={"coinImg"} alt="" className={classes.icon} />
               <Typography
                 sx={{
                   padding: "0 40px",
@@ -458,7 +459,11 @@ export const EditParty = () => {
                 onClick={handleGetCoin}
                 sx={{ margin: "2rem 0rem", cursor: "pointer" }}
               >
-                <ButtonComponent title="Get Coins" button="#162767" />
+                <ButtonComponent
+                  title="Get Coins"
+                  button="#162767"
+                  width="100%"
+                />
               </Box>
             </Box>
           </Container>

@@ -13,8 +13,8 @@ const token = "";
 const createPartyStart = () => {
   return { type: CREATE_PARTY_START };
 };
-const createPartySucess = (message) => {
-  return { type: CREATE_PARTY_SUCCESS, message };
+const createPartySucess = (payload, message) => {
+  return { type: CREATE_PARTY_SUCCESS, message, payload };
 };
 const createPartyFail = (payload) => {
   return { type: CREATE_PARTY_FAIL, payload };
@@ -37,8 +37,8 @@ export const createPartyRequest = (payload) => {
       const data = await API(callObj);
       console.log(data, "party data");
       if (data.status) {
-        dispatch(getPartiesSucess([], payload));
-        dispatch(createPartySucess(data.message));
+        dispatch(createPartySucess(data.data, data.message));
+        // dispatch(getPartiesSucess(data.data, data.message));
         return data;
       } else {
         dispatch(createPartyFail(data.data, data.message));
@@ -52,7 +52,7 @@ export const createPartyRequest = (payload) => {
       } else {
         errorResponse = ["Something went wrong. please try again"];
       }
-      dispatch(createPartyFail([], errorResponse));
+      dispatch(createPartyFail(errorResponse));
     }
   };
 };

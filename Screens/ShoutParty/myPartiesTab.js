@@ -1,12 +1,41 @@
 import { Container } from "@mui/material";
-// import { useDispatch, useSelector } from "react-redux";
-// import Loading from "../LoadingScreen";
 import Title from "../../Component/TitleComponent";
 import PartyCard from "../../Component/PartyCard/index.js";
-// import ButtonComponent from "../../components/Button";
 import { dummyNextPartyData, dummyUpcomingPartyData } from "../../utils/partyData";
-
+import { useSelector, useDispatch } from "react-redux";
+import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
+import { useStyles } from "./style";
+import { useRouter } from "next/router";
+import { getPartiesRequest } from "../../store/actions/get-parties";
+import { useEffect } from "react";
+import styles from "./style.module.css";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 const MyParties = () => {
+  const dispatch = useDispatch();
+  const classes = useStyles();
+  const route = useRouter();
+  const { parties } = useSelector((s) => s.getParties);
+
+  const enterMyParty = (data, id) => {
+    const userId = localStorage.getItem("userId");
+    const checkParty = data?.filter((element) => element.id === id);
+    const obj = {
+      id: checkParty[0].id,
+      user: userId,
+    };
+    dispatch(getPartyDetailsRequest(obj));
+    route.push("/detail");
+    console.log(checkParty);
+    console.log(checkParty[0].id);
+  };
+  const fetchParties = () => {
+    const obj = {
+      user: localStorage.getItem("userId"),
+    };
+
+    dispatch(getPartiesRequest(obj));
+  };
+
   return (
     <Container className="invite-tab-container">
       <Title title="Next party" />
@@ -21,17 +50,27 @@ const MyParties = () => {
 
       <Title title="Upcoming party" />
 
-      {dummyUpcomingPartyData?.map((data, i) => (
+      {parties?.map((data, i) => (
         <PartyCard
-          key={i}
+          key={data?.id}
           data={data}
+          id={data?.id}
           paid={false}
           button="#14B363"
           secondary="#050C50"
-          header="0"
+          header="25px"
           badge="#4d4c83"
+          partyBtnFunction={() => enterMyParty(parties, data?.id)}
         />
       ))}
+      {parties.length === 0 && (
+        <div className={styles.noParty}>
+          <p>You have not created any party</p>
+          <div>
+            <KeyboardDoubleArrowDownIcon className={styles.icon} />
+          </div>
+        </div>
+      )}
     </Container>
   );
 };

@@ -54,6 +54,9 @@ const ModalPopup = ({ show, toggleModal }) => {
                   borderColor: "#162767",
                   width: "200px",
                   margin: "0 10px",
+                  height: "45px",
+                  borderRadius: "10px",
+                  color: "#162767",
                 }}
               >
                 Cancel
@@ -65,6 +68,9 @@ const ModalPopup = ({ show, toggleModal }) => {
                   backgroundColor: "#162767",
                   width: "200px",
                   margin: "0 10px",
+                  height: "45px",
+                  borderRadius: "10px",
+                  color: "#fff",
                 }}
               >
                 Okay

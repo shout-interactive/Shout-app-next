@@ -24,10 +24,10 @@ import SendIcon from "@mui/icons-material/Send";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { BsChevronLeft } from "react-icons/bs";
 import VideocamSharpIcon from "@mui/icons-material/VideocamSharp";
-import { useStyles } from "../../pages/Screens/create party/style";
+import { useStyles } from "./style";
 // import { Header } from "./../../../Component/Header/index";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
-import coinImg from "../../../assest/images/coinImg.png";
+// import coinImg from "../../../assest/images/coinImg.png";
 import ModalComponent from "../../Component/Modals";
 import ButtonComponent from "../../Component/Button";
 import AddIcon from "@mui/icons-material/Add";
@@ -89,10 +89,7 @@ export const EditCalendar = () => {
           rightLink=""
           primary
         />
-        <Box
-          id="partyName"
-          sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
-        >
+        <Box id="partyName" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
           <FormLabel
             required
             sx={{
@@ -232,10 +229,7 @@ export const EditCalendar = () => {
             }}
           />
         </Box>
-        <Box
-          id="description"
-          sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
-        >
+        <Box id="description" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
           <Typography
             sx={{
               marginBottom: ".7rem",

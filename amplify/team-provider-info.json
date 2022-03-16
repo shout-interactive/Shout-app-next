@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-shoutappnext-dev-70220-authRole",
+      "UnauthRoleArn": "arn:aws:iam::116743752267:role/amplify-shoutappnext-dev-70220-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::116743752267:role/amplify-shoutappnext-dev-70220-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-shoutappnext-dev-70220-deployment",
+      "UnauthRoleName": "amplify-shoutappnext-dev-70220-unauthRole",
+      "StackName": "amplify-shoutappnext-dev-70220",
+      "StackId": "arn:aws:cloudformation:us-east-1:116743752267:stack/amplify-shoutappnext-dev-70220/65668d70-a39f-11ec-88c0-0a39a9c9a37b",
+      "AmplifyAppId": "d30wv9kxw1zprk"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d30wv9kxw1zprk",
+          "type": "manual"
+        }
+      }
+    }
+  }
+}

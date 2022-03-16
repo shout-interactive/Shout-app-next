@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Box,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Container, Box, Typography, Button } from "@mui/material";
 import Link from "@mui/material/Link";
 
 // import { useDispatch, useSelector } from "react-redux";
@@ -15,11 +10,8 @@ import { BsChevronLeft } from "react-icons/bs";
 import { useStyles } from "./style";
 import ButtonComponent from "../../Component/Button";
 import AddIcon from "@mui/icons-material/Add";
-import TabsComponent from "./Tabs"
-import { FormLabel } from "@mui/material";
-// import "./style.js";
-// import { createPartyRequest } from "../../store/actions/create-party";
-// import { Navigate } from "react-router-dom";
+import TabsComponent from "./Tabs";
+
 import { Header } from "../../Component/Header/index";
 import { createTheme } from "@mui/material/styles";
 

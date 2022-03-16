@@ -15,6 +15,14 @@ export const getAllParties = {
     myParties: [],
     message: "",
 };
+export const getAllInvite = {
+    isLoading: false,
+    error: null,
+    isSuccessful: false,
+    invite: [],
+    //   myParties: [],
+    message: "",
+};
 
 export const getPartyDetails = {
     isLoading: false,
@@ -29,6 +37,7 @@ export const createParty = {
     error: null,
     isSuccessful: false,
     message: "",
+    partyData: null,
 };
 export const createGift = {
     isLoading: false,

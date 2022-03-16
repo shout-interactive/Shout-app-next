@@ -1,19 +1,20 @@
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { useRouter } from "next/router";
-import {useEffect} from "react"
+import { useEffect } from "react";
 import styles from "./index.module.css";
-
+import { useSelector } from "react-redux";
 import { useStyles } from "./style";
 
-
-const HomePageHeader = ({ coinId, giftId, leaderId }) => {
-  if (typeof window !== 'undefined') {
-  // Perform localStorage action
- const userCoin = localStorage.getItem("coin");
-}
+const HomePageHeader = () => {
+  const { user } = useSelector((s) => s.verifyToken);
+  let userCoin;
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    userCoin = localStorage.getItem("coin");
+  }
+  useEffect(() => {}, []);
   // const classes = useStyles();
   const router = useRouter();
-
   const handleNavigateToLeaderBoard = () => {
     router.push("/leaderboard");
   };
@@ -23,10 +24,7 @@ const HomePageHeader = ({ coinId, giftId, leaderId }) => {
   const handleNavigateToGifts = () => {
     router.push("/gift");
   };
-  useEffect(() =>{
-
-  })
-      
+  useEffect(() => {});
 
   function intToString(value) {
     var suffixes = ["", "k", "m", "b", "t"];
@@ -39,13 +37,12 @@ const HomePageHeader = ({ coinId, giftId, leaderId }) => {
     }
     return shortValue + suffixes[suffixNum];
   }
-  // console.log(coinId);
   return (
     <Navbar className="">
       <Container className={styles.navHeaderWrapper} style={{ margin: "0 20px" }}>
         <Navbar.Brand>
-          <img src={"/assest/images/shoutLogo.svg"} alt="shout" />
-          {/* <h1 className="title"> Home </h1> */}
+          {/* <img src={"/assest/images/shoutLogo.svg"} alt="shout" /> */}
+          <h1 className={styles.title}> Hi, {user?.firstname || "Champ!"} </h1>
         </Navbar.Brand>
         <Nav>
           <Nav onClick={handleNavigateToWallet}>
@@ -56,16 +53,19 @@ const HomePageHeader = ({ coinId, giftId, leaderId }) => {
           </Nav>
 
           <Nav onClick={handleNavigateToLeaderBoard}>
-            <div className={styles["badge-header"]} id={leaderId}>
+            <div className={styles["badge-header"]}>
               <img src={"/assets/cup.svg"} alt="Leaderboard" />
             </div>
           </Nav>
 
-          <Nav onClick={handleNavigateToGifts} style={{ paddingRight: 0 }}>
-            <div className={styles["badge-header"]} id={giftId}>
+          {/* <Nav
+            onClick={handleNavigateToLeaderBoard}
+            style={{ paddingRight: 0 }}
+          >
+            <div className={styles["badge-header"]}>
               <img src={"/assets/gift-box.svg"} alt="Gift box" />
             </div>
-          </Nav>
+          </Nav> */}
         </Nav>
       </Container>
     </Navbar>

@@ -8,10 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import CardHeader from "@mui/material/CardHeader";
 import CloseIcon from "@mui/icons-material/Close";
-import { display } from "@mui/system";
-import CardActions from "@mui/material/CardActions";
-import { MoreHoriz } from "@mui/icons-material";
-import ButtonComponent from "../../Component/Button";
+import { useRouter } from "next/router";
 import {
   Container,
   SwipeableDrawer,
@@ -29,6 +26,7 @@ import Link from "@mui/material/Link";
 import CakeIcon from "@mui/icons-material/Cake";
 
 export const AddCalendarInvite = () => {
+  const route = useRouter();
   return (
     <Box
       sx={{
@@ -40,7 +38,7 @@ export const AddCalendarInvite = () => {
     >
       <Box>
         <Card
-          fullWidth
+          // fullWidth
           sx={{
             backgroundColor: "#14B363",
 
@@ -54,7 +52,7 @@ export const AddCalendarInvite = () => {
           <CardHeader
             avatar={
               <Avatar sx={{ bgcolor: "#14B363" }} aria-label="settings">
-                <CloseIcon />
+                <CloseIcon onClick={() => route.push("/mycalendar")} />
               </Avatar>
             }
             action={
@@ -65,7 +63,7 @@ export const AddCalendarInvite = () => {
           />
         </Card>
         <Card
-          fullWidth
+          // fullWidth
           sx={{
             backgroundColor: "white",
 
@@ -76,10 +74,7 @@ export const AddCalendarInvite = () => {
         >
           <CardHeader
             avatar={
-              <Avatar
-                sx={{ color: "#14B363", bgcolor: "white" }}
-                aria-label="settings"
-              >
+              <Avatar sx={{ color: "#14B363", bgcolor: "white" }} aria-label="settings">
                 <CakeIcon />
               </Avatar>
             }
@@ -92,10 +87,7 @@ export const AddCalendarInvite = () => {
             }
           />
           <CardContent>
-            <Box
-              id="description"
-              sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
-            >
+            <Box id="description" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
               <Typography
                 sx={{
                   marginBottom: ".7rem",
@@ -107,14 +99,9 @@ export const AddCalendarInvite = () => {
                 Description
               </Typography>
               <TextField
-                // error={err}
                 multiline
-                // type="multiline"
-                // id="outlined-select-currency"
                 minRows={4}
                 style={{ width: "100%", padding: "0.5rem" }}
-                // maxRows={4}
-                // fullWidth
                 placeholder="Come and have a blast and party with me as I turn 25! 🍾"
                 // value={partyDesc}
                 // onChange={handleChangePartyDesc}
@@ -134,7 +121,6 @@ export const AddCalendarInvite = () => {
                 flexBasis: "100%",
                 justifyContent: "space-between",
               }}
-              //  className={classes.buttonWrapper}
             >
               <Button
                 sx={{
@@ -149,7 +135,7 @@ export const AddCalendarInvite = () => {
                 variant="outlined"
                 fullWidth
               >
-                {/* {isLoading ? "Loading..." : "Create"} */}Update
+                Update
               </Button>
               <Button
                 sx={{
@@ -164,7 +150,7 @@ export const AddCalendarInvite = () => {
                 variant="outlined"
                 fullWidth
               >
-                {/* {isLoading ? "Loading..." : "Create"} */}Cancel
+                Cancel
               </Button>
             </Box>
           </CardContent>

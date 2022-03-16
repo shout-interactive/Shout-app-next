@@ -1,7 +1,7 @@
 import React from "react";
-import { Calendar } from "../../Screens/calendar/calendar"
+import CalendarList from "../Screens/calendar";
 
 const MyCalender = () => {
-  return <Calendar />;
+  return <CalendarList />;
 };
 export default MyCalender;

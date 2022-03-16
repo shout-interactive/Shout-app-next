@@ -1,16 +1,23 @@
 import { useState, Fragment } from "react";
 import Dynamic from "next/dynamic";
 import { BsChevronLeft } from "react-icons/bs";
-import ClearIcon from "@mui/icons-material/Clear";
-import { Container, Button, Box, Card, Typography, Divider } from "@mui/material";
-import Tour from "reactour";
+import {
+  Container,
+  // Button,
+  Box,
+  Card,
+  Typography,
+  Divider,
+} from "@mui/material";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
 import { useRouter } from "next/router";
 import { Header } from "../../Component/Header";
-import WalletPaymentDrawer from "./walletPaymentDrawer";
-import FundWalletDrawer from "./fundWalletDrawer";
+const WalletPaymentDrawer = Dynamic(() => import("./walletPaymentDrawer"));
+const FundWalletDrawer = Dynamic(() => import("./fundWalletDrawer"));
 import { useStyles } from "./style";
 import styles from "./style.module.css";
+// import ClearIcon from "@mui/icons-material/Clear";
+// import Tour from "reactour";
 
 const coinBundles = [
   {
@@ -95,7 +102,9 @@ const Wallet = () => {
           cursor: "pointer",
         }}
       >
-        <Typography sx={{ color: "#0A1F44", fontWeight: "bold", textAlign: "center" }}>
+        <Typography
+          sx={{ color: "#0A1F44", fontWeight: "bold", textAlign: "center" }}
+        >
           {item.value}
         </Typography>
       </Box>
@@ -104,6 +113,23 @@ const Wallet = () => {
 
   return (
     <>
+      {/* <Tour
+        onAfterOpen={disableBody}
+        onBeforeClose={enableBody}
+        steps={steps}
+        isOpen={enabled}
+        onRequestClose={onExit}
+        className="helper"
+        disableKeyboardNavigation={true}
+        lastStepNextButton={<Button>Okay</Button>}
+        nextButton={<Button>Next</Button>}
+        prevButton={<div>{}</div>}
+        rounded={5}
+        showNavigationNumber={false}
+        accentColor="#091D50"
+        showNumber={false}
+        maskSpace={5}
+      /> */}
       <Container className={`${styles.rootContainer} ${classes.root}`}>
         <Card
           // className={styles.card}
@@ -117,9 +143,8 @@ const Wallet = () => {
             type="nav"
             title="Wallet"
             leftLink="/home"
-            rightLink={() => route.push("/home")}
             leftIcon={<BsChevronLeft />}
-            rightIcon={<ClearRoundedIcon />}
+            rightIcon={<ClearRoundedIcon onClick={() => route.push("/home")} />}
           />
           <Box
             sx={{
@@ -168,11 +193,11 @@ const Wallet = () => {
             </Typography>
           </Container>
 
-          {coinBundles.map((item, i) => (
-            <>
-              {coinBundleItem(item, i)}
+          {coinBundles.map((item, index) => (
+            <Fragment key={index}>
+              {coinBundleItem(item)}
               <Divider />
-            </>
+            </Fragment>
           ))}
         </Card>
         <WalletPaymentDrawer

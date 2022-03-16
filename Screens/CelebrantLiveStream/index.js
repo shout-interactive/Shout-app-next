@@ -339,10 +339,15 @@ const CelebrantLiveStream = () => {
               width: "2rem !important",
               height: "2rem !important",
               cursor: "pointer",
+              position: "relative",
+              zIndex: "999",
             }}
             onClick={() => handleToggleMusicDrawer(true)}
           >
-            <AudiotrackSharpIcon sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }} />
+            <AudiotrackSharpIcon
+              sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }}
+              onClick={() => handleToggleMusicDrawer(true)}
+            />
           </Box>
           {liveStreamMode === "My Party" ? (
             <Box
@@ -414,7 +419,7 @@ const CelebrantLiveStream = () => {
                 sx={{
                   position: "fixed",
                   height: "25%",
-                  width: "100%",
+                  width: "50%",
                   // background: "blue",
                   background: "rgb(0, 0, 0)",
                   background:
