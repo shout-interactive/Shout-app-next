@@ -2,18 +2,21 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { verifyTokenRequest } from "../../store/actions/get-token";
+
 const AuthWrapper = ({ children }) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const isAuthenticated =
-    useSelector((state) => state.verifyToken.isSuccessful) || sessionStorage.getItem("token");
-  const router = useRouter();
+    useSelector((state) => state.verifyToken.isSuccessful) ||
+    sessionStorage.getItem("token");
 
   useEffect(() => {
-    dispatch(verifyTokenRequest);
-    console.log("lets");
-    if (isAuthenticated) return null;
+    const { token } = router.query;
+    if (token) dispatch(verifyTokenRequest(token));
+
+    if (isAuthenticated) return true;
     router.push("/login");
-  }, []);
+  }, [router.isReady]);
   return <>{isAuthenticated && children}</>;
 };
 

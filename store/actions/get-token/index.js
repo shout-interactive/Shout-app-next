@@ -7,8 +7,7 @@ import {
 import { API } from "../../../utils/Axios";
 
 // export const token = process.env.NEXT_PUBLIC_API_TEMP_TOKEN;
-export const token =
-  "eyJpZCI6IjFmODg5MjdmLWMyYTgtNGM0Mi1hOTZjLWM3N2I0ZDdhYTcyYyIsImZpcnN0bmFtZSI6Ik9ib2RvIiwibGFzdG5hbWUiOiJCcmlnaHQiLCJtaWRkbGVuYW1lIjpudWxsLCJwcm9ub3VuY2UiOm51bGwsImVtYWlsIjoiYnJpZ2h0QGRldi5jb20iLCJwaG9uZSI6bnVsbCwicm9sZSI6WyJ1c2VyIl0sInBlcm1pc3Npb25zIjpbInVzZXIiXSwiY29udGFjdHMiOm51bGwsImlzT25ib2FyZGVkIjpmYWxzZSwiY3JlYXRlZEF0IjoiMjAyMi0wMy0xNFQwNTozNTo0MC4yMTVaIiwidXBkYXRlZEF0IjoiMjAyMi0wMy0xNFQwNTozNTo0MC4yMTVaIiwiQ29udGFjdCI6bnVsbH0=";
+
 const verifyTokenStart = () => {
   return { type: VERIFY_TOKEN_START };
 };
@@ -22,7 +21,7 @@ export const getTokenCleanUp = () => {
   return { type: VERIFY_TOKEN_CLEANUP };
 };
 
-export const verifyTokenRequest = () => {
+export const verifyTokenRequest = (token) => {
   return async (dispatch) => {
     dispatch(verifyTokenStart());
 

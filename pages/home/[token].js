@@ -1,6 +1,6 @@
 import React from "react";
-import HomeScreen from "../Screens/Homescreen";
-import AuthWrapper from "../Component/AuthWrapper";
+import HomeScreen from "../../Screens/Homescreen";
+import AuthWrapper from "../../Component/AuthWrapper";
 
 const Home = () => {
   return (
