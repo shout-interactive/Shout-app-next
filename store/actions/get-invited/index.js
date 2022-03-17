@@ -33,7 +33,7 @@ export const getInviteRequest = (payload) => {
       const data = await API(callObj);
 
       if (data.status) {
-        dispatch(getInviteSucess(data.parties, data.parties, data.message));
+        dispatch(getInviteSucess(data.parties, data.message));
 
         return data;
       } else {

@@ -37,7 +37,7 @@ const PartyDetails = () => {
   const handleGetCoin = () => {
     route.push("/wallet");
   };
-
+  const userCoin = localStorage.getItem("coin");
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
@@ -53,6 +53,7 @@ const PartyDetails = () => {
     }
   };
 
+  const checkPartyOwner = partyDetails?.party?.owner === localStorage.getItem("userId");
   const activities = [
     {
       color: "#FA9330",
@@ -205,7 +206,7 @@ const PartyDetails = () => {
 
         <div className={classes.buttonWrapper} id="join">
           <Button
-            onClick={() => handleToggleModal(true)}
+            onClick={checkPartyOwner ? handleEnterParty : () => handleToggleModal(true)}
             sx={{
               width: "100%",
               padding: "1rem",
@@ -220,7 +221,7 @@ const PartyDetails = () => {
             size="medium"
             variant="contained"
           >
-            {tempPaid ? "Join party" : joined ? "4D:23H:13M:5S" : "Join party for 2000 🪙"}
+            {checkPartyOwner ? "Join party" : "Join party for 2000 🪙"}
           </Button>
         </div>
 

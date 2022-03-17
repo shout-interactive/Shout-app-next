@@ -15,11 +15,12 @@ import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
 import PersonRemoveAlt1OutlinedIcon from "@mui/icons-material/PersonRemoveAlt1Outlined";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { generate } from "shortid";
+import { partyCreated } from "../../store/actions/track-state";
 export const CreateParty = () => {
   const classes = useStyles();
   // localstorage data
-  const userCoin = localStorage.getItem("coin");
-
+  // const userCoin = localStorage.getItem("coin");
+  const userCoin = 20;
   // useSelector and dispatch
   const { parties } = useSelector((s) => s.getParties);
   const { isLoading, partyData } = useSelector((s) => s.createParty);
@@ -64,9 +65,9 @@ export const CreateParty = () => {
     setOpenModal(open);
   };
 
-  const handleGetCoin = () => {
-    route.push("/wallet");
-  };
+  // const handleGetCoin = () => {
+  //   route.push("/wallet");
+  // };
 
   const handleChangePartyName = (event) => {
     setSelectedPartyName(event.target.value);
@@ -84,7 +85,7 @@ export const CreateParty = () => {
     } else if (partyName && partyDate && partyDesc) {
       setErr(false);
       const obj = {
-        owner: "bright",
+        owner: localStorage.getItem("userId"),
         name: partyName,
         date: partyDate,
         description: partyDesc,
@@ -107,6 +108,12 @@ export const CreateParty = () => {
       //   route.push("/detail");
       // }, 5000);
     }
+  };
+
+  // Route to buy coins
+  const getCoins = () => {
+    route.push("/wallet");
+    dispatch(partyCreated());
   };
 
   // console.log("my party", parties[0]);
@@ -417,8 +424,8 @@ export const CreateParty = () => {
                 className={classes.btnRemove}
                 onClick={() => handleToggleModal(false)}
               />
-              <Box onClick={handleGetCoin} sx={{ margin: "2rem 0rem", cursor: "pointer" }}>
-                <ButtonComponent title="Get Coins" button="#162767" />
+              <Box onClick={getCoins} sx={{ margin: "2rem 0rem", cursor: "pointer" }}>
+                <ButtonComponent title="Get Coins" button="#162767" width="100%" />
               </Box>
             </Box>
           </Container>

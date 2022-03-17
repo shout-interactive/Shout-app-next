@@ -63,14 +63,24 @@ const PartyCard = ({
               <AvatarGroup
                 total={Number(data?.Geust?.invites.length + data?.Geust?.geusts.length) || 20}
               >
-                {data?.Geust?.geusts.map((guestData, i) => (
-                  <Avatar
-                    key={i}
-                    className="avatar"
-                    alt={guestData?.username}
-                    src={guestData?.profile_pic}
-                  />
-                ))}
+                {data?.Geust?.invites
+                  ? data?.Geust?.invites.map((guestData, i) => (
+                      <Avatar
+                        key={i}
+                        className="avatar"
+                        alt={guestData?.username}
+                        src={guestData?.profile_pic}
+                      />
+                    ))
+                  : data?.Geust?.geusts &&
+                    data?.Geust?.geusts.map((guestData, i) => (
+                      <Avatar
+                        key={i}
+                        className="avatar"
+                        alt={guestData?.username}
+                        src={guestData?.profile_pic}
+                      />
+                    ))}
               </AvatarGroup>
             )}
           </div>

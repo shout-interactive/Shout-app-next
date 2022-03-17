@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import { Container, Box, Stack, Typography, Button, TextField } from "@mui/material";
 import ModalComponent from "../../Component/Modals";
 import { getPartiesRequest } from "../../store/actions/get-parties";
-
+import ButtonComponent from "../../Component/Button";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import CheckCircleOutlineRounded from "@mui/icons-material/CheckCircleOutlineRounded";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
@@ -14,6 +14,8 @@ import { createGiftSend } from "../../store/actions/create-gift";
 import styles from "./style.module.css";
 import { Header } from "../../Component/Header";
 import axios from "axios";
+import { giftCoin } from "../../store/actions/track-state";
+import { useRouter } from "next/router";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -30,10 +32,12 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 const GiftGoals = () => {
   const dispatch = useDispatch();
+  const route = useRouter();
   const [amount, setAMount] = useState();
   const [error, setError] = useState(false);
   const [coins, setCoins] = useState(0);
   const [totalCoins, setTotalCoins] = useState(140000);
+  const [moreCoin, setMoreCoin] = useState(false);
   const {
     isLoading,
     error: err,
@@ -42,7 +46,8 @@ const GiftGoals = () => {
     message,
   } = useSelector((s) => s.createGift);
   const [openModal, setOpenModal] = useState(false);
-
+  const userCoin = 20;
+  const checkCoin = amount > userCoin;
   const handleSend = () => {
     if (Number(amount) < 1 || !amount) {
       setError(true);
@@ -66,7 +71,7 @@ const GiftGoals = () => {
   const fetchGoals = async () => {
     const response = await axios({
       method: "POST",
-      url: "https://shoutmockserver-env.eba-4gpwyer9.eu-west-3.elasticbeanstalk.com/v1/party/gift/all",
+      url: "https://dev-server.shoutng.com/v1/party/gift/all",
     });
     console.log(response);
   };
@@ -78,10 +83,15 @@ const GiftGoals = () => {
     dispatch(getPartiesRequest(obj));
   };
 
+  const getCoins = () => {
+    route.push("/wallet");
+    dispatch(giftCoin());
+  };
+
   useEffect(() => {
     fetchGoals();
     fetchParties();
-  });
+  }, []);
 
   return (
     <Container className={styles.root}>
@@ -206,7 +216,7 @@ const GiftGoals = () => {
       </Box>
 
       <Box
-        onClick={() => handleSend()}
+        onClick={checkCoin ? () => setMoreCoin(true) : () => handleSend()}
         sx={{ width: "90%", margin: "1.5rem auto", backgroundColor: "transparent" }}
       >
         <Button
@@ -237,6 +247,26 @@ const GiftGoals = () => {
               className={styles.btnRemove}
               onClick={() => handleToggleModal(false)}
             />
+          </Box>
+        </Container>
+      </ModalComponent>
+      <ModalComponent show={moreCoin} toggleModal={() => handleMoreCoin(false)}>
+        <Container className={styles.containerDetail}>
+          <Box className={styles.modalBox}>
+            <img src={"/assest/images/coinImg.png"} alt="" className={styles.icon} />
+            <Typography
+              sx={{
+                padding: "0 40px",
+                textAlign: "center",
+                marginBottom: "40px",
+              }}
+            >
+              You need more coins to contribute
+            </Typography>
+            <ClearRoundedIcon className={styles.btnRemove} onClick={() => handleMoreCoin(false)} />
+            <Box onClick={getCoins} sx={{ margin: "2rem 0rem", cursor: "pointer" }}>
+              <ButtonComponent title="Get Coins" button="#162767" width="100%" />
+            </Box>
           </Box>
         </Container>
       </ModalComponent>

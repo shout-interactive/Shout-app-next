@@ -6,6 +6,7 @@ import {
   Typography,
   InputAdornment,
   TextField,
+  Input,
   Button,
   Container,
 } from "@mui/material";
@@ -22,10 +23,14 @@ import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlin
 import ButtonComponent from "../../Component/Button";
 import { useStyles } from "./style";
 import { Header } from "../../Component/Header";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { partyCreated } from "../../store/actions/track-state";
 
 const FundWalletDrawer = ({ show, toggleDrawer }) => {
   const classes = useStyles();
-
+  const route = useRouter();
+  const dispatch = useDispatch();
   // const [selectedArr, setSelectedArray] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(1);
   const [showWarningModel, setShowWarningModel] = useState(false);
@@ -34,8 +39,7 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
   const [fundWallet, setFundWallet] = useState(false);
   const [fundAmount, setFundAmount] = useState("");
   const [err, setErr] = useState(false);
-  // const handleSelectFriend = (id) => {};
-
+  const { partyCreate } = useSelector((s) => s.trackState);
   const handleSelect = (index) => {
     setSelectedIndex(index);
     console.log(index);
@@ -74,6 +78,16 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
       setShowWarningModel(true);
       setShowSuccessModel(false);
       setShowAddCardModel(false);
+    }
+  };
+
+  const handleAddFundSuccess = () => {
+    if (partyCreate) {
+      route.push("/create");
+      setFundWallet(false);
+      dispatch(partyCreated());
+    } else {
+      setFundWallet(false);
     }
   };
 
@@ -151,6 +165,7 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
           fullWidth
           placeholder="Enter amount"
           value={fundAmount}
+          type="number"
           onChange={(e) => setFundAmount(e.target.value)}
           sx={{
             "& .css-nnbavb": { float: "left" },
@@ -409,7 +424,7 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
               </Typography>
 
               <Box
-                onClick={() => setFundWallet(false)}
+                onClick={handleAddFundSuccess}
                 sx={{ margin: "2rem 0rem 0rem 0rem", cursor: "pointer" }}
                 className={classes.buttonWrapper}
               >
@@ -473,6 +488,7 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
                   id="outlined-select-currency"
                   fullWidth
                   placeholder=""
+                  type="number"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -499,17 +515,25 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
                   >
                     Exp. date
                   </Typography>
-                  <TextField
-                    id="outlined-select-currency"
-                    fullWidth
-                    placeholder="MM/YY"
-                    // value={partyuser}
-                    // onChange={}
-                    sx={{
-                      "& .css-nnbavb": { float: "left" },
-                      "& .MuiOutlinedInput-root": { borderRadius: "20px" },
-                    }}
-                  />
+                  <div className={classes.monthWrapper}>
+                    <input
+                      type="text"
+                      name="month"
+                      placeholder="MM"
+                      maxlength="2"
+                      size="2"
+                      className={classes.expInput}
+                    />
+                    <span style={{ paddingRight: "5px" }}>/</span>
+                    <input
+                      type="text"
+                      name="year"
+                      placeholder="YY"
+                      maxlength="5"
+                      size="2"
+                      className={classes.expInput}
+                    />
+                  </div>
                 </Box>
                 <Box sx={{ width: "100%", margin: "1.5rem auto 1rem 1rem" }}>
                   <Typography
@@ -521,17 +545,7 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
                   >
                     Cvv
                   </Typography>
-                  <TextField
-                    id="outlined-select-currency"
-                    fullWidth
-                    placeholder="123"
-                    // value={partyuser}
-                    // onChange={}
-                    sx={{
-                      "& .css-nnbavb": { float: "left" },
-                      "& .MuiOutlinedInput-root": { borderRadius: "20px" },
-                    }}
-                  />
+                  <input type="text" className={classes.cvvInput} placeholder="123" maxlength={3} />
                 </Box>
               </Stack>
               <Box

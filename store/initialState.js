@@ -45,3 +45,9 @@ export const createGift = {
     isSuccessful: false,
     message: "",
 };
+
+export const trackState = {
+    partyCreate: false,
+    partyEnter: false,
+    giftCoin: false,
+};

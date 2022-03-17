@@ -36,6 +36,7 @@ export const useStyles = makeStyles((theme) => ({
         color: "white",
         padding: ".5rem",
         borderRadius: "10px",
+        cursor: "pointer",
     },
     partyCardTitleWrapper: {
         width: "100%",
