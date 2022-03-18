@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import { Container, Box, Stack, Typography, Button, TextField } from "@mui/material";
 import ModalComponent from "../../Component/Modals";
 import { getPartiesRequest } from "../../store/actions/get-parties";
+import { useRouter } from "next/router";
 
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import CheckCircleOutlineRounded from "@mui/icons-material/CheckCircleOutlineRounded";
@@ -42,7 +43,7 @@ const GiftGoals = () => {
     message,
   } = useSelector((s) => s.createGift);
   const [openModal, setOpenModal] = useState(false);
-
+  const route = useRouter();
   const handleSend = () => {
     if (Number(amount) < 1 || !amount) {
       setError(true);
@@ -88,8 +89,8 @@ const GiftGoals = () => {
       <Header
         type="nav"
         title="Gift goal"
-        leftLink="/detail"
-        leftIcon={<BsChevronLeft />}
+        // leftLink="/detail"
+        leftIcon={<BsChevronLeft onClick={() => route.back()} />}
         primary
       />
       <Box

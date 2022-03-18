@@ -14,11 +14,9 @@ const CalendarList = () => {
         <Header
           type="nav"
           title="Calendar"
-          leftLink="/party"
-          leftIcon={<BsChevronLeft />}
-          rightIcon={
-            <AddIcon onClick={() => route.push("/calendar/addcalendar")} />
-          }
+          // leftLink="/party"
+          leftIcon={<BsChevronLeft onClick={() => route.back()} />}
+          rightIcon={<AddIcon onClick={() => route.push("/calendar/addcalendar")} />}
           primary
         />
         <TableTab />

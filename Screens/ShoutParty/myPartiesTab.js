@@ -24,7 +24,7 @@ const MyParties = () => {
       user: userId,
     };
     dispatch(getPartyDetailsRequest(obj));
-    route.push("/detail");
+    route.push(`/detail/${checkParty[0].id}`);
     console.log(checkParty);
     console.log(checkParty[0].id);
   };

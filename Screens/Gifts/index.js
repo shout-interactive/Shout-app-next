@@ -7,10 +7,11 @@ import GiftGoalDrawer from "./GiftDrawer";
 import { getPartiesRequest } from "../../store/actions/get-parties";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 const GiftScreen = () => {
   const dispatch = useDispatch();
   const [toggleGoalDrawer, setToggleGoalDrawer] = useState(false);
-
+  const route = useRouter();
   const fetchParties = () => {
     const obj = {
       user: localStorage.getItem("userId"),
@@ -30,7 +31,7 @@ const GiftScreen = () => {
         type="nav"
         title="Gift goal"
         leftLink="/detail"
-        leftIcon={<BsChevronLeft />}
+        leftIcon={<BsChevronLeft onClick={() => route.back()} />}
         primary
       />
 
