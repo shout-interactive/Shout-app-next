@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 // import { useDispatch, useSelector } from "react-redux";
 import SentimentVeryDissatisfiedSharpIcon from "@mui/icons-material/SentimentVeryDissatisfiedSharp";
+import { useRouter } from "next/router";
 
 import styles from "./style.module.css";
 import ButtomDrawer from "./bottomDrawer";
@@ -24,13 +25,9 @@ import GuestDetailsDrawer from "./guestdetails";
 import { Header } from "../../Component/Header";
 
 const Guestlist = () => {
-  //   const dispatch = useDispatch();
-  //   const styles = useStyles();
   const [toggle, setToggle] = useState(false);
   const [toggleGuestDetails, setToggleGuestDetails] = useState(false);
-  // const { isLoading, error, isSuccessful, partyDetails, message } = useSelector(
-  //   (s) => s.getPartyDetails
-  // );
+  const route = useRouter();
 
   const dummyFriendsData = [
     {
@@ -68,8 +65,8 @@ const Guestlist = () => {
       <Header
         type="nav"
         title="View Guests"
-        leftLink="/detail"
-        leftIcon={<BsChevronLeft />}
+        // leftLink="/detail"
+        leftIcon={<BsChevronLeft onClick={() => route.back()} />}
         rightIcon={<PersonAddAltIcon onClick={() => handleToggleDrawer(true)} />}
         primary
       />

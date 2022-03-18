@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 // import { useNavigate, useLocation } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs";
 import { Container, Box, List, ListItem, Stack, Typography, Button, Avatar } from "@mui/material";
-
+import { useRouter } from "next/router";
 import { useStyles } from "./style";
 import { Header } from "../../Component/Header";
 import Musiclist from "./musiclistDrawer";
@@ -13,7 +13,7 @@ const MusicPost = () => {
   const classes = useStyles();
   const [toggle, setToggle] = useState(false);
   const [musiclist, setMusiclist] = useState([]);
-
+  const route = useRouter();
   const handleMusicDrawer = (open) => {
     setToggle(open);
   };
@@ -28,8 +28,8 @@ const MusicPost = () => {
       <Header
         type="nav"
         title="Music post"
-        leftLink="/detail"
-        leftIcon={<BsChevronLeft />}
+        // leftLink="/details"
+        leftIcon={<BsChevronLeft onClick={() => route.back()} />}
         primary
       />
       {musiclist?.length > 0 ? (

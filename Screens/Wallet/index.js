@@ -56,6 +56,7 @@ const Wallet = () => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   }
+  const token = useSelector((state) => state.verifyToken.token);
 
   const handleTogglePaymentDrawer = (open) => {
     setTogglePaymentDrawer(open);
@@ -113,23 +114,6 @@ const Wallet = () => {
 
   return (
     <>
-      {/* <Tour
-        onAfterOpen={disableBody}
-        onBeforeClose={enableBody}
-        steps={steps}
-        isOpen={enabled}
-        onRequestClose={onExit}
-        className="helper"
-        disableKeyboardNavigation={true}
-        lastStepNextButton={<Button>Okay</Button>}
-        nextButton={<Button>Next</Button>}
-        prevButton={<div>{}</div>}
-        rounded={5}
-        showNavigationNumber={false}
-        accentColor="#091D50"
-        showNumber={false}
-        maskSpace={5}
-      /> */}
       <Container className={`${styles.rootContainer} ${classes.root}`}>
         <Card
           // className={styles.card}

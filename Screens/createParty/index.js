@@ -123,8 +123,8 @@ export const CreateParty = () => {
         <Header
           type="nav"
           title="New Shout! Party"
-          leftLink="/party"
-          leftIcon={<BsChevronLeft onClick={() => route.push("/party")} />}
+          // leftLink="/party"
+          leftIcon={<BsChevronLeft onClick={() => route.back()} />}
           primary
         />
 

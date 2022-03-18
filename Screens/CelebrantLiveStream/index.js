@@ -33,6 +33,7 @@ const CelebrantLiveStream = () => {
   const router = useRouter();
   //   const dispatch = useDispatch();
   //   const { livestream } = useSelector((s) => s.onBoardScreen);
+  const token = useSelector((state) => state.verifyToken.token);
 
   const [liveStreamMode, setLiveStreamMode] = useState("My Party");
   const [liveChat, setLiveChat] = useState("");
@@ -125,7 +126,7 @@ const CelebrantLiveStream = () => {
   });
 
   const handleCloseLiveparty = () => {
-    router.push(`/party`);
+    router.push(`/party/${token}`);
   };
 
   const handleToggleLiveStreamMode = (open) => {
