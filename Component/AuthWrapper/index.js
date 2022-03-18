@@ -12,12 +12,13 @@ const AuthWrapper = ({ children }) => {
 
   useEffect(() => {
     const { token } = router.query;
+    console.log(token);
     if (token) dispatch(verifyTokenRequest(token));
 
     if (isAuthenticated) return true;
     router.push("/login");
   }, [router.isReady]);
-  return <>{isAuthenticated && children}</>;
+  return <>{isAuthenticated && router.isReady && children}</>;
 };
 
 export default AuthWrapper;

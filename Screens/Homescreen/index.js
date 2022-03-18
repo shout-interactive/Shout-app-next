@@ -12,7 +12,6 @@ import Confetti from "react-dom-confetti";
 
 const HomeScreen = () => {
   const router = useRouter();
-  const token = useSelector((state) => state.verifyToken.token);
   const [splash, setSplash] = useState(false);
   // State to toggle the onboarding screen
 
@@ -52,7 +51,7 @@ const HomeScreen = () => {
                 <div
                   style={{ overflow: "hidden" }}
                   className={`${styles.homecard} ${styles.sparty}`}
-                  onClick={() => router.push(`/party/${token}`)}
+                  onClick={() => router.push(`/party/${router.query.token}`)}
                 >
                   <div className={styles.partytext}>
                     <h2>Shout! Party</h2>

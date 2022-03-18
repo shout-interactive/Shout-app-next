@@ -1,6 +1,6 @@
 import React from "react";
-import Wallet from "../Screens/Wallet";
-import AuthWrapper from "../Component/AuthWrapper";
+import Wallet from "../../Screens/Wallet";
+import AuthWrapper from "../../Component/AuthWrapper";
 
 const wallet = () => {
   return (

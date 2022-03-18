@@ -17,7 +17,6 @@ const ShoutParty = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const token = useSelector((state) => state.verifyToken.token);
   const { isLoading, error, isSuccessful, parties, message } = useSelector(
     (s) => s.getParties
   );
@@ -68,7 +67,7 @@ const ShoutParty = () => {
         <Header
           type="nav"
           title="🎉 Shout! Party"
-          leftLink={`/home/${token}`}
+          leftLink={`/home/${route.query.token}`}
           leftIcon={<BsChevronLeft />}
           primary
           rightIcon={

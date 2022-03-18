@@ -19,7 +19,7 @@ const HomePageHeader = () => {
     router.push("/leaderboard");
   };
   const handleNavigateToWallet = () => {
-    router.push("/wallet");
+    router.push(`/wallet/${router.query.token}`);
   };
   const handleNavigateToGifts = () => {
     router.push("/gift");
@@ -30,7 +30,9 @@ const HomePageHeader = () => {
     var suffixes = ["", "k", "m", "b", "t"];
     var suffixNum = Math.floor(("" + value).length / 3);
     var shortValue = parseFloat(
-      (suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(2)
+      (suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(
+        2
+      )
     );
     if (shortValue % 1 != 0) {
       shortValue = shortValue.toFixed(1);
@@ -39,16 +41,21 @@ const HomePageHeader = () => {
   }
   return (
     <Navbar className="">
-      <Container className={styles.navHeaderWrapper} style={{ margin: "0 20px" }}>
+      <Container
+        className={styles.navHeaderWrapper}
+        style={{ margin: "0 20px" }}
+      >
         <Navbar.Brand>
           {/* <img src={"/assest/images/shoutLogo.svg"} alt="shout" /> */}
-          <h1 className={styles.title}> Hi, {user?.firstname || "Champ!"} </h1>
+          <h1 className={styles.title}> Hi, {user?.firstname} </h1>
         </Navbar.Brand>
         <Nav>
           <Nav onClick={handleNavigateToWallet}>
             <div className={styles["badge-header"]}>
               <img src={"/assets/coin.png"} alt="Coin" />
-              {userCoin === "undefined" ? intToString(2000) : intToString(userCoin)}
+              {userCoin === "undefined"
+                ? intToString(2000)
+                : intToString(userCoin)}
             </div>
           </Nav>
 

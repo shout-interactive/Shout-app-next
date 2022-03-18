@@ -142,9 +142,13 @@ const Wallet = () => {
           <Header
             type="nav"
             title="Wallet"
-            leftLink="/home"
+            leftLink={`/home/${route.query.token}`}
             leftIcon={<BsChevronLeft />}
-            rightIcon={<ClearRoundedIcon onClick={() => route.push("/home")} />}
+            rightIcon={
+              <ClearRoundedIcon
+                onClick={() => route.push(`/home/${route.query.token}`)}
+              />
+            }
           />
           <Box
             sx={{
