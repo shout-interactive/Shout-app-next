@@ -25,7 +25,7 @@ import { useStyles } from "./style";
 import { Header } from "../../Component/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { partyCreated } from "../../store/actions/track-state";
+import { partyCreated, enterParty } from "../../store/actions/track-state";
 
 const FundWalletDrawer = ({ show, toggleDrawer }) => {
   const classes = useStyles();
@@ -40,6 +40,8 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
   const [fundAmount, setFundAmount] = useState("");
   const [err, setErr] = useState(false);
   const { partyCreate } = useSelector((s) => s.trackState);
+  const { enterParti } = useSelector((s) => s.trackState);
+
   const handleSelect = (index) => {
     setSelectedIndex(index);
     console.log(index);
@@ -83,9 +85,13 @@ const FundWalletDrawer = ({ show, toggleDrawer }) => {
 
   const handleAddFundSuccess = () => {
     if (partyCreate) {
-      route.push("/create");
+      route.back();
       setFundWallet(false);
       dispatch(partyCreated());
+    } else if (enterParti) {
+      route.back();
+      setFundWallet(false);
+      dispatch(enterParty());
     } else {
       setFundWallet(false);
     }

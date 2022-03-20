@@ -11,15 +11,20 @@ import { getPartiesRequest } from "../../store/actions/get-parties";
 import { useDispatch, useSelector } from "react-redux";
 import { getInviteRequest } from "../../store/actions/get-invited";
 import styles from "./style.module.css";
+
 const ShoutParty = () => {
   const route = useRouter();
+  const dispatch = useDispatch();
+  const classes = useStyles();
+
+  const token = useSelector((state) => state.verifyToken.token);
+  const { isLoading, error, isSuccessful, parties, message } = useSelector((s) => s.getParties);
+
   let userId;
   if (typeof window !== "undefined") {
     // Perform localStorage action
     userId = localStorage.getItem("userId");
   }
-  const dispatch = useDispatch();
-  const { isLoading, error, isSuccessful, parties, message } = useSelector((s) => s.getParties);
 
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
@@ -29,8 +34,6 @@ const ShoutParty = () => {
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
-
-  const classes = useStyles();
 
   const fetchParties = () => {
     const obj = {
@@ -63,8 +66,8 @@ const ShoutParty = () => {
         <Header
           type="nav"
           title="🎉 Shout! Party"
-          leftLink="/home"
-          leftIcon={<BsChevronLeft />}
+          // leftLink={`/home/${token}`}
+          leftIcon={<BsChevronLeft onClick={() => route.push(`/home/${token}`)} />}
           primary
           rightIcon={<TodayRoundedIcon onClick={() => route.push("/mycalendar")} />}
         />

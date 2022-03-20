@@ -6,38 +6,41 @@ import HomeIcon from "@mui/icons-material/Home";
 import { useStyles } from "./style";
 import { Paper, Typography, Box } from "@mui/material";
 import { useRouter } from "next/router";
-const CalenderCard = ({ backgroundColor, data }) => {
+import Link from "next/link";
+const CalenderCard = ({ backgroundColor, data, id }) => {
   const props = {
     backgroundColor: backgroundColor,
   };
   const classes = useStyles(props);
   const route = useRouter();
   return (
-    <Paper className={classes.paperBox} onClick={() => route.push("/calendar/invitecalendar")}>
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Typography>{data?.eventName}</Typography>
-        <Box>
-          {data?.eventType === "birthday" ? (
-            <CakeIcon />
-          ) : data?.eventType === "anniversary" ? (
-            <FavoriteIcon />
-          ) : data?.eventType === "graduation" ? (
-            <CelebrationIcon />
-          ) : data?.eventType === "church" ? (
-            <HomeIcon />
-          ) : (
-            ""
-          )}
+    <Link href={`/calendar/${id}`}>
+      <Paper className={classes.paperBox} onClick={() => route.push("/calendar/invitecalendar")}>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography>{data}</Typography>
+          <Box>
+            {data?.eventType === "birthday" ? (
+              <CakeIcon />
+            ) : data?.eventType === "anniversary" ? (
+              <FavoriteIcon />
+            ) : data?.eventType === "graduation" ? (
+              <CelebrationIcon />
+            ) : data?.eventType === "church" ? (
+              <HomeIcon />
+            ) : (
+              <CakeIcon />
+            )}
+          </Box>
         </Box>
-      </Box>
-    </Paper>
+      </Paper>
+    </Link>
   );
 };
 export default CalenderCard;

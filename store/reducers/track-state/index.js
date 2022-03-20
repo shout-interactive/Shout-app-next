@@ -2,7 +2,7 @@ import React from "react";
 
 let walletState = {
     partyCreate: false,
-    enterParty: false,
+    enterParti: false,
     giftCoin: false,
 };
 const trackState = (state = walletState, action) => {
@@ -10,7 +10,7 @@ const trackState = (state = walletState, action) => {
         case "ON_PARTY_CREATE":
             return {...state, partyCreate: !walletState.partyCreate };
         case "ON_ENTER_PARTY":
-            return {...state, enterParty: !walletState.enterParty };
+            return {...state, enterParti: !walletState.enterParty };
         case "ON_GIFT_COIN":
             return {...state, giftCoin: !walletState.giftCoin };
         default:

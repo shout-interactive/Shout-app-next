@@ -45,16 +45,8 @@ const TableTab = () => {
           onChange={handleChange}
           aria-label="shout party tabs"
         >
-          <Tab
-            className={classes.tab}
-            label="My invites"
-            {...a11yProps(0, "invites")}
-          />
-          <Tab
-            className={classes.tab}
-            label="My parties"
-            {...a11yProps(1, "parties")}
-          />
+          <Tab className={classes.tab} label="My Event" {...a11yProps(0, "invites")} />
+          <Tab className={classes.tab} label="Other Event" {...a11yProps(1, "parties")} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

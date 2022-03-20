@@ -19,9 +19,10 @@ import { partyCreated } from "../../store/actions/track-state";
 export const CreateParty = () => {
   const classes = useStyles();
   // localstorage data
-  // const userCoin = localStorage.getItem("coin");
-  const userCoin = 20;
+  const userCoin = localStorage.getItem("coin");
+  // const userCoin = 20;
   // useSelector and dispatch
+  const token = useSelector((state) => state.verifyToken.token);
   const { parties } = useSelector((s) => s.getParties);
   const { isLoading, partyData } = useSelector((s) => s.createParty);
   const dispatch = useDispatch();
@@ -96,19 +97,20 @@ export const CreateParty = () => {
       dispatch(createPartyRequest(obj));
       resetState();
       setTimeout(() => {
-        route.push("/party");
-      }, 3000);
+        route.push(`/party/${token}`);
+      }, 2000);
 
       // setTimeout(() => {
       //   const getDetail = {
-      //     id: partyData.id,
+      //     id: partyData?.id,
       //     user: localStorage.getItem("userId"),
       //   };
       //   dispatch(getPartyDetailsRequest(getDetail));
-      //   route.push("/detail");
-      // }, 5000);
+      //   route.push(`details/${partyData?.id}`);
+      // }, 3000);
     }
   };
+  // console.log(partyData?.id);
 
   // Route to buy coins
   const getCoins = () => {
@@ -130,8 +132,8 @@ export const CreateParty = () => {
         <Header
           type="nav"
           title="New Shout! Party"
-          leftLink="/party"
-          leftIcon={<BsChevronLeft onClick={() => route.push("/party")} />}
+          // leftLink="/party"
+          leftIcon={<BsChevronLeft onClick={() => route.back()} />}
           primary
         />
 

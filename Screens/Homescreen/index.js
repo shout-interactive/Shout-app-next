@@ -2,7 +2,7 @@ import { Row, Col } from "react-bootstrap";
 import { Header } from "../../Component/Header";
 import CarouselComponent from "../../Component/Carousel";
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 // import { useNavigate } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import Confetti from "react-dom-confetti";
 
 const HomeScreen = () => {
   const router = useRouter();
+  const token = useSelector((state) => state.verifyToken.token);
   const [splash, setSplash] = useState(false);
   // State to toggle the onboarding screen
 
@@ -51,7 +52,7 @@ const HomeScreen = () => {
                 <div
                   style={{ overflow: "hidden" }}
                   className={`${styles.homecard} ${styles.sparty}`}
-                  onClick={() => router.push("/party")}
+                  onClick={() => router.push(`/party/${token}`)}
                 >
                   <div className={styles.partytext}>
                     <h2>Shout! Party</h2>
@@ -63,7 +64,9 @@ const HomeScreen = () => {
                   <img
                     src={"/assets/shout-bottle.png"}
                     alt=""
-                    className={`${styles.shoutimage} ${splash ? styles.shake : ""} `}
+                    className={`${styles.shoutimage} ${
+                      splash ? styles.shake : ""
+                    } `}
                   />
                 </div>
                 {/* </Link> */}
@@ -76,13 +79,17 @@ const HomeScreen = () => {
                   style={{ overflow: "hidden" }}
                   className={`${styles.homecard} ${styles.splay}`}
                   id="shout-game"
-                  onClick={() => router.push("/party")}
+                  onClick={() => router.push(`/party/${token}`)}
                 >
                   <div className={styles.partytext}>
                     <h2 className={styles.title}>Shout Play</h2>
                     <p>Play games and win big</p>
                   </div>
-                  <img src="/assets/shout-games.png" className={`${styles.playimg}`} alt="" />
+                  <img
+                    src="/assets/shout-games.png"
+                    className={`${styles.playimg}`}
+                    alt=""
+                  />
                 </div>
               </Col>
 
@@ -91,7 +98,7 @@ const HomeScreen = () => {
                   style={{ overflow: "hidden" }}
                   className={`${styles.homecard} ${styles.sauction}`}
                   id="aunction"
-                  onClick={() => router.push("/party")}
+                  onClick={() => router.push(`/party/${token}`)}
                 >
                   <div>
                     <h2 className={styles.title}>
@@ -101,7 +108,11 @@ const HomeScreen = () => {
                       Win big prizes from your fave celebs
                     </p>
                   </div>
-                  <img src="/assets/shout-award.png" className={styles.auctionImg} alt="" />
+                  <img
+                    src="/assets/shout-award.png"
+                    className={styles.auctionImg}
+                    alt=""
+                  />
                 </div>
               </Col>
             </Row>

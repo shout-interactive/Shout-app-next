@@ -16,6 +16,7 @@ import { Header } from "../../Component/Header";
 import axios from "axios";
 import { giftCoin } from "../../store/actions/track-state";
 import { useRouter } from "next/router";
+const { token } = useSelector((s) => s.verifyToken);
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -46,14 +47,13 @@ const GiftGoals = () => {
     message,
   } = useSelector((s) => s.createGift);
   const [openModal, setOpenModal] = useState(false);
-  const userCoin = 20;
+  const userCoin = localStorage.getItem("coin");
   const checkCoin = amount > userCoin;
   const handleSend = () => {
     if (Number(amount) < 1 || !amount) {
       setError(true);
       return;
     } else if (Number(amount) > 0) {
-      // navigate("/party/details");
       const obj = {
         giftGoal: amount,
       };
@@ -84,7 +84,7 @@ const GiftGoals = () => {
   };
 
   const getCoins = () => {
-    route.push("/wallet");
+    route.push(`/wallet/${token}`);
     dispatch(giftCoin());
   };
 
@@ -98,8 +98,8 @@ const GiftGoals = () => {
       <Header
         type="nav"
         title="Gift goal"
-        leftLink="/detail"
-        leftIcon={<BsChevronLeft />}
+        // leftLink="/detail"
+        leftIcon={<BsChevronLeft onClick={() => route.back()} />}
         primary
       />
       <Box

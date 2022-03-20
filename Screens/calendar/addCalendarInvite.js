@@ -22,30 +22,36 @@ import {
   OutlinedInput,
   Input,
 } from "@mui/material";
-import Link from "@mui/material/Link";
+import { useSelector, useDispatch } from "react-redux";
+import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
+import { useEffect } from "react";
 import CakeIcon from "@mui/icons-material/Cake";
 
 export const AddCalendarInvite = () => {
   const route = useRouter();
-  return (
-    <Box
-      sx={{
-        // height: "2500px",
-        width: "100%",
+  const { isLoading, partyDetails } = useSelector((s) => s.getPartyDetails);
+  const userId = localStorage.getItem("userId");
+  const id = route.query.invite;
+  const dispatch = useDispatch();
+  const fetchPartyDetails = () => {
+    const obj = {
+      id: id,
+      user: userId,
+    };
+    // console.log(id);
+    dispatch(getPartyDetailsRequest(obj));
+  };
+  useEffect(() => {
+    fetchPartyDetails();
+  }, []);
 
-        borderRadius: "0px",
-      }}
-    >
+  return (
+    <div style={{ width: "100%" }}>
       <Box>
         <Card
-          // fullWidth
           sx={{
             backgroundColor: "#14B363",
-
             height: "180px",
-            left: "0px",
-            top: "0px",
-            boxShadow: "out",
           }}
           variant="outlined"
         >
@@ -62,14 +68,10 @@ export const AddCalendarInvite = () => {
             }
           />
         </Card>
-        <Card
+        <Box
           // fullWidth
           sx={{
             backgroundColor: "white",
-
-            height: "800px",
-            left: "0px",
-            top: "0px",
           }}
         >
           <CardHeader
@@ -78,7 +80,7 @@ export const AddCalendarInvite = () => {
                 <CakeIcon />
               </Avatar>
             }
-            title="Mitch's Birthday"
+            title={partyDetails?.party?.name}
             subheader={
               <span>
                 Thursday, 12 March • All day. <br />
@@ -113,15 +115,35 @@ export const AddCalendarInvite = () => {
             </Box>
             <Box
               sx={{
-                margin: "18rem 0rem",
+                width: "90%",
+                margin: "auto",
                 cursor: "pointer",
                 display: "flex",
                 flex: "1",
                 flexDirection: "row",
                 flexBasis: "100%",
                 justifyContent: "space-between",
+                position: "fixed",
+                bottom: "20px",
+                alignItems: "center",
               }}
             >
+              <Button
+                onClick={() => route.push("/mycalendar")}
+                sx={{
+                  backgroundColor: "white",
+                  color: "#110066",
+                  textTransform: "capitalize",
+                  fontWeight: "bold",
+                  padding: ".8rem 0rem",
+                  borderRadius: "10px",
+                  margin: "0 .8rem",
+                }}
+                variant="outlined"
+                fullWidth
+              >
+                Cancel
+              </Button>
               <Button
                 sx={{
                   backgroundColor: "#110066",
@@ -137,25 +159,10 @@ export const AddCalendarInvite = () => {
               >
                 Update
               </Button>
-              <Button
-                sx={{
-                  backgroundColor: "white",
-                  color: "#110066",
-                  textTransform: "capitalize",
-                  fontWeight: "bold",
-                  padding: ".8rem 0rem",
-                  borderRadius: "10px",
-                  margin: "0 .8rem",
-                }}
-                variant="outlined"
-                fullWidth
-              >
-                Cancel
-              </Button>
             </Box>
           </CardContent>
-        </Card>
+        </Box>
       </Box>
-    </Box>
+    </div>
   );
 };

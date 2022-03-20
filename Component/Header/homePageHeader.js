@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useStyles } from "./style";
 
 const HomePageHeader = () => {
-  const { user } = useSelector((s) => s.verifyToken);
+  const { user, token } = useSelector((s) => s.verifyToken);
   let userCoin;
   if (typeof window !== "undefined") {
     // Perform localStorage action
@@ -19,7 +19,7 @@ const HomePageHeader = () => {
     router.push("/leaderboard");
   };
   const handleNavigateToWallet = () => {
-    router.push("/wallet");
+    router.push(`/wallet/${token}`);
   };
   const handleNavigateToGifts = () => {
     router.push("/gift");
@@ -42,7 +42,7 @@ const HomePageHeader = () => {
       <Container className={styles.navHeaderWrapper} style={{ margin: "0 20px" }}>
         <Navbar.Brand>
           {/* <img src={"/assest/images/shoutLogo.svg"} alt="shout" /> */}
-          <h1 className={styles.title}> Hi, {user?.firstname || "Champ!"} </h1>
+          <h1 className={styles.title}> Hi, {user?.firstname || null} </h1>
         </Navbar.Brand>
         <Nav>
           <Nav onClick={handleNavigateToWallet}>

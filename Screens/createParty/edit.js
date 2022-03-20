@@ -26,12 +26,7 @@ import ModalComponent from "../../Component/Modals";
 import ButtonComponent from "../../Component/Button";
 import { useRouter } from "next/router";
 import { FormLabel } from "@mui/material";
-// import "./style.js";
-// import { createPartyRequest } from "../../store/actions/create-party";
-// import { Navigate } from "react-router-dom";
 import { Header } from "../../Component/Header/index";
-// const userCoin = localStorage.getItem("coins");
-// const userId = localStorage.getItem("userId");
 
 //
 export const EditParty = () => {
@@ -47,91 +42,12 @@ export const EditParty = () => {
   const [openSnackbar, setOPenSnackBar] = useState(true);
   const [enabled, setEnabled] = useState(true);
   const [err, setErr] = useState(false);
-  const onExit = () => {
-    setEnabled(false);
-  };
-  //const { enqueueSnackbar } = useSnackbar();
-  // const [selectedIndexArr, setSelectedIndexArray] = useState([]);
-
-  // const handleCreate = () => {};
+  const handleCreate = () => {};
   const [openModal, setOpenModal] = useState(false);
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
-  const party_users = [
-    {
-      key: 1,
-      value: "myself one",
-      label: "Myself One",
-    },
-    {
-      key: 2,
-      value: "myself two",
-      label: "Myself Two",
-    },
-    {
-      key: 3,
-      value: "myself three",
-      label: "Myself Three",
-    },
-    {
-      key: 4,
-      value: "myself four",
-      label: "Myself four",
-    },
-    {
-      key: 5,
-      value: "myself five",
-      label: "Myself five",
-    },
-  ];
 
-  const guests = [
-    {
-      key: 1,
-      name: "David Doe",
-      value: "David Doe",
-    },
-    {
-      key: 2,
-      name: "Ayo Cole",
-      value: "Ayo Cole",
-    },
-    {
-      key: 3,
-      name: "Oliver Hansen",
-      value: "Oliver Hansen",
-    },
-    {
-      key: 4,
-      name: "Van Henry",
-      value: "Van Henry",
-    },
-    {
-      key: 5,
-      name: "April Tucker",
-      value: "April Tucker",
-    },
-    {
-      Key: 6,
-      name: "Ralph Hubbard",
-      value: "Ralph Hubbard",
-    },
-    {
-      key: 7,
-      name: "Omar Alexander",
-      value: "Omar Alexander",
-    },
-    {
-      key: 8,
-      name: "Carlos Abbott",
-      value: "Carlos Abbott",
-    },
-  ];
-
-  const handleClose = () => {
-    setOpenAlert(false);
-  };
   const handleGetCoin = () => {
     navigate("/wallet");
   };
@@ -154,33 +70,6 @@ export const EditParty = () => {
     setSelectedPartyGuests([...event.target.value]);
   };
 
-  const handleGoBack = async () => {
-    if (!partyName && !partyDate && !partyDesc) {
-      setErr(true);
-    } else if (partyName && partyDate && partyDesc) {
-      setErr(false);
-      const obj = {
-        owner: partyuser,
-        name: partyName,
-        date: partyDate,
-        description: partyDesc,
-        Geust: {
-          invites: [],
-          geusts: partyGuests,
-        },
-        user: userId,
-      };
-      dispatch(createPartyRequest(obj));
-
-      resetState();
-      setTimeout(() => {
-        navigate("/party");
-      }, 2000);
-    }
-
-    // navigate("/shout/party");
-  };
-
   const resetState = () => {
     setSelectedPartyUser("myself one");
     setSelectedPartyName("");
@@ -195,10 +84,9 @@ export const EditParty = () => {
         <Header
           type="nav"
           title="Edit Shout! Party"
-          leftLink="/detail"
-          leftIcon={<BsChevronLeft onClick={() => handleGoBack()} />}
-          rightIcon={<MoreHorizIcon onClick={() => handleGoBack()} />}
-          rightLink=""
+          leftIcon={<BsChevronLeft onClick={() => route.back()} />}
+          rightIcon={<MoreHorizIcon />}
+          // rightLink=""
           primary
         />
 
@@ -209,10 +97,7 @@ export const EditParty = () => {
             justifyContent: "center",
           }}
         >
-          <Box
-            id="partyName"
-            sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
-          >
+          <Box id="partyName" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
             <FormLabel
               required
               sx={{
@@ -239,10 +124,7 @@ export const EditParty = () => {
             />
           </Box>
 
-          <Box
-            id="date"
-            sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
-          >
+          <Box id="date" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
             <FormLabel
               required
               sx={{
@@ -269,10 +151,7 @@ export const EditParty = () => {
               }}
             />
           </Box>
-          <Box
-            id="videoInvite"
-            sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
-          >
+          <Box id="videoInvite" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
             <Typography
               sx={{
                 marginBottom: ".7rem",
@@ -328,10 +207,7 @@ export const EditParty = () => {
               </Box>
             </label>
           </Box>
-          <Box
-            id="description"
-            sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}
-          >
+          <Box id="description" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
             <Typography
               sx={{
                 marginBottom: ".7rem",
@@ -402,7 +278,7 @@ export const EditParty = () => {
               variant="outlined"
               fullWidth
             >
-              {/* {isLoading ? "Loading..." : "Create"} */}Update
+              Update
             </Button>
             <Button
               sx={{
@@ -416,7 +292,7 @@ export const EditParty = () => {
               }}
               variant="outlined"
               fullWidth
-              onClick={() => route.push("/detail")}
+              onClick={() => route.back()}
             >
               {/* {isLoading ? "Loading..." : "Create"} */}Cancel
             </Button>
@@ -455,15 +331,8 @@ export const EditParty = () => {
                 className={classes.btnRemove}
                 onClick={() => handleToggleModal(false)}
               />
-              <Box
-                onClick={handleGetCoin}
-                sx={{ margin: "2rem 0rem", cursor: "pointer" }}
-              >
-                <ButtonComponent
-                  title="Get Coins"
-                  button="#162767"
-                  width="100%"
-                />
+              <Box onClick={handleGetCoin} sx={{ margin: "2rem 0rem", cursor: "pointer" }}>
+                <ButtonComponent title="Get Coins" button="#162767" width="100%" />
               </Box>
             </Box>
           </Container>

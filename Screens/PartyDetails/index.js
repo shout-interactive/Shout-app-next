@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, Container, Paper, Grid, Typography, IconButton, Button } from "@mui/material";
 import VideocamSharpIcon from "@mui/icons-material/VideocamSharp";
-
+import { useSelector, useDispatch } from "react-redux";
 import ReactPlayer from "react-player";
 import GroupIcon from "@mui/icons-material/Group";
 import RedeemIcon from "@mui/icons-material/Redeem";
@@ -17,25 +17,53 @@ import { useStyles } from "./style";
 import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
 import ButtonComponent from "../../Component/Button";
-import { useSelector } from "react-redux";
-const PartyDetails = () => {
-  const route = useRouter();
+import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
+import { enterParty } from "../../store/actions/track-state";
 
+const PartyDetails = ({ query }) => {
+  const userId = localStorage.getItem("userId");
+  const route = useRouter();
+  // const queryKey = "detail";
+  // const queryValue =
+  //   route.query[queryKey] || route.asPath.match(new RegExp(`[&?]${queryKey}=(.*)(&|$)`));
+  const id = route.query.detail;
+  // dispatch initialization
+  const dispatch = useDispatch();
+
+  // Get current party details
+  const fetchPartyDetails = () => {
+    const obj = {
+      id: id,
+      user: userId,
+    };
+    // console.log(id);
+    dispatch(getPartyDetailsRequest(obj));
+  };
+  // styles
   const classes = useStyles();
-  const [, setData] = useState();
+  // console.log("party id", id);
+
+  // mount details
+
+  useEffect(() => {
+    fetchPartyDetails();
+  }, []);
+  // dynamic states
   const [paid, setPaid] = useState();
   const [openModal, setOpenModal] = useState(false);
-  const [enabled, setEnabled] = useState(false);
   const [moreCoinModal, setMoreCoinModal] = useState(false);
-  // const navigate = useNavigate();
   const [joined, setJoined] = useState(false);
   const [tempPaid, setTempPaid] = useState(paid);
   const [toggle, setToggle] = useState(false);
+
+  // useSelector Redux
   const { isLoading, partyDetails } = useSelector((s) => s.getPartyDetails);
   const { partyData } = useSelector((s) => s.createParty);
+  const { token } = useSelector((s) => s.verifyToken);
 
   const handleGetCoin = () => {
-    route.push("/wallet");
+    route.push(`/wallet/${token}`);
+    dispatch(enterParty());
   };
   const userCoin = localStorage.getItem("coin");
   const handleToggleModal = (open) => {
@@ -66,14 +94,14 @@ const PartyDetails = () => {
       color: "#FA4A0C",
       label: "Gift goal",
       Icon: RedeemIcon,
-      link: "details/giftgoal",
+      link: "/details/giftgoal",
       id: "giftGoal",
     },
     {
       color: "#B57BFF",
       label: "Musicpost",
       Icon: AudiotrackIcon,
-      link: "details/musicpost",
+      link: "/details/musicpost",
       id: "musicPost",
     },
     {
@@ -109,7 +137,6 @@ const PartyDetails = () => {
       <Typography className={classes.label}>{label}</Typography>
     </Paper>
   );
-  console.log(partyData?.id);
 
   return (
     <>

@@ -9,7 +9,7 @@ import VideoCallSharpIcon from "@mui/icons-material/VideoCallSharp";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
 import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
 import { useRouter } from "next/router";
-
+import { useSelector } from "react-redux";
 import {
   Button,
   Container,
@@ -33,6 +33,7 @@ const CelebrantLiveStream = () => {
   const router = useRouter();
   //   const dispatch = useDispatch();
   //   const { livestream } = useSelector((s) => s.onBoardScreen);
+  const token = useSelector((state) => state.verifyToken.token);
 
   const [liveStreamMode, setLiveStreamMode] = useState("My Party");
   const [liveChat, setLiveChat] = useState("");
@@ -43,89 +44,14 @@ const CelebrantLiveStream = () => {
   const [toggleMusicDrawer, setoggleMusicDrawer] = useState(false);
   const [liveChatData, setLiveChatData] = useState([]);
 
-  const steps = [
-    {
-      selector: "#inviteGuest",
-      position: "left",
-      content: (
-        <>
-          <h4 className="onboard-title">Invite Guest</h4>
-          <p className="onboard-text">Click on this icon to add more people</p>
-        </>
-      ),
-    },
-    {
-      selector: "#gift",
-      position: "left",
-      content: (
-        <>
-          <h4 className="onboard-title">Gifts</h4>
-          <p className="onboard-text">Click on this icon to check gift oal progress.</p>
-        </>
-      ),
-    },
-    {
-      selector: "#musicPost",
-      position: "left",
-      content: (
-        <>
-          <h4 className="onboard-title">Music Post</h4>
-          <p className="onboard-text">Click on this button to create or view a music post</p>
-        </>
-      ),
-    },
-    {
-      selector: "#views",
-      position: "bottom",
-      content: (
-        <>
-          <h4 className="onboard-title">Views</h4>
-          <p className="onboard-text">Click on here to change your party view</p>
-        </>
-      ),
-    },
-    {
-      selector: "#audience",
-      position: "bottom",
-      content: (
-        <>
-          <h4 className="onboard-title">Audience</h4>
-          <p className="onboard-text">Click on this icon to see who is present in view</p>
-        </>
-      ),
-    },
-    {
-      selector: "#coins",
-      content: (
-        <>
-          <h4 className="onboard-title">Like</h4>
-          <p className="onboard-text">Click on the icon to like the party</p>
-        </>
-      ),
-      position: "top",
-    },
-  ];
-  const [enabled, setEnabled] = useState(false);
-  const onExit = () => {
-    setEnabled(false);
-  };
-  const disableBody = (target) => {
-    disableBodyScroll(target);
-  };
-  const enableBody = (target) => {
-    enableBodyScroll(target);
-  };
   const myRef = useRef(null);
 
-  const handleDisableModal = () => {
-    dispatch(onboardLive());
-  };
   useEffect(() => {
     myRef.current.scrollIntoView({ behavior: "smooth" });
   });
 
   const handleCloseLiveparty = () => {
-    router.push(`/party`);
+    router.push(`/party/${token}`);
   };
 
   const handleToggleLiveStreamMode = (open) => {

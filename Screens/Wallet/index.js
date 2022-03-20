@@ -16,8 +16,7 @@ const WalletPaymentDrawer = Dynamic(() => import("./walletPaymentDrawer"));
 const FundWalletDrawer = Dynamic(() => import("./fundWalletDrawer"));
 import { useStyles } from "./style";
 import styles from "./style.module.css";
-// import ClearIcon from "@mui/icons-material/Clear";
-// import Tour from "reactour";
+import { useSelector } from "react-redux";
 
 const coinBundles = [
   {
@@ -56,6 +55,7 @@ const Wallet = () => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   }
+  const token = useSelector((state) => state.verifyToken.token) || sessionStorage.getItem("token");
 
   const handleTogglePaymentDrawer = (open) => {
     setTogglePaymentDrawer(open);
@@ -102,9 +102,7 @@ const Wallet = () => {
           cursor: "pointer",
         }}
       >
-        <Typography
-          sx={{ color: "#0A1F44", fontWeight: "bold", textAlign: "center" }}
-        >
+        <Typography sx={{ color: "#0A1F44", fontWeight: "bold", textAlign: "center" }}>
           {item.value}
         </Typography>
       </Box>
@@ -113,23 +111,6 @@ const Wallet = () => {
 
   return (
     <>
-      {/* <Tour
-        onAfterOpen={disableBody}
-        onBeforeClose={enableBody}
-        steps={steps}
-        isOpen={enabled}
-        onRequestClose={onExit}
-        className="helper"
-        disableKeyboardNavigation={true}
-        lastStepNextButton={<Button>Okay</Button>}
-        nextButton={<Button>Next</Button>}
-        prevButton={<div>{}</div>}
-        rounded={5}
-        showNavigationNumber={false}
-        accentColor="#091D50"
-        showNumber={false}
-        maskSpace={5}
-      /> */}
       <Container className={`${styles.rootContainer} ${classes.root}`}>
         <Card
           // className={styles.card}
@@ -142,9 +123,9 @@ const Wallet = () => {
           <Header
             type="nav"
             title="Wallet"
-            leftLink="/home"
-            leftIcon={<BsChevronLeft />}
-            rightIcon={<ClearRoundedIcon onClick={() => route.push("/home")} />}
+            // leftLink={`/home/${token}`}
+            leftIcon={<BsChevronLeft onClick={() => route.push(`/home/${token}`)} />}
+            rightIcon={<ClearRoundedIcon onClick={() => route.push(`/home/${token}`)} />}
           />
           <Box
             sx={{

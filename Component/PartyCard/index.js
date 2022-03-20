@@ -6,10 +6,10 @@ import { BsChevronLeft } from "react-icons/bs";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useRouter } from "next/router";
 import ButtonComponent from "../Button";
 import { Header } from "../../Component/Header";
-
+import Link from "next/link";
 import { useStyles } from "./style";
 import styles from "./style.module.css";
 
@@ -32,13 +32,16 @@ const PartyCard = ({
   };
 
   const classes = useStyles(props);
-
+  const route = useRouter();
   const handleOnClick = () => {
     localStorage.setItem("data", JSON.stringify(data));
     localStorage.setItem("paid", paid);
     navigate("/party/details", { state: { data: data, paid: paid } });
   };
 
+  // const sharedLink = () =>{
+  //   let url =
+  // }
   return (
     <Card className={`${styles["card-box"]} ${classes.squareBox}`}>
       <Box sx={{ width: "100%" }}>
@@ -84,9 +87,11 @@ const PartyCard = ({
               </AvatarGroup>
             )}
           </div>
-          <div className={`${styles["btn-box"]} ${classes.buttonContainer}`}>
-            <ButtonComponent handleClick={partyBtnFunction} title="Enter Party" button={button} />
-          </div>
+          <Link href={`/details/${id}`}>
+            <div className={`${styles["btn-box"]} ${classes.buttonContainer}`}>
+              <ButtonComponent title="Enter Party" button={button} />
+            </div>
+          </Link>
         </CardContent>
       </Box>
     </Card>
@@ -99,7 +104,8 @@ export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
   const { isLoading, error, isSuccessful, partyDetails, message } = useSelector(
     (s) => s.getPartyDetails
   );
-
+  const token = useSelector((state) => state.verifyToken.token);
+  const route = useRouter();
   useEffect(() => {
     // const tempData = localStorage.getItem("data");
     const tempPaid = localStorage.getItem("paid");
@@ -119,8 +125,8 @@ export const PartyCardTwo = ({ secondary, header, onClick, id }) => {
         <div className={classes.navWrapper}>
           <Header
             type="nav"
-            leftLink="/party"
-            leftIcon={<BsChevronLeft />}
+            // leftLink={`/party/${token}`}
+            leftIcon={<BsChevronLeft onClick={() => route.back()} />}
             rightIcon={<PersonAddAltIcon onClick={() => onClick()} id={id} />}
           />
         </div>

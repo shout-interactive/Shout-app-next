@@ -46,15 +46,15 @@ const TabsComponent = () => {
           onChange={handleChange}
           aria-label="shout party tabs"
         >
-          <Tab className={classes.tab} label="My invites" {...a11yProps(0, "invites")} />
-          <Tab className={classes.tab} label="My parties" {...a11yProps(1, "parties")} />
+          <Tab className={classes.tab} label="My parties" {...a11yProps(0, "invites")} />
+          <Tab className={classes.tab} label="My invitees" {...a11yProps(1, "parties")} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <MyInvites />
+        <MyParties />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <MyParties />
+        <MyInvites />
       </TabPanel>
     </Box>
   );
