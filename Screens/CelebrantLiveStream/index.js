@@ -10,8 +10,11 @@ import SendSharpIcon from "@mui/icons-material/SendSharp";
 import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+// import LiveChat from "./liveChat";
+
 import {
   Button,
+  Grid,
   Container,
   Box,
   Stack,
@@ -33,7 +36,7 @@ const CelebrantLiveStream = () => {
   const router = useRouter();
   //   const dispatch = useDispatch();
   //   const { livestream } = useSelector((s) => s.onBoardScreen);
-  const token = useSelector((state) => state.verifyToken.token);
+  const { token, user } = useSelector((state) => state.verifyToken.token);
 
   const [liveStreamMode, setLiveStreamMode] = useState("My Party");
   const [liveChat, setLiveChat] = useState("");
@@ -55,7 +58,7 @@ const CelebrantLiveStream = () => {
   };
 
   const handleToggleLiveStreamMode = (open) => {
-    setoggleLiveStreamMode(open);
+    open;
   };
   const handleToggleGuestDrawer = (open) => {
     setoggleGuestDrawer(open);
@@ -85,7 +88,7 @@ const CelebrantLiveStream = () => {
     window.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
         const obj = {
-          username: "newuser",
+          username: `${user?.firstname}`,
           post: liveChat,
         };
         setLiveChatData([...liveChatData, obj]);
@@ -138,7 +141,7 @@ const CelebrantLiveStream = () => {
       <Container
         maxWidth="sm"
         sx={{
-          padding: "1rem 0rem",
+          padding: "2rem 1.2rem",
           height: "100vh",
           backgroundPosition: "center",
           backgroundSize: "cover",
@@ -155,7 +158,7 @@ const CelebrantLiveStream = () => {
             justifyContent: "space-between",
           }}
           direction="horizontal"
-          spacing={3}
+          spacing={5}
         >
           <Box
             id="views"
@@ -166,7 +169,7 @@ const CelebrantLiveStream = () => {
               justifyContent: "center",
               backgroundColor: "rgba(96, 100, 106, 0.4)",
               borderRadius: "25px",
-              padding: ".2rem .7rem",
+              padding: ".25rem .65rem",
               cursor: "pointer",
             }}
             onClick={() => handleToggleLiveStreamMode(true)}
@@ -176,6 +179,7 @@ const CelebrantLiveStream = () => {
             </Typography>
             <KeyboardArrowDownIcon sx={{ color: "white", fontWeight: "600" }} />
           </Box>
+
           <Box
             id="audience"
             onClick={() => handleToggleGuestDrawer(true)}
@@ -202,7 +206,13 @@ const CelebrantLiveStream = () => {
               padding: ".5rem .3rem",
             }}
           >
-            <CloseSharpIcon sx={{ color: "white", fontSize: "1.5rem", fontWeight: "bolder" }} />
+            <CloseSharpIcon
+              sx={{
+                color: "white",
+                fontSize: "1.5rem",
+                fontWeight: "bolder",
+              }}
+            />
           </Box>
         </Stack>
         <Stack
@@ -345,7 +355,7 @@ const CelebrantLiveStream = () => {
                 sx={{
                   position: "fixed",
                   height: "25%",
-                  width: "50%",
+                  width: "70%",
                   // background: "blue",
                   background: "rgb(0, 0, 0)",
                   background:
@@ -360,18 +370,23 @@ const CelebrantLiveStream = () => {
             <div ref={myRef} />
           </Box>
         </Box>
+        {/* /////////////////////////// work here /////////////////////////////// */}
+
         <Box
           sx={{
-            width: "100%",
-            position: "relative",
-            // margin: "1.5rem auto 1rem auto",
+            position: "fixed",
+            alignItems: "center",
+            bottom: 0,
+            color: "white",
+            background: "none",
+            width: "95%",
+            margin: "1.5rem auto 1rem auto",
             marginBottom: "",
             flexDirection: "row",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            top: "-120px",
-            padding: "0 1em",
+            padding: "1em 1em",
             // display: "none",
           }}
         >
@@ -392,8 +407,11 @@ const CelebrantLiveStream = () => {
               "& .css-nnbavb": { float: "left" },
               "& .MuiOutlinedInput-root": {
                 borderRadius: "20px",
-                borderColor: "white",
+                border: "2px solid white",
+                outline: "none",
+                // borderColor: "white",
                 color: "white !important",
+                marginLeft: "-5px",
               },
               "& .MuiInputAdornment-root": { color: "white" },
               "& .MuiOutlinedInput-notchedOutline": { borderColor: "white" },
@@ -404,6 +422,7 @@ const CelebrantLiveStream = () => {
             id="coins"
           />
         </Box>
+        {/* <LiveChat messages={liveChatData} setMessages={setLiveChatData} /> */}
         <LiveStreamDrawer
           show={toggleLiveStreamMode}
           handleSetLiveStreamMode={handleSetLiveStreamMode}
