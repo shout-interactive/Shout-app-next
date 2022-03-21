@@ -9,9 +9,12 @@ import VideoCallSharpIcon from "@mui/icons-material/VideoCallSharp";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
 import FavoriteSharpIcon from "@mui/icons-material/FavoriteSharp";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import LiveChat from "./liveChat";
 
 import {
   Button,
+  Grid,
   Container,
   Box,
   Stack,
@@ -61,7 +64,9 @@ const CelebrantLiveStream = () => {
       content: (
         <>
           <h4 className="onboard-title">Gifts</h4>
-          <p className="onboard-text">Click on this icon to check gift oal progress.</p>
+          <p className="onboard-text">
+            Click on this icon to check gift oal progress.
+          </p>
         </>
       ),
     },
@@ -71,7 +76,9 @@ const CelebrantLiveStream = () => {
       content: (
         <>
           <h4 className="onboard-title">Music Post</h4>
-          <p className="onboard-text">Click on this button to create or view a music post</p>
+          <p className="onboard-text">
+            Click on this button to create or view a music post
+          </p>
         </>
       ),
     },
@@ -81,7 +88,9 @@ const CelebrantLiveStream = () => {
       content: (
         <>
           <h4 className="onboard-title">Views</h4>
-          <p className="onboard-text">Click on here to change your party view</p>
+          <p className="onboard-text">
+            Click on here to change your party view
+          </p>
         </>
       ),
     },
@@ -91,7 +100,9 @@ const CelebrantLiveStream = () => {
       content: (
         <>
           <h4 className="onboard-title">Audience</h4>
-          <p className="onboard-text">Click on this icon to see who is present in view</p>
+          <p className="onboard-text">
+            Click on this icon to see who is present in view
+          </p>
         </>
       ),
     },
@@ -130,7 +141,7 @@ const CelebrantLiveStream = () => {
   };
 
   const handleToggleLiveStreamMode = (open) => {
-    setoggleLiveStreamMode(open);
+    open;
   };
   const handleToggleGuestDrawer = (open) => {
     setoggleGuestDrawer(open);
@@ -213,7 +224,7 @@ const CelebrantLiveStream = () => {
       <Container
         maxWidth="sm"
         sx={{
-          padding: "1rem 0rem",
+          padding: "2rem 1.2rem",
           height: "100vh",
           backgroundPosition: "center",
           backgroundSize: "cover",
@@ -230,7 +241,7 @@ const CelebrantLiveStream = () => {
             justifyContent: "space-between",
           }}
           direction="horizontal"
-          spacing={3}
+          spacing={5}
         >
           <Box
             id="views"
@@ -241,16 +252,19 @@ const CelebrantLiveStream = () => {
               justifyContent: "center",
               backgroundColor: "rgba(96, 100, 106, 0.4)",
               borderRadius: "25px",
-              padding: ".2rem .7rem",
+              padding: ".25rem .65rem",
               cursor: "pointer",
             }}
             onClick={() => handleToggleLiveStreamMode(true)}
           >
-            <Typography sx={{ color: "white", marginRight: "5px", fontWeight: "600" }}>
+            <Typography
+              sx={{ color: "white", marginRight: "5px", fontWeight: "600" }}
+            >
               {liveStreamMode}
             </Typography>
             <KeyboardArrowDownIcon sx={{ color: "white", fontWeight: "600" }} />
           </Box>
+
           <Box
             id="audience"
             onClick={() => handleToggleGuestDrawer(true)}
@@ -263,8 +277,12 @@ const CelebrantLiveStream = () => {
               padding: ".2rem 0rem",
             }}
           >
-            <PersonSharpIcon sx={{ color: "white", marginRight: "5px", fontWeight: "600" }} />
-            <Typography sx={{ color: "white", fontWeight: "600" }}>20</Typography>
+            <PersonSharpIcon
+              sx={{ color: "white", marginRight: "5px", fontWeight: "600" }}
+            />
+            <Typography sx={{ color: "white", fontWeight: "600" }}>
+              20
+            </Typography>
           </Box>
           <Box
             onClick={() => handleCloseLiveparty()}
@@ -277,7 +295,13 @@ const CelebrantLiveStream = () => {
               padding: ".5rem .3rem",
             }}
           >
-            <CloseSharpIcon sx={{ color: "white", fontSize: "1.5rem", fontWeight: "bolder" }} />
+            <CloseSharpIcon
+              sx={{
+                color: "white",
+                fontSize: "1.5rem",
+                fontWeight: "bolder",
+              }}
+            />
           </Box>
         </Stack>
         <Stack
@@ -326,7 +350,9 @@ const CelebrantLiveStream = () => {
             }}
             onClick={() => handleToggleGiftGoalDrawer(true)}
           >
-            <RedeemSharpIcon sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }} />
+            <RedeemSharpIcon
+              sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }}
+            />
           </Box>
           <Box
             id="musicPost"
@@ -363,7 +389,9 @@ const CelebrantLiveStream = () => {
                 height: "2rem !important",
               }}
             >
-              <VideoCallSharpIcon sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }} />
+              <VideoCallSharpIcon
+                sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }}
+              />
             </Box>
           ) : (
             <Box
@@ -435,18 +463,23 @@ const CelebrantLiveStream = () => {
             <div ref={myRef} />
           </Box>
         </Box>
+        {/* /////////////////////////// work here /////////////////////////////// */}
+
         <Box
           sx={{
-            width: "100%",
-            position: "relative",
-            // margin: "1.5rem auto 1rem auto",
+            position: "fixed",
+            alignItems: "center",
+            bottom: 0,
+            color: "white",
+            background: "none",
+            width: "95%",
+            margin: "1.5rem auto 1rem auto",
             marginBottom: "",
             flexDirection: "row",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            top: "-120px",
-            padding: "0 1em",
+            padding: "1em 1em",
             // display: "none",
           }}
         >
@@ -467,8 +500,11 @@ const CelebrantLiveStream = () => {
               "& .css-nnbavb": { float: "left" },
               "& .MuiOutlinedInput-root": {
                 borderRadius: "20px",
-                borderColor: "white",
+                border: "2px solid white",
+                outline: "none",
+                // borderColor: "white",
                 color: "white !important",
+                marginLeft: "-5px",
               },
               "& .MuiInputAdornment-root": { color: "white" },
               "& .MuiOutlinedInput-notchedOutline": { borderColor: "white" },
@@ -479,15 +515,28 @@ const CelebrantLiveStream = () => {
             id="coins"
           />
         </Box>
+        {/* <LiveChat messages={liveChatData} setMessages={setLiveChatData} /> */}
         <LiveStreamDrawer
           show={toggleLiveStreamMode}
           handleSetLiveStreamMode={handleSetLiveStreamMode}
           toggleDrawer={handleToggleLiveStreamMode}
         />
-        <GuestDrawer show={toggleGuestDrawer} toggleDrawer={setoggleGuestDrawer} />
-        <AddGuestDrawer show={toggleAddGuestDrawer} toggleDrawer={handleToggleAddGuestDrawer} />
-        <GiftGoalDrawer show={toggleGiftGoalDrawer} toggleDrawer={handleToggleGiftGoalDrawer} />
-        <MusicDrawer show={toggleMusicDrawer} toggleDrawer={handleToggleMusicDrawer} />
+        <GuestDrawer
+          show={toggleGuestDrawer}
+          toggleDrawer={setoggleGuestDrawer}
+        />
+        <AddGuestDrawer
+          show={toggleAddGuestDrawer}
+          toggleDrawer={handleToggleAddGuestDrawer}
+        />
+        <GiftGoalDrawer
+          show={toggleGiftGoalDrawer}
+          toggleDrawer={handleToggleGiftGoalDrawer}
+        />
+        <MusicDrawer
+          show={toggleMusicDrawer}
+          toggleDrawer={handleToggleMusicDrawer}
+        />
       </Container>
     </>
   );
