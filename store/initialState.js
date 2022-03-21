@@ -45,3 +45,10 @@ export const createGift = {
     isSuccessful: false,
     message: "",
 };
+
+export const addCalendar = {
+    isLoading: false,
+    error: null,
+    isSuccessful : false,
+    message: "",
+}

@@ -385,20 +385,7 @@ export const CreateParty = () => {
               )}
             </Button>
           </Box>
-          {/* {isSuccessful ? (
-            <Snackbar
-              open={openSnackbar}
-              autoHideDuration={2000}
-              onClose={() => setOPenSnackBar(false)}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            >
-              <Alert onClose={handleCloseAlert} severity="success" sx={{ width: "100%" }}>
-                Party Created Successfully!
-              </Alert>
-            </Snackbar>
-          ) : (
-            ""
-          )} */}
+         
         </Box>
         <ModalComponent show={openModal} toggleModal={handleToggleModal}>
           <Container className={classes.container}>
