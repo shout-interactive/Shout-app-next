@@ -39,17 +39,16 @@ const GiftGoalDrawer = ({ show, toggleDrawer }) => {
         user: userId,
       },
       url: "https://dev-server.shoutng.com/v1/party/gift",
-      
     });
     console.log(response.data);
     console.log("click");
     setTimeout(() => {
-      const getDetail = {
-        id: partyDetails?.party.id,
-        user: localStorage.getItem("userId"),
-      };
-      dispatch(getPartyDetailsRequest(getDetail));
-      route.push("/detail");
+      // const getDetail = {
+      //   id: partyDetails?.party.id,
+      //   user: localStorage.getItem("userId"),
+      // };
+      // dispatch(getPartyDetailsRequest(getDetail));
+      route.back();
     }, 2000);
   };
   useEffect(() => {

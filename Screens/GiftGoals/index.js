@@ -16,7 +16,6 @@ import { Header } from "../../Component/Header";
 import axios from "axios";
 import { giftCoin } from "../../store/actions/track-state";
 import { useRouter } from "next/router";
-const { token } = useSelector((s) => s.verifyToken);
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -37,15 +36,12 @@ const GiftGoals = () => {
   const [amount, setAMount] = useState();
   const [error, setError] = useState(false);
   const [coins, setCoins] = useState(0);
-  const [totalCoins, setTotalCoins] = useState(140000);
+
   const [moreCoin, setMoreCoin] = useState(false);
-  const {
-    isLoading,
-    error: err,
-    isSuccessful,
-    partyDetails,
-    message,
-  } = useSelector((s) => s.createGift);
+  const { token } = useSelector((s) => s.verifyToken);
+  const { partyDetails } = useSelector((s) => s.getPartyDetails);
+  const giftPrice = partyDetails?.party?.GiftGoal?.Gift?.price;
+  const [totalCoins, setTotalCoins] = useState(giftPrice);
   const [openModal, setOpenModal] = useState(false);
   const userCoin = localStorage.getItem("coin");
   const checkCoin = amount > userCoin;
@@ -68,20 +64,20 @@ const GiftGoals = () => {
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
-  const fetchGoals = async () => {
-    const response = await axios({
-      method: "POST",
-      url: "https://dev-server.shoutng.com/v1/party/gift/all",
-    });
-    console.log(response);
-  };
-  const fetchParties = () => {
-    const obj = {
-      user: localStorage.getItem("userId"),
-    };
+  // const fetchGoals = async () => {
+  //   const response = await axios({
+  //     method: "POST",
+  //     url: "https://dev-server.shoutng.com/v1/party/gift/all",
+  //   });
+  //   console.log(response);
+  // };
+  // const fetchParties = () => {
+  //   const obj = {
+  //     user: localStorage.getItem("userId"),
+  //   };
 
-    dispatch(getPartiesRequest(obj));
-  };
+  //   dispatch(getPartiesRequest(obj));
+  // };
 
   const getCoins = () => {
     route.push(`/wallet/${token}`);
@@ -89,8 +85,8 @@ const GiftGoals = () => {
   };
 
   useEffect(() => {
-    fetchGoals();
-    fetchParties();
+    // fetchGoals();
+    // fetchParties();
   }, []);
 
   return (
@@ -124,7 +120,7 @@ const GiftGoals = () => {
         >
           <img
             src={
-              // partyDetails?.GiftGoal?.gift?.image ||
+              partyDetails?.party?.GiftGoal?.Gift?.image ||
               "https://res.cloudinary.com/de8vrxbqq/image/upload/v1644325906/shout/beach_jqgnsm.svg"
             }
             alt="beach"
@@ -146,10 +142,10 @@ const GiftGoals = () => {
             variant="h4"
             sx={{ color: "#110066", fontSize: "1.3rem", fontWeight: "bold" }}
           >
-            2 Week Trip to Dubai
+            {partyDetails?.party?.GiftGoal?.Gift?.title}
           </Typography>
           <Typography variant="p" sx={{ color: "#818FA3", fontSize: "1rem" }}>
-            A 2 week all expense paid trip to Dubai brought to you by Emirate Airline
+            {partyDetails?.party?.GiftGoal?.Gift?.description}
           </Typography>
         </Box>
         <Box
@@ -167,13 +163,14 @@ const GiftGoals = () => {
         >
           <BorderLinearProgress
             variant="determinate"
-            value={Math.floor((amount / totalCoins) * 100)}
+            value={Math.round((amount / totalCoins) * 100)}
+            // value="50"
           />
           <Typography
             variant="h5"
             sx={{ color: "#110066", marginTop: ".3rem", fontSize: "1rem", fontWeight: "bold" }}
           >
-            {coins / totalCoins} Coins
+            {`${coins} / ${totalCoins}`} Coins
             {/* {`${isSuccessful ? coins : 0} / ${totalCoins}`} Coins */}
           </Typography>
         </Box>

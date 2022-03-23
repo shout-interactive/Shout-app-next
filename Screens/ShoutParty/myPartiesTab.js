@@ -35,7 +35,10 @@ const MyParties = () => {
 
     dispatch(getPartiesRequest(obj));
   };
-
+  const individualParty = parties?.map((party) => party?.type);
+  console.log(individualParty);
+  const checks = individualParty === "shout";
+  console.log(checks);
   return (
     <Container className="invite-tab-container">
       <Title title="Next party" />
@@ -50,19 +53,29 @@ const MyParties = () => {
 
       <Title title="Upcoming party" />
 
-      {parties?.map((data, i) => (
-        <PartyCard
-          key={data?.id}
-          data={data}
-          id={data?.id}
-          paid={false}
-          button="#14B363"
-          secondary="#050C50"
-          header="25px"
-          badge="#4d4c83"
-          partyBtnFunction={() => enterMyParty(parties, data?.id)}
-        />
-      ))}
+      {parties?.map(
+        (data) =>
+          data?.type === "individual" && (
+            <PartyCard
+              id={data?.id}
+              data={data}
+              paid={true}
+              secondary="#40B464"
+              header="25px"
+              badge="#bfd9ba"
+              button="#091d50"
+              partyBtnFunction={() => handleToggleModal(true)}
+            />
+          )
+      )}
+      {/* {individualParty === "shout" ? (
+        <div className={styles.noParty}>
+          <p>You have not created any party</p>
+          <div>
+            <KeyboardDoubleArrowDownIcon className={styles.icon} />
+          </div>
+        </div>
+      ) : null} */}
       {parties.length === 0 && (
         <div className={styles.noParty}>
           <p>You have not created any party</p>

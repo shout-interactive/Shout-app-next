@@ -39,19 +39,23 @@ const MyInvites = () => {
     <>
       <Container className={classes.inviteTabContainer}>
         <Title title="Featured parties" />
+        {parties?.map(
+          (data) =>
+            data?.type === "shout" && (
+              <PartyCard
+                id={data?.id}
+                // key={i}
+                data={data}
+                paid={true}
+                secondary="#40B464"
+                header="25px"
+                badge="#bfd9ba"
+                button="#091d50"
+                partyBtnFunction={() => handleToggleModal(true)}
+              />
+            )
+        )}
 
-        {featuredParty?.map((data, i) => (
-          <PartyCard
-            key={i}
-            data={data}
-            paid={true}
-            secondary="#40B464"
-            header="25px"
-            badge="#bfd9ba"
-            button="#091d50"
-            partyBtnFunction={() => handleToggleModal(true)}
-          />
-        ))}
         <ModalPopup show={partyModal} toggleModal={handleToggleModal} />
       </Container>
       <Container className={classes.inviteTabContainer}>
