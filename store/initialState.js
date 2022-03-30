@@ -15,6 +15,13 @@ export const getAllParties = {
     myParties: [],
     message: "",
 };
+export const getAllCalendar = {
+    isLoading: false,
+    error: null,
+    isSuccessful: false,
+    calendar: [],
+    message: "",
+};
 export const getAllInvite = {
     isLoading: false,
     error: null,
@@ -39,6 +46,13 @@ export const createParty = {
     message: "",
     partyData: null,
 };
+export const createCalendar = {
+    isLoading: false,
+    error: null,
+    isSuccessful: false,
+    message: "",
+    calendarData: null,
+};
 export const createGift = {
     isLoading: false,
     error: null,
@@ -50,4 +64,11 @@ export const trackState = {
     partyCreate: false,
     partyEnter: false,
     giftCoin: false,
+};
+export const checkWalletCoin = {
+    message: "",
+    data: {},
+};
+export const topUp = {
+    message: "",
 };

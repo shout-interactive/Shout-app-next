@@ -57,10 +57,9 @@ const PartyDetails = ({ query }) => {
   const [toggle, setToggle] = useState(false);
 
   // useSelector Redux
-  const { isLoading, partyDetails } = useSelector((s) => s.getPartyDetails);
-  const { partyData } = useSelector((s) => s.createParty);
+  const { partyDetails } = useSelector((s) => s.getPartyDetails);
   const { token } = useSelector((s) => s.verifyToken);
-
+  const { data } = useSelector((s) => s.checkCoinReducer);
   const handleGetCoin = () => {
     route.push(`/wallet/${token}`);
     dispatch(enterParty());
@@ -73,7 +72,7 @@ const PartyDetails = ({ query }) => {
     setMoreCoinModal(open);
   };
   const handleEnterParty = () => {
-    if (userCoin >= 200) {
+    if (data?.coins >= 200) {
       route.push("/live");
     } else {
       handleToggleModal(false);
@@ -333,11 +332,11 @@ const PartyDetails = ({ query }) => {
                   marginBottom: "40px",
                 }}
               >
-                You need more coins to create this party
+                You need more coins to enter this party
               </Typography>
               <ClearRoundedIcon
                 className={classes.btnRemove}
-                onClick={() => handleToggleModal(false)}
+                onClick={() => setMoreCoinModal(false)}
               />
               <ButtonComponent
                 title="Get Coins"

@@ -17,40 +17,53 @@ const FundWalletDrawer = Dynamic(() => import("./fundWalletDrawer"));
 import { useStyles } from "./style";
 import styles from "./style.module.css";
 import { useSelector } from "react-redux";
+import BuyCoinModal from "./modal";
+
+// import BuyCoinModal from "./modal"
 
 const coinBundles = [
   {
     name: "2,000 Coins",
     value: "N400",
     img: "/assets/coin.png",
+    amount: 2000,
   },
   {
     name: "5,500 Coins",
     value: "N2,000",
     img: "/assets/coin2.png",
+    amount: 3500,
   },
   {
     name: "12,000 Coins",
     value: "N3,000",
     img: "/assets/coin3.png",
+    amount: 12000,
   },
   {
     name: "20,000 Coins",
     value: "N10,000",
     img: "/assets/coin4.png",
+    amount: 20000,
   },
   {
     name: "27,000 Coins",
     value: "N20,000",
     img: "/assets/coin5.png",
+    amount: 27000,
   },
 ];
 
 const Wallet = () => {
   const userCoin = localStorage.getItem("coin");
   const route = useRouter();
+  const { data } = useSelector((s) => s.checkCoinReducer);
+
   const [togglePaymentDrawer, setTogglePaymentDrawer] = useState(false);
   const [toggleFundWalletDrawer, setToggleFundWalletDrawer] = useState(false);
+  const [buyModal, setBuyModal] = useState(false);
+  const [amount, setAmount] = useState();
+  console.log(amount);
   const classes = useStyles();
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -65,6 +78,12 @@ const Wallet = () => {
     setToggleFundWalletDrawer(open);
   };
 
+  const handleBuyModal = (open) => {
+    setBuyModal(open);
+  };
+  const handleSetAmount = (input) => {
+    setAmount(input);
+  };
   const coinBundleItem = (item, i) => (
     <Container
       key={i}
@@ -89,7 +108,13 @@ const Wallet = () => {
         {item.name}
       </Typography>
       <Box
-        onClick={() => handleTogglePaymentDrawer(true)}
+        onClick={() => {
+          handleBuyModal(true);
+          handleSetAmount(item.amount);
+          console.log(item.amount);
+        }}
+        // onClick={() => console.log(item.amount)}
+        // onClick={() => handleTogglePaymentDrawer(true)}
         sx={{
           width: "6em",
           height: "30px",
@@ -147,7 +172,7 @@ const Wallet = () => {
               }}
             >
               <img className={styles.coin} src="/assets/coin.png" />
-              {userCoin === "undefined" ? "2000" : numberWithCommas(userCoin)}
+              {numberWithCommas(data?.coins) || 0}
             </Typography>
           </Box>
         </Card>
@@ -190,6 +215,7 @@ const Wallet = () => {
           show={toggleFundWalletDrawer}
           toggleDrawer={handleToggleFundWalletDrawer}
         />
+        <BuyCoinModal show={buyModal} toggleModal={handleBuyModal} amount={amount} />
       </Container>
     </>
   );

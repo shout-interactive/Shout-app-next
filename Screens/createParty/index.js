@@ -25,6 +25,8 @@ export const CreateParty = () => {
   const token = useSelector((state) => state.verifyToken.token);
   const { parties } = useSelector((s) => s.getParties);
   const { isLoading, partyData } = useSelector((s) => s.createParty);
+  const { data } = useSelector((s) => s.checkCoinReducer);
+
   const dispatch = useDispatch();
 
   // route
@@ -99,22 +101,13 @@ export const CreateParty = () => {
       setTimeout(() => {
         route.push(`/party/${token}`);
       }, 2000);
-
-      // setTimeout(() => {
-      //   const getDetail = {
-      //     id: partyData?.id,
-      //     user: localStorage.getItem("userId"),
-      //   };
-      //   dispatch(getPartyDetailsRequest(getDetail));
-      //   route.push(`details/${partyData?.id}`);
-      // }, 3000);
     }
   };
   // console.log(partyData?.id);
 
   // Route to buy coins
   const getCoins = () => {
-    route.push("/wallet");
+    route.push(`/wallet/${token}`);
     dispatch(partyCreated());
   };
 
@@ -366,7 +359,7 @@ export const CreateParty = () => {
           <Box
             id="createParty"
             // onClick={handleCreateParty}
-            onClick={userCoin >= 100 ? () => handleCreateParty() : () => handleToggleModal(true)}
+            onClick={data?.coins >= 100 ? () => handleCreateParty() : () => handleToggleModal(true)}
             sx={{ margin: "2rem 0rem", cursor: "pointer", flex: "1" }}
             className={classes.buttonWrapper}
           >
@@ -394,20 +387,6 @@ export const CreateParty = () => {
               )}
             </Button>
           </Box>
-          {/* {isSuccessful ? (
-            <Snackbar
-              open={openSnackbar}
-              autoHideDuration={2000}
-              onClose={() => setOPenSnackBar(false)}
-              anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            >
-              <Alert onClose={handleCloseAlert} severity="success" sx={{ width: "100%" }}>
-                Party Created Successfully!
-              </Alert>
-            </Snackbar>
-          ) : (
-            ""
-          )} */}
         </Box>
         <ModalComponent show={openModal} toggleModal={handleToggleModal}>
           <Container className={classes.container}>

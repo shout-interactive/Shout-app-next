@@ -39,12 +39,14 @@ const GiftGoals = () => {
 
   const [moreCoin, setMoreCoin] = useState(false);
   const { token } = useSelector((s) => s.verifyToken);
+  const { data } = useSelector((s) => s.checkCoinReducer);
+
   const { partyDetails } = useSelector((s) => s.getPartyDetails);
   const giftPrice = partyDetails?.party?.GiftGoal?.Gift?.price;
   const [totalCoins, setTotalCoins] = useState(giftPrice);
   const [openModal, setOpenModal] = useState(false);
-  const userCoin = localStorage.getItem("coin");
-  const checkCoin = amount > userCoin;
+  // const userCoin = localStorage.getItem("coin");
+  const checkCoin = amount > data?.coins;
   const handleSend = () => {
     if (Number(amount) < 1 || !amount) {
       setError(true);
@@ -64,30 +66,11 @@ const GiftGoals = () => {
   const handleToggleModal = (open) => {
     setOpenModal(open);
   };
-  // const fetchGoals = async () => {
-  //   const response = await axios({
-  //     method: "POST",
-  //     url: "https://dev-server.shoutng.com/v1/party/gift/all",
-  //   });
-  //   console.log(response);
-  // };
-  // const fetchParties = () => {
-  //   const obj = {
-  //     user: localStorage.getItem("userId"),
-  //   };
-
-  //   dispatch(getPartiesRequest(obj));
-  // };
 
   const getCoins = () => {
     route.push(`/wallet/${token}`);
     dispatch(giftCoin());
   };
-
-  useEffect(() => {
-    // fetchGoals();
-    // fetchParties();
-  }, []);
 
   return (
     <Container className={styles.root}>
@@ -229,7 +212,6 @@ const GiftGoals = () => {
           fullWidth
         >
           Send Coin
-          {/* {isLoading ? "Sending coins" : "Send Coins"} */}
         </Button>
       </Box>
       <ModalComponent show={openModal} toggleModal={handleToggleModal}>

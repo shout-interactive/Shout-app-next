@@ -7,12 +7,9 @@ import { useStyles } from "./style";
 
 const HomePageHeader = () => {
   const { user, token } = useSelector((s) => s.verifyToken);
-  let userCoin;
-  if (typeof window !== "undefined") {
-    // Perform localStorage action
-    userCoin = localStorage.getItem("coin");
-  }
-  useEffect(() => {}, []);
+  const { data } = useSelector((s) => s.checkCoinReducer);
+  console.log(data.coins);
+
   // const classes = useStyles();
   const router = useRouter();
   const handleNavigateToLeaderBoard = () => {
@@ -21,10 +18,6 @@ const HomePageHeader = () => {
   const handleNavigateToWallet = () => {
     router.push(`/wallet/${token}`);
   };
-  const handleNavigateToGifts = () => {
-    router.push("/gift");
-  };
-  useEffect(() => {});
 
   function intToString(value) {
     var suffixes = ["", "k", "m", "b", "t"];
@@ -48,7 +41,7 @@ const HomePageHeader = () => {
           <Nav onClick={handleNavigateToWallet}>
             <div className={styles["badge-header"]}>
               <img src={"/assets/coin.png"} alt="Coin" />
-              {userCoin === "undefined" ? intToString(2000) : intToString(userCoin)}
+              {intToString(data?.coins) || 0}
             </div>
           </Nav>
 

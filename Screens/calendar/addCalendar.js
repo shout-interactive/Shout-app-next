@@ -20,6 +20,8 @@ import { FormLabel } from "@mui/material";
 import { Header } from "../../Component/Header/index";
 import FormControl from "@mui/material/FormControl";
 import { useRouter } from "next/router";
+import { createCalendarRequest } from "../../store/actions/create-calendar";
+
 export const AddCalendar = () => {
   const classes = useStyles();
   const route = useRouter();
@@ -27,13 +29,44 @@ export const AddCalendar = () => {
   const [description, setDescription] = useState("");
   const [eventName, setEventName] = useState("");
   const [repeat, setRepeat] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const [eventType, setEventType] = useState("");
   const [err, setErr] = useState(false);
   const handleChange = (event) => {
     setRepeat(event.target.value);
   };
-  const handleChangeBirthday = (event) => {
-    setBirthday(event.target.value);
+  const handleChangeEvent = (event) => {
+    setEventType(event.target.value);
+  };
+
+  // create calendar
+  const handleCreateCalendar = async () => {
+    if (!eventName && !eventType && !partyDate && !partyDesc) {
+      setErr(true);
+    } else if (partyName && partyDate && partyDesc) {
+      setErr(false);
+      const obj = {
+        name: eventName,
+        event_type: eventType,
+        date: partyDate,
+        repeat: repeat,
+        party: "",
+        description: partyDesc,
+      };
+
+      dispatch(createPartyRequest(obj));
+      resetState();
+      setTimeout(() => {
+        route.push(`/party/${token}`);
+      }, 2000);
+    }
+  };
+
+  const resetState = () => {
+    setSelectedPartyDate("");
+    setDescription("");
+    setEventName("");
+    setRepeat("");
+    setBirthday("");
   };
 
   return (
@@ -90,18 +123,20 @@ export const AddCalendar = () => {
               borderRadius: "20px",
             }}
           >
-            <Typography
+            <FormLabel
+              required
               sx={{
                 marginBottom: ".7rem",
                 fontWeight: "bold",
                 fontSize: "1rem",
-                color: "##0a1f44",
+                color: "#0a1f44",
               }}
             >
-              Repeat*
-            </Typography>
+              Required
+            </FormLabel>
             <FormControl fullWidth>
               <Select
+                error={err}
                 sx={{
                   borderRadius: "20px",
                 }}
@@ -111,9 +146,9 @@ export const AddCalendar = () => {
                 inputProps={{ "aria-label": "Without label" }}
               >
                 <MenuItem value="">Birthday</MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value="yearly">Yearly</MenuItem>
+                <MenuItem value="monthly">Monthly</MenuItem>
+                <MenuItem value="weekly">Weekly</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -129,30 +164,32 @@ export const AddCalendar = () => {
               borderRadius: "20px",
             }}
           >
-            <Typography
+            <FormLabel
+              required
               sx={{
                 marginBottom: ".7rem",
                 fontWeight: "bold",
                 fontSize: "1rem",
-                color: "##0a1f44",
+                color: "#0a1f44",
               }}
             >
-              Event
-            </Typography>
+              Event Type
+            </FormLabel>
             <FormControl fullWidth>
               <Select
+                error={err}
                 sx={{
                   borderRadius: "20px",
                 }}
-                value={birthday}
-                onChange={handleChangeBirthday}
+                value={eventType}
+                onChange={setEventType}
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}
               >
                 <MenuItem value="">Birthday</MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value="house warming">House Warming</MenuItem>
+                <MenuItem value="wedding">Wedding</MenuItem>
+                <MenuItem value="anniversary">Anniversary</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -183,7 +220,8 @@ export const AddCalendar = () => {
             />
           </Box>
           <Box id="description" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
-            <Typography
+            <FormLabel
+              required
               sx={{
                 marginBottom: ".7rem",
                 fontWeight: "bold",
@@ -192,7 +230,7 @@ export const AddCalendar = () => {
               }}
             >
               Description
-            </Typography>
+            </FormLabel>
             <TextField
               error={err}
               multiline
@@ -209,6 +247,7 @@ export const AddCalendar = () => {
           </Box>
 
           <Box
+            onClick={handleCreateCalendar}
             sx={{
               marginTop: "4rem",
               position: "relative",

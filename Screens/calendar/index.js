@@ -11,27 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 const CalendarList = () => {
   const route = useRouter();
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.verifyToken.token) || sessionStorage.getItem("token");
 
-  // const fetchParties = () => {
-  //   const obj = {
-  //     user: localStorage.getItem("userId"),
-  //   };
-
-  //   dispatch(getPartiesRequest(obj));
-  // };
-
-  // const fetchInvite = () => {
-  //   const obj = {
-  //     user: localStorage.getItem("userId"),
-  //   };
-
-  //   dispatch(getInviteRequest(obj));
-  // };
-
-  // useEffect(() => {
-  //   fetchParties();
-  //   fetchInvite();
-  // }, []);
   return (
     <>
       <Container maxWidth="sm" sx={{ width: "auto" }} role="presentation">
@@ -39,7 +20,7 @@ const CalendarList = () => {
           type="nav"
           title="Calendar"
           // leftLink="/party"
-          leftIcon={<BsChevronLeft onClick={() => route.back()} />}
+          leftIcon={<BsChevronLeft onClick={() => route.push(`/party/${token}`)} />}
           rightIcon={<AddIcon onClick={() => route.push("/calendar/addcalendar")} />}
           primary
         />

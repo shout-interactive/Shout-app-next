@@ -1,17 +1,66 @@
 .rootContainer {
-	margin: 0 !important;
-	padding: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .coin {
-	height: 40px;
-	width: 40px;
-	margin-right: 5px;
+    height: 40px;
+    width: 40px;
+    margin-right: 5px;
 }
 
-/* .card {
-	/* background: url(v03_wave-19.jpg), #110066;
-	background-blend-mode: hard-light, normal; */
-/* align-content: center;
-	border: "2px solid red";
-} */
+.modalBox {
+    width: 20em;
+    height: 16em;
+    background-color: #ffffff;
+    margin-top: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.containerDetail {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: "block";
+}
+
+.icon {
+    /* position: relative;
+  top: 40px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 120px;
+    color: green;
+    border-radius: 20px;
+    margin: 20px auto;
+}
+
+.btnRemove {
+    position: absolute;
+    right: 20px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    top: 20px;
+    color: black;
+}
+
+.getBtn {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 auto;
+    position: relative;
+    top: 30px;
+}

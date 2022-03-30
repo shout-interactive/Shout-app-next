@@ -8,6 +8,9 @@ import createGift from "./create-gift";
 import onBoardScreen from "./onboard";
 import getInvite from "./get-invite";
 import trackState from "./track-state";
+import checkCoinReducer from "./check-coin";
+import BuyCoin from "./buy-coin";
+import createCalendar from "./create-calendar";
 export default combineReducers({
     verifyToken,
     getParties,
@@ -17,4 +20,7 @@ export default combineReducers({
     onBoardScreen,
     getInvite,
     trackState,
+    checkCoinReducer,
+    BuyCoin,
+    createCalendar,
 });
