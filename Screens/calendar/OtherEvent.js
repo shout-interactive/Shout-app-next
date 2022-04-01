@@ -5,9 +5,11 @@ import CalenderCard from "../../Component/CalendarCard";
 import { useSelector } from "react-redux";
 import moment from "moment";
 const Otherevent = () => {
-  const { parties } = useSelector((s) => s.getParties);
+  const { calendar } = useSelector((s) => s.getCalendar);
 
-  const groups = parties.reduce((groups, event) => {
+  // console.log("calendar", calendar.calenders);
+
+  const groups = calendar.calenders.reduce((groups, event) => {
     const date = event.date.split("T")[0];
     if (!groups[date]) {
       groups[date] = [];
@@ -26,6 +28,14 @@ const Otherevent = () => {
   const checkToday = groupArrays?.map((data) => moment(data?.date).format("ddd d, MMM "));
   const d = new Date();
   console.log(groupArrays);
+
+  if (calendar.calenders.length === 0) {
+    return (
+      <div style={{ padding: "20px" }}>
+        <p>You have not created a calendar schedule yet</p>
+      </div>
+    );
+  }
   return (
     <>
       <Container>
@@ -41,7 +51,7 @@ const Otherevent = () => {
           ));
           return (
             <>
-              <Title title={moment(data?.date).format("ddd d, MMM ")} />
+              <Title title={moment(data?.date).format("ddd Do, MMM ")} />
               {event}
             </>
           );

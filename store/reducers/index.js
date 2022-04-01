@@ -11,6 +11,7 @@ import trackState from "./track-state";
 import checkCoinReducer from "./check-coin";
 import BuyCoin from "./buy-coin";
 import createCalendar from "./create-calendar";
+import getCalendar from "./all-calendar";
 export default combineReducers({
     verifyToken,
     getParties,
@@ -23,4 +24,5 @@ export default combineReducers({
     checkCoinReducer,
     BuyCoin,
     createCalendar,
+    getCalendar,
 });

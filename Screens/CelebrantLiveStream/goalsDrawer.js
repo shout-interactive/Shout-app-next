@@ -2,12 +2,12 @@ import React from "react";
 import { Box, SwipeableDrawer, Stack, Typography, Avatar } from "@mui/material";
 import DragHandleIcon from "@mui/icons-material/DragHandle";
 import CloseIcon from "@mui/icons-material/Close";
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
+import { useSelector } from "react-redux";
+import ButtonComponent from "../../Component/Button";
+import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
-import Img from "react-cloudinary-lazy-image";
 
+import { useRouter } from "next/router";
 // import { ReactComponent as BaseImage } from "../../assest/images/Base.svg";
 
 import { useStyles } from "./style";
@@ -29,35 +29,35 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
   const classes = useStyles();
-
-  // const [selectedArr, setSelectedArray] = useState([]);
-  // const [selectedIndexArr, setSelectedIndexArray] = useState([]);
+  const { partyDetails } = useSelector((s) => s.getPartyDetails);
+  const route = useRouter();
+  const giftPrice = partyDetails?.party?.GiftGoal?.Gift?.price;
 
   const contributorsData = [
-    {
-      username: "Levels Akinkunle",
-      message: "Just sent you 1,000 Coins🎉🎉",
-    },
-    {
-      username: "Levels Akinkunle",
-      message: "Just sent you 1,000 Coins🎉🎉",
-    },
-    {
-      username: "Tayo Kenneth",
-      message: "Just sent you 500 Coins🎉🎉",
-    },
-    {
-      username: "Tayo Kenneth",
-      message: "Just sent you 500 Coins🎉🎉",
-    },
-    {
-      username: "Nifemi Cole",
-      message: "Just sent you 5000 Coins🎉🎉",
-    },
-    {
-      username: "Nifemi Cole",
-      message: "Just sent you 5000 Coins🎉🎉",
-    },
+    // {
+    //   username: "Levels Akinkunle",
+    //   message: "Just sent you 1,000 Coins🎉🎉",
+    // },
+    // {
+    //   username: "Levels Akinkunle",
+    //   message: "Just sent you 1,000 Coins🎉🎉",
+    // },
+    // {
+    //   username: "Tayo Kenneth",
+    //   message: "Just sent you 500 Coins🎉🎉",
+    // },
+    // {
+    //   username: "Tayo Kenneth",
+    //   message: "Just sent you 500 Coins🎉🎉",
+    // },
+    // {
+    //   username: "Nifemi Cole",
+    //   message: "Just sent you 5000 Coins🎉🎉",
+    // },
+    // {
+    //   username: "Nifemi Cole",
+    //   message: "Just sent you 5000 Coins🎉🎉",
+    // },
   ];
 
   const contributorsItem = (data) => (
@@ -72,11 +72,7 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
       }}
     >
       <Box sx={{ width: "10%" }}>
-        <Avatar
-          variant="rounded"
-          alt="Trevor Henderson"
-          src="/static/images/avatar/1.jpg"
-        />
+        <Avatar variant="rounded" alt="Trevor Henderson" src="/static/images/avatar/1.jpg" />
       </Box>
       <Box
         sx={{
@@ -111,10 +107,7 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
         >
           <div />
           <DragHandleIcon />
-          <CloseIcon
-            onClick={() => toggleDrawer(false)}
-            sx={{ cursor: "pointer" }}
-          />
+          <CloseIcon onClick={() => toggleDrawer(false)} sx={{ cursor: "pointer" }} />
         </Stack>
         <Typography sx={{ color: "#0A1F44", fontWeight: "bold" }} variant="h5">
           Gift goal
@@ -154,15 +147,7 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
               }}
             >
               {/* <BaseImage className={classes.img} /> */}
-              <Img
-                cloudName={cloudName}
-                imageName={"image/upload/v1644325924/shout/Base_wma93s"}
-                fluid={{
-                  maxWidth: 800,
-                  height: 300,
-                }}
-                alt={"shout_logo"}
-              />
+              <img src={partyDetails?.party?.GiftGoal?.Gift?.image} alt="" />
             </Box>
             <Box
               sx={{
@@ -182,14 +167,10 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
                   fontWeight: "bold",
                 }}
               >
-                2 Week Trip to Dubai
+                {partyDetails?.party?.GiftGoal?.Gift?.title}
               </Typography>
-              <Typography
-                variant="p"
-                sx={{ color: "#818FA3", fontSize: "1rem" }}
-              >
-                A 2 week all expense paid trip to Dubai brought to you by
-                Emirate Airline.
+              <Typography variant="p" sx={{ color: "#818FA3", fontSize: "1rem" }}>
+                {partyDetails?.party?.GiftGoal?.Gift?.description}
               </Typography>
             </Box>
           </Box>
@@ -215,16 +196,13 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
                 fontWeight: "bold",
               }}
             >
-              10,000/40,000 Coins
+              {`${0} / {giftPrice}`}Coins
             </Typography>
           </Box>
         </Box>
 
         <Box sx={{ width: "100%", marginTop: "2rem" }}>
-          <Typography
-            sx={{ color: "#0A1F44", fontWeight: "bold" }}
-            variant="h6"
-          >
+          <Typography sx={{ color: "#0A1F44", fontWeight: "bold" }} variant="h6">
             Contributors
           </Typography>
           {contributorsData.map((data) => contributorsItem(data))}
@@ -233,6 +211,51 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
     </Box>
   );
 
+  const noGift = () => (
+    <Box sx={{ width: "auto" }} role="presentation">
+      <Box className={"classes.bottomDrawerWrapper"}>
+        <Stack
+          direction="horizontal"
+          gap={3}
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <div />
+          <DragHandleIcon />
+          <CloseIcon onClick={() => toggleDrawer(false)} sx={{ cursor: "pointer" }} />
+        </Stack>
+        <Typography sx={{ color: "#0A1F44", fontWeight: "bold" }} variant="h5">
+          Gift goal
+        </Typography>
+        <Typography sx={{ color: "#0A1F44" }} variant="body1">
+          {" "}
+          Check your gift goal progress
+        </Typography>
+        <Typography sx={{ color: "#0A1F44", marginTop: "15px", textAlign: "center" }} variant="h6">
+          {" "}
+          Ooopsss!
+        </Typography>
+        <p style={{ color: "#0A1F44", textAlign: "center" }}>You have not created any Gift Goal</p>
+        <ButtonComponent
+          title="Create Gift Goal"
+          handleClick={() => route.push("/details/giftgoal")}
+          button="#0A1F44"
+          width="100%"
+        />
+      </Box>
+    </Box>
+  );
+
+  if (partyDetails?.party?.GiftGoal === null) {
+    <div>
+      <h1>You have not yet created any Gift Goal.</h1>
+      <p>Create a gift goal so that you can </p>
+    </div>;
+  }
   return (
     <div className={classes.bottomDrawerContainer}>
       <SwipeableDrawer
@@ -252,7 +275,7 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
         onClose={() => toggleDrawer(false)}
         onOpen={() => toggleDrawer(true)}
       >
-        {list()}
+        {partyDetails?.party?.GiftGoal === null ? noGift() : list()}
       </SwipeableDrawer>
     </div>
   );

@@ -21,43 +21,54 @@ import { Header } from "../../Component/Header/index";
 import FormControl from "@mui/material/FormControl";
 import { useRouter } from "next/router";
 import { createCalendarRequest } from "../../store/actions/create-calendar";
-
+import { useDispatch, useSelector } from "react-redux";
 export const AddCalendar = () => {
   const classes = useStyles();
+  const { token } = useSelector((s) => s.verifyToken);
+  const { isLoading, isSuccessful } = useSelector((s) => s.createCalendar);
   const route = useRouter();
+  const dispatch = useDispatch();
   const [partyDate, setSelectedPartyDate] = useState("");
   const [description, setDescription] = useState("");
   const [eventName, setEventName] = useState("");
   const [repeat, setRepeat] = useState("");
   const [eventType, setEventType] = useState("");
   const [err, setErr] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   const handleChange = (event) => {
     setRepeat(event.target.value);
   };
   const handleChangeEvent = (event) => {
     setEventType(event.target.value);
   };
-
+  console.log("is Successful", isSuccessful);
   // create calendar
   const handleCreateCalendar = async () => {
-    if (!eventName && !eventType && !partyDate && !partyDesc) {
+    if (!eventName && !eventType && !partyDate && !description) {
       setErr(true);
-    } else if (partyName && partyDate && partyDesc) {
+    } else if (eventName && eventType && partyDate && description) {
       setErr(false);
       const obj = {
         name: eventName,
         event_type: eventType,
-        date: partyDate,
         repeat: repeat,
-        party: "",
-        description: partyDesc,
+        date: partyDate,
+        user: localStorage.getItem("userId"),
+        description: description,
       };
 
-      dispatch(createPartyRequest(obj));
+      dispatch(createCalendarRequest(obj));
+      console.log(obj);
+
       resetState();
-      setTimeout(() => {
-        route.push(`/party/${token}`);
-      }, 2000);
+      if (isSuccessful === true) {
+        route.push(`/myCalendar`);
+      } else {
+        setErrorMessage(true);
+      }
+      // setTimeout(() => {
+      //   route.push(`/party/${token}`);
+      // }, 2000);
     }
   };
 
@@ -66,7 +77,7 @@ export const AddCalendar = () => {
     setDescription("");
     setEventName("");
     setRepeat("");
-    setBirthday("");
+    setEventType("");
   };
 
   return (
@@ -132,7 +143,7 @@ export const AddCalendar = () => {
                 color: "#0a1f44",
               }}
             >
-              Required
+              Repeat
             </FormLabel>
             <FormControl fullWidth>
               <Select
@@ -182,7 +193,7 @@ export const AddCalendar = () => {
                   borderRadius: "20px",
                 }}
                 value={eventType}
-                onChange={setEventType}
+                onChange={handleChangeEvent}
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}
               >
@@ -190,6 +201,8 @@ export const AddCalendar = () => {
                 <MenuItem value="house warming">House Warming</MenuItem>
                 <MenuItem value="wedding">Wedding</MenuItem>
                 <MenuItem value="anniversary">Anniversary</MenuItem>
+                <MenuItem value="naming ceremony">Naming Ceremony</MenuItem>
+                <MenuItem value="other">Other</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -245,9 +258,14 @@ export const AddCalendar = () => {
               }}
             />
           </Box>
-
+          {errorMessage ? (
+            <Typography sx={{ textAlign: "center", color: "red", fontWeight: "600" }}>
+              Unable to create a calendar schedule
+            </Typography>
+          ) : null}
           <Box
             onClick={handleCreateCalendar}
+            // onClick={() => console.log("clicked!")}
             sx={{
               marginTop: "4rem",
               position: "relative",
@@ -270,7 +288,16 @@ export const AddCalendar = () => {
               variant="outlined"
               fullWidth
             >
-              Save
+              {isLoading === true ? (
+                <img
+                  aria-disabled
+                  src="/assest/images/Shoutassets/loader.gif"
+                  alt=""
+                  style={{ width: "25px", height: "25px" }}
+                />
+              ) : (
+                "Save"
+              )}
             </Button>
           </Box>
         </Box>

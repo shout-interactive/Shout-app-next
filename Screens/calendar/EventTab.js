@@ -7,9 +7,10 @@ import { todayDate } from "../../utils/CalendarData";
 import moment from "moment";
 const EventTab = () => {
   const { parties } = useSelector((s) => s.getParties);
+  const { calendar } = useSelector((s) => s.getCalendar);
 
   const d = new Date();
-  const groups = parties.reduce((groups, event) => {
+  const groups = calendar.calenders.reduce((groups, event) => {
     const date = event.date.split("T")[0];
     if (!groups[date]) {
       groups[date] = [];
@@ -40,7 +41,7 @@ const EventTab = () => {
     <>
       <Container>
         <Title title="Today" />
-        {checkToday === moment(d).format("ddd d, MMM") ? myTodayEvent : "You have no event today"}
+        {checkToday === moment(d).format("ddd Do, MMM") ? myTodayEvent : "You have no event today"}
       </Container>
     </>
   );

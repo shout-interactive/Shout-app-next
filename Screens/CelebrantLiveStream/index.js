@@ -36,7 +36,7 @@ const CelebrantLiveStream = () => {
   const router = useRouter();
   //   const dispatch = useDispatch();
   //   const { livestream } = useSelector((s) => s.onBoardScreen);
-  const { token, user } = useSelector((state) => state.verifyToken.token);
+  const { token, user } = useSelector((state) => state.verifyToken);
 
   const [liveStreamMode, setLiveStreamMode] = useState("My Party");
   const [liveChat, setLiveChat] = useState("");

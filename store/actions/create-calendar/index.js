@@ -26,12 +26,12 @@ export const createCalendarRequest = (payload) => {
     try {
       const callObj = {
         method: "POST",
-        path: `party/calendars/create`,
+        path: `party/calenders/create`,
         data: payload,
       };
 
       const data = await API(callObj);
-      console.log(data, "party data");
+      console.log(data, "Calendar data");
       if (data.status) {
         dispatch(createCalendarSucess(data.data, data.message));
         // dispatch(getPartiesSucess(data.data, data.message));
