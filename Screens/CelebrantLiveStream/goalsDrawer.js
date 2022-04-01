@@ -30,9 +30,11 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
   const classes = useStyles();
   const { partyDetails } = useSelector((s) => s.getPartyDetails);
+
   const route = useRouter();
   const giftPrice = partyDetails?.party?.GiftGoal?.Gift?.price;
-
+  const amountContributed = partyDetails?.party?.GiftGoal?.contributed;
+  const contributors = partyDetails?.party?.GiftGoal?.contributors;
   const contributorsData = [
     // {
     //   username: "Levels Akinkunle",
@@ -84,9 +86,9 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
       >
         <Typography sx={{ fontWeight: "bold" }}>
           <Box component="span" sx={{ color: "#C0C9D2" }}>
-            {data.username}{" "}
+            {data?.fistname}{" "}
           </Box>
-          {data.message}
+          {/* {data.message} */}
         </Typography>
       </Box>
     </Box>
@@ -196,7 +198,7 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
                 fontWeight: "bold",
               }}
             >
-              {`${0} / {giftPrice}`}Coins
+              {`${amountContributed} / {giftPrice}`}Coins
             </Typography>
           </Box>
         </Box>
@@ -205,7 +207,7 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
           <Typography sx={{ color: "#0A1F44", fontWeight: "bold" }} variant="h6">
             Contributors
           </Typography>
-          {contributorsData.map((data) => contributorsItem(data))}
+          {contributors.map((data) => contributorsItem(data))}
         </Box>
       </Box>
     </Box>

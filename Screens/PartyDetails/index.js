@@ -19,6 +19,8 @@ import ClearRoundedIcon from "@mui/icons-material/Clear";
 import ButtonComponent from "../../Component/Button";
 import { getPartyDetailsRequest } from "../../store/actions/get-party-details";
 import { enterParty } from "../../store/actions/track-state";
+import { checkPartyStatus } from "../../store/actions/check-party";
+import { joinPartyPayment } from "../../store/actions/join-party";
 
 const PartyDetails = ({ query }) => {
   const userId = localStorage.getItem("userId");
@@ -60,6 +62,9 @@ const PartyDetails = ({ query }) => {
   const { partyDetails } = useSelector((s) => s.getPartyDetails);
   const { token } = useSelector((s) => s.verifyToken);
   const { data } = useSelector((s) => s.checkCoinReducer);
+  const { message, isSuccessful } = useSelector((s) => s.checkParty);
+  const { successful } = useSelector((s) => s.joinPayment);
+
   const handleGetCoin = () => {
     route.push(`/wallet/${token}`);
     dispatch(enterParty());
@@ -74,6 +79,32 @@ const PartyDetails = ({ query }) => {
   const handleEnterParty = () => {
     if (data?.coins >= 200) {
       route.push("/live");
+    } else {
+      handleToggleModal(false);
+      handleMoreCoinModal(true);
+    }
+  };
+  const partyStatus = () => {
+    const payload = {
+      party: id,
+    };
+    dispatch(checkPartyStatus(payload));
+    if (isSuccessful === true) {
+      route.push("/live");
+    } else {
+      handleToggleModal(true);
+    }
+  };
+
+  const partyPayment = () => {
+    const payload = {
+      party: id,
+    };
+    if (data?.coins >= 2000) {
+      dispatch(joinPartyPayment(payload));
+      if (successful) {
+        route.push();
+      }
     } else {
       handleToggleModal(false);
       handleMoreCoinModal(true);
@@ -232,7 +263,7 @@ const PartyDetails = ({ query }) => {
 
         <div className={classes.buttonWrapper} id="join">
           <Button
-            onClick={checkPartyOwner ? handleEnterParty : () => handleToggleModal(true)}
+            onClick={checkPartyOwner ? handleEnterParty : partyStatus}
             sx={{
               width: "100%",
               padding: "1rem",
@@ -304,7 +335,7 @@ const PartyDetails = ({ query }) => {
                   Cancel
                 </Button>
                 <Button
-                  onClick={handleEnterParty}
+                  onClick={partyPayment}
                   variant="contained"
                   style={{
                     backgroundColor: "#162767",

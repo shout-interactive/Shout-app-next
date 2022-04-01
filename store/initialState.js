@@ -46,6 +46,7 @@ export const createParty = {
     message: "",
     partyData: null,
 };
+
 export const createCalendar = {
     isLoading: false,
     error: null,
@@ -71,4 +72,12 @@ export const checkWalletCoin = {
 };
 export const topUp = {
     message: "",
+};
+export const joinPartyPayment = {
+    message: "",
+    successful: false,
+};
+export const checkJoinStatus = {
+    message: "",
+    isSuccessful: false,
 };

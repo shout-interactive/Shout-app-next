@@ -38,11 +38,12 @@ const GiftGoals = () => {
   const [coins, setCoins] = useState(0);
 
   const [moreCoin, setMoreCoin] = useState(false);
-  const { token } = useSelector((s) => s.verifyToken);
+  const { token, user } = useSelector((s) => s.verifyToken);
   const { data } = useSelector((s) => s.checkCoinReducer);
-
+  const { isSuccessful } = useSelector((s) => s.createGift);
   const { partyDetails } = useSelector((s) => s.getPartyDetails);
   const giftPrice = partyDetails?.party?.GiftGoal?.Gift?.price;
+  const amountContributed = partyDetails?.party?.GiftGoal?.contributed;
   const [totalCoins, setTotalCoins] = useState(giftPrice);
   const [openModal, setOpenModal] = useState(false);
   // const userCoin = localStorage.getItem("coin");
@@ -54,13 +55,14 @@ const GiftGoals = () => {
     } else if (Number(amount) > 0) {
       const obj = {
         party: partyDetails?.party?.id,
-        giftGoal: amount,
+        amount: Number(amount),
       };
       dispatch(createGiftSend(obj));
       setCoins(amount);
-      setTimeout(() => {
+      if (isSuccessful == true) {
         setOpenModal(true);
-      }, 3000);
+      }
+
       setAMount("");
     }
   };
@@ -147,14 +149,14 @@ const GiftGoals = () => {
         >
           <BorderLinearProgress
             variant="determinate"
-            value={Math.round((amount / totalCoins) * 100)}
+            value={Math.round((Number(amountContributed) / totalCoins) * 100)}
             // value="50"
           />
           <Typography
             variant="h5"
             sx={{ color: "#110066", marginTop: ".3rem", fontSize: "1rem", fontWeight: "bold" }}
           >
-            {`${coins} / ${totalCoins}`} Coins
+            {`${amountContributed} / ${totalCoins}`} Coins
             {/* {`${isSuccessful ? coins : 0} / ${totalCoins}`} Coins */}
           </Typography>
         </Box>
@@ -221,7 +223,7 @@ const GiftGoals = () => {
             <CheckCircleOutlineRounded className={styles.icon} />
 
             <Typography sx={{ padding: "0 40px", textAlign: "center", marginBottom: "40px" }}>
-              You just gifted David {coins} coins
+              You just gifted {user?.firstname} {coins} coins
             </Typography>
             <ClearRoundedIcon
               className={styles.btnRemove}

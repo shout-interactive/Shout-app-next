@@ -5,6 +5,7 @@ import {
   CREATE_GIFT_FAIL,
 } from "../../actionTypes";
 import { API } from "../../../utils/Axios";
+import { useSelector } from "react-redux";
 
 export const createGiftStart = () => {
   return { type: CREATE_GIFT_START };
@@ -20,14 +21,19 @@ export const createGiftCleanup = () => {
 };
 
 export const createGiftSend = (payload) => {
+  const token = localStorage.getItem("token");
   return async (dispatch) => {
     dispatch(createGiftStart());
 
+    // const { token } = useSelector((s) => s.verifyToken);
     try {
       const callObj = {
         method: "POST",
         path: `party/contribute`,
         data: payload,
+        headers: {
+          Authorization: token,
+        },
       };
       const data = await API(callObj);
       console.log(data, "GIft sent");

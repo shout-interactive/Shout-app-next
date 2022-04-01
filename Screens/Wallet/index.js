@@ -171,7 +171,7 @@ const Wallet = () => {
               }}
             >
               <img className={styles.coin} src="/assets/coin.png" />
-              {numberWithCommas(data?.coins) || 0}
+              {data?.coins || 0}
             </Typography>
           </Box>
         </Card>

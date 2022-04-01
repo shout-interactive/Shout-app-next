@@ -4,16 +4,17 @@ import * as _ from "lodash";
 
 export const apiUrl = "https://dev-server.shoutng.com/v1/";
 export const API = async (callObj, dispatch) => {
-  const { path, method, data, header = false } = callObj;
+  const token = localStorage.getItem("token");
+  const { path, method, data, headers } = callObj;
 
-  const headers = { "Content-Type": "application/json" };
+  // const headers = { "Content-Type": "application/json",};
   let url = `${apiUrl}${path}`;
   try {
     const response = await axios({ method, url, data, headers, json: true });
 
     const result = response && response.data;
 
-    if (header) {
+    if (headers) {
       return response;
     } else {
       return result;
