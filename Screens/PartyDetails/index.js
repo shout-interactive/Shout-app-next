@@ -103,7 +103,7 @@ const PartyDetails = ({ query }) => {
     if (data?.coins >= 2000) {
       dispatch(joinPartyPayment(payload));
       if (successful) {
-        route.push();
+        route.push("/live");
       }
     } else {
       handleToggleModal(false);
