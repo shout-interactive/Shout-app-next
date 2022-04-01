@@ -41,9 +41,7 @@ export const AddCalendarInvite = () => {
     // console.log(id);
     dispatch(getPartyDetailsRequest(obj));
   };
-  useEffect(() => {
-    fetchPartyDetails();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div style={{ width: "100%" }}>

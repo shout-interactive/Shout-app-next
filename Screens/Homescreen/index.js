@@ -11,18 +11,25 @@ import styles from "./index.module.css";
 import Confetti from "react-dom-confetti";
 import { Encrypt } from "../../utils/helpers";
 import { checkCoin } from "../../store/actions/check-coin";
+import { getCalendarRequest } from "../../store/actions/get-calendar";
 const HomeScreen = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.verifyToken.token);
   const [splash, setSplash] = useState(false);
   // State to toggle the onboarding screen
-
+  const fetchCalendar = () => {
+    const obj = {
+      user: localStorage.getItem("userId"),
+    };
+    dispatch(getCalendarRequest(obj));
+  };
   useEffect(() => {
     setTimeout(() => {
       setSplash(!splash);
     }, 1500);
     dispatch(checkCoin());
+    fetchCalendar();
   }, []);
 
   const config = {

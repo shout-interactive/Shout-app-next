@@ -10,8 +10,8 @@ const EventTab = () => {
   const { calendar } = useSelector((s) => s.getCalendar);
 
   const d = new Date();
-  const groups = calendar.calenders.reduce((groups, event) => {
-    const date = event.date.split("T")[0];
+  const groups = calendar?.calenders.reduce((groups, event) => {
+    const date = event?.date.split("T")[0];
     if (!groups[date]) {
       groups[date] = [];
     }
@@ -31,7 +31,7 @@ const EventTab = () => {
 
   // moment(d).format("ddd d, MMM ");
   // Initiale
-  const myTodayEvent = groupArrays?.map((data) =>
+  const myTodayEvent = groupArrays.map((data) =>
     data?.event?.map((user) => <CalenderCard backgroundColor=" #FA9330" data={user?.name} />)
   );
 
