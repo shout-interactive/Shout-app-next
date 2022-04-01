@@ -6,11 +6,28 @@ import styles from "./style.module.css";
 import ClearRoundedIcon from "@mui/icons-material/Clear";
 import { BuyCoin } from "../../store/actions/buy-coin";
 import { useDispatch } from "react-redux";
+import { partyCreated, enterParty } from "../../store/actions/track-state";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 const BuyCoinModal = ({ show, toggleModal, amount }) => {
   const dispatch = useDispatch();
+  const route = useRouter();
+  const { partyCreate } = useSelector((s) => s.trackState);
+  const { enterParti } = useSelector((s) => s.trackState);
+
   const topupBalance = () => {
     dispatch(BuyCoin(amount));
-    toggleModal(false);
+    if (partyCreate) {
+      route.back();
+      toggleModal(false);
+      dispatch(partyCreated);
+    } else if (enterParti) {
+      route.back();
+      toggleModal(false);
+      dispatch(enterParty);
+    } else {
+      toggleModal(false);
+    }
   };
 
   useEffect(() => {

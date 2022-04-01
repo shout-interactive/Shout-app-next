@@ -26,7 +26,7 @@ export const createGiftSend = (payload) => {
     try {
       const callObj = {
         method: "POST",
-        path: `party/goal`,
+        path: `party/contribute`,
         data: payload,
       };
       const data = await API(callObj);

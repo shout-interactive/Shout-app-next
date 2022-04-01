@@ -53,6 +53,7 @@ const GiftGoals = () => {
       return;
     } else if (Number(amount) > 0) {
       const obj = {
+        party: partyDetails?.party?.id,
         giftGoal: amount,
       };
       dispatch(createGiftSend(obj));

@@ -207,7 +207,7 @@ const PartyDetails = ({ query }) => {
             </Box>
             <Box
               sx={{ width: "100%", margin: "7px auto" }}
-              onClick={() => route.push("/editparty")}
+              // onClick={() => route.push("/editparty")}
             >
               <ButtonComponent title="Upload a Video" button="#110166" width="100%" />
             </Box>

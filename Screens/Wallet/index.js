@@ -55,10 +55,9 @@ const coinBundles = [
 ];
 
 const Wallet = () => {
-  const userCoin = localStorage.getItem("coin");
+  // const userCoin = localStorage.getItem("coin");
   const route = useRouter();
   const { data } = useSelector((s) => s.checkCoinReducer);
-
   const [togglePaymentDrawer, setTogglePaymentDrawer] = useState(false);
   const [toggleFundWalletDrawer, setToggleFundWalletDrawer] = useState(false);
   const [buyModal, setBuyModal] = useState(false);

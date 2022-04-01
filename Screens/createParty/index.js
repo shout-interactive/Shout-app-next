@@ -24,7 +24,7 @@ export const CreateParty = () => {
   // useSelector and dispatch
   const token = useSelector((state) => state.verifyToken.token);
   const { parties } = useSelector((s) => s.getParties);
-  const { isLoading, partyData } = useSelector((s) => s.createParty);
+  const { isLoading, isSuccessful, partyData } = useSelector((s) => s.createParty);
   const { data } = useSelector((s) => s.checkCoinReducer);
 
   const dispatch = useDispatch();
@@ -40,6 +40,7 @@ export const CreateParty = () => {
   const [openModal, setOpenModal] = useState(false);
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errMsg, setErrMsg] = useState(false);
   const inputGuestField = [
     {
       type: "text",
@@ -98,9 +99,14 @@ export const CreateParty = () => {
 
       dispatch(createPartyRequest(obj));
       resetState();
-      setTimeout(() => {
+      if (isSuccessful === true) {
         route.push(`/party/${token}`);
-      }, 2000);
+      } else {
+        setErrMsg(true);
+      }
+      // setTimeout(() => {
+      //   route.push(`/party/${token}`);
+      // }, 2000);
     }
   };
   // console.log(partyData?.id);
@@ -318,7 +324,8 @@ export const CreateParty = () => {
             </label>
           </Box>
           <Box id="description" sx={{ width: "100%", margin: "1.5rem auto 1rem auto" }}>
-            <Typography
+            <FormLabel
+              required
               sx={{
                 marginBottom: ".7rem",
                 fontWeight: "bold",
@@ -327,7 +334,7 @@ export const CreateParty = () => {
               }}
             >
               Description
-            </Typography>
+            </FormLabel>
             <TextField
               error={err}
               multiline
@@ -355,15 +362,21 @@ export const CreateParty = () => {
               Please enter all text fields
             </Typography>
           )}
-
+          {errMsg === true && (
+            <Typography sx={{ textAlign: "center" }}>Unable to create party, try again</Typography>
+          )}
           <Box
             id="createParty"
             // onClick={handleCreateParty}
-            onClick={data?.coins >= 100 ? () => handleCreateParty() : () => handleToggleModal(true)}
+            // onClick={data?.coins >= 100 ? () => handleCreateParty() : () => handleToggleModal(true)}
             sx={{ margin: "2rem 0rem", cursor: "pointer", flex: "1" }}
             className={classes.buttonWrapper}
           >
             <Button
+              onClick={
+                data?.coins >= 100 ? () => handleCreateParty() : () => handleToggleModal(true)
+              }
+              disabled={isLoading === true ? true : false}
               sx={{
                 backgroundColor: "#110066",
                 color: "white",

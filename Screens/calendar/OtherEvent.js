@@ -17,6 +17,19 @@ const Otherevent = () => {
     groups[date].push(event);
     return groups;
   }, {});
+  const enterCalendarDetails = (data, id) => {
+    // const userId = localStorage.getItem("userId");
+    const checkParty = data?.filter((element) => element.id === id);
+    return checkParty;
+    // const obj = {
+    //   id: checkParty[0].id,
+    //   user: userId,
+    // };
+    // dispatch(getPartyDetailsRequest(obj));
+    // route.push("/detail");
+    // console.log(checkParty);
+    // console.log(checkParty[0].id);
+  };
 
   // Edit: to add it in the array format instead
   const groupArrays = Object.keys(groups).map((date) => {
@@ -47,6 +60,7 @@ const Otherevent = () => {
               }
               data={user?.name}
               id={user?.id}
+              click={enterCalendarDetails(calendar.calenders, user?.id)}
             />
           ));
           return (
