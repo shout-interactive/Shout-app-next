@@ -207,7 +207,7 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
           <Typography sx={{ color: "#0A1F44", fontWeight: "bold" }} variant="h6">
             Contributors
           </Typography>
-          {contributors.map((data) => contributorsItem(data))}
+          {contributors?.map((data) => contributorsItem(data))}
         </Box>
       </Box>
     </Box>
@@ -242,12 +242,7 @@ const GiftGoalsDrawer = ({ show, toggleDrawer }) => {
           Ooopsss!
         </Typography>
         <p style={{ color: "#0A1F44", textAlign: "center" }}>You have not created any Gift Goal</p>
-        <ButtonComponent
-          title="Create Gift Goal"
-          handleClick={() => route.push("/details/giftgoal")}
-          button="#0A1F44"
-          width="100%"
-        />
+        <ButtonComponent title="Create Gift Goal" handleClick={() => route.push("/details/giftgoal")} button="#0A1F44" width="100%" />
       </Box>
     </Box>
   );

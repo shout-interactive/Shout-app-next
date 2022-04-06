@@ -12,23 +12,14 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 // import LiveChat from "./liveChat";
 
-import {
-  Button,
-  Grid,
-  Container,
-  Box,
-  Stack,
-  Typography,
-  Avatar,
-  TextField,
-  InputAdornment,
-} from "@mui/material";
+import { Button, Grid, Container, Box, Stack, Typography, Avatar, TextField, InputAdornment } from "@mui/material";
 
 import LiveStreamDrawer from "./liveStreamMode";
 import GuestDrawer from "./guestDrawer";
 import AddGuestDrawer from "./addGuestDrawer";
 import GiftGoalDrawer from "./goalsDrawer";
 import MusicDrawer from "./musicDrawer";
+import WebCam from "../../Component/WebCam";
 
 // import { useStyles } from "./style";
 
@@ -138,155 +129,98 @@ const CelebrantLiveStream = () => {
 
   return (
     <>
-      <Container
-        maxWidth="sm"
-        sx={{
-          padding: "2rem 1.2rem",
-          height: "100vh",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundColor: "black",
-          // backgroundImage: `url(https://res.cloudinary.com/de8vrxbqq/image/upload/v1644325919/shout/guysAtParty_vdbxyb.svg)`,
-        }}
-      >
-        <Stack
+      <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh" }}>
+        <Container
+          // maxWidth="sm"
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
+            maxWidth: "100vw !important",
+            padding: "2rem 1.2rem",
+            height: "100vh",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            // backgroundColor: "black",
+            position: "relative",
+            // backgroundImage: `url(https://res.cloudinary.com/de8vrxbqq/image/upload/v1644325919/shout/guysAtParty_vdbxyb.svg)`,
           }}
-          direction="horizontal"
-          spacing={5}
         >
-          <Box
-            id="views"
+          <WebCam></WebCam>
+          <Stack
             sx={{
               display: "flex",
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(96, 100, 106, 0.4)",
-              borderRadius: "25px",
-              padding: ".25rem .65rem",
-              cursor: "pointer",
+              justifyContent: "space-between",
             }}
-            onClick={() => handleToggleLiveStreamMode(true)}
+            direction="horizontal"
+            spacing={5}
           >
-            <Typography sx={{ color: "white", marginRight: "5px", fontWeight: "600" }}>
-              {liveStreamMode}
-            </Typography>
-            <KeyboardArrowDownIcon sx={{ color: "white", fontWeight: "600" }} />
-          </Box>
-
-          <Box
-            id="audience"
-            onClick={() => handleToggleGuestDrawer(true)}
-            sx={{
-              cursor: "pointer",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: ".2rem 0rem",
-            }}
-          >
-            <PersonSharpIcon sx={{ color: "white", marginRight: "5px", fontWeight: "600" }} />
-            <Typography sx={{ color: "white", fontWeight: "600" }}>20</Typography>
-          </Box>
-          <Box
-            onClick={() => handleCloseLiveparty()}
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              padding: ".5rem .3rem",
-            }}
-          >
-            <CloseSharpIcon
-              sx={{
-                color: "white",
-                fontSize: "1.5rem",
-                fontWeight: "bolder",
-              }}
-            />
-          </Box>
-        </Stack>
-        <Stack
-          sx={{
-            marginTop: "1rem",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-end",
-            justifyContent: "center",
-          }}
-          spacing={3}
-        >
-          <Box
-            id="inviteGuest"
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(96, 100, 106, 0.4)",
-              borderRadius: "10px",
-              width: "2rem !important",
-              height: "2rem !important",
-
-              cursor: "pointer",
-            }}
-            onClick={() => handleToggleAddGuestDrawer(true)}
-          >
-            <PersonAddAltSharpIcon
-              sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }}
-            />
-          </Box>
-          <Box
-            id="gift"
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(96, 100, 106, 0.4)",
-              borderRadius: "10px",
-              width: "2rem !important",
-              height: "2rem !important",
-              cursor: "pointer",
-            }}
-            onClick={() => handleToggleGiftGoalDrawer(true)}
-          >
-            <RedeemSharpIcon sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }} />
-          </Box>
-          <Box
-            id="musicPost"
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(96, 100, 106, 0.4)",
-              borderRadius: "10px",
-              width: "2rem !important",
-              height: "2rem !important",
-              cursor: "pointer",
-              position: "relative",
-              zIndex: "999",
-            }}
-            onClick={() => handleToggleMusicDrawer(true)}
-          >
-            <AudiotrackSharpIcon
-              sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }}
-              onClick={() => handleToggleMusicDrawer(true)}
-            />
-          </Box>
-          {liveStreamMode === "My Party" ? (
             <Box
+              id="views"
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgba(96, 100, 106, 0.4)",
+                borderRadius: "25px",
+                padding: ".25rem .65rem",
+                cursor: "pointer",
+              }}
+              onClick={() => handleToggleLiveStreamMode(true)}
+            >
+              <Typography sx={{ color: "white", marginRight: "5px", fontWeight: "600" }}>{liveStreamMode}</Typography>
+              <KeyboardArrowDownIcon sx={{ color: "white", fontWeight: "600" }} />
+            </Box>
+
+            <Box
+              id="audience"
+              onClick={() => handleToggleGuestDrawer(true)}
+              sx={{
+                cursor: "pointer",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: ".2rem 0rem",
+              }}
+            >
+              <PersonSharpIcon sx={{ color: "white", marginRight: "5px", fontWeight: "600" }} />
+              <Typography sx={{ color: "white", fontWeight: "600" }}>20</Typography>
+            </Box>
+            <Box
+              onClick={() => handleCloseLiveparty()}
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                padding: ".5rem .3rem",
+              }}
+            >
+              <CloseSharpIcon
+                sx={{
+                  color: "white",
+                  fontSize: "1.5rem",
+                  fontWeight: "bolder",
+                }}
+              />
+            </Box>
+          </Stack>
+          <Stack
+            sx={{
+              marginTop: "1rem",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              justifyContent: "center",
+            }}
+            spacing={3}
+          >
+            <Box
+              id="inviteGuest"
               sx={{
                 display: "flex",
                 flexDirection: "row",
@@ -296,143 +230,191 @@ const CelebrantLiveStream = () => {
                 borderRadius: "10px",
                 width: "2rem !important",
                 height: "2rem !important",
+
+                cursor: "pointer",
               }}
+              onClick={() => handleToggleAddGuestDrawer(true)}
             >
-              <VideoCallSharpIcon sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }} />
+              <PersonAddAltSharpIcon sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }} />
             </Box>
-          ) : (
             <Box
+              id="gift"
               sx={{
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: "transparent",
+                backgroundColor: "rgba(96, 100, 106, 0.4)",
                 borderRadius: "10px",
                 width: "2rem !important",
                 height: "2rem !important",
+                cursor: "pointer",
               }}
-            />
-          )}
-        </Stack>
+              onClick={() => handleToggleGiftGoalDrawer(true)}
+            >
+              <RedeemSharpIcon sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }} />
+            </Box>
+            <Box
+              id="musicPost"
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgba(96, 100, 106, 0.4)",
+                borderRadius: "10px",
+                width: "2rem !important",
+                height: "2rem !important",
+                cursor: "pointer",
+                position: "relative",
+                zIndex: "999",
+              }}
+              onClick={() => handleToggleMusicDrawer(true)}
+            >
+              <AudiotrackSharpIcon sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }} onClick={() => handleToggleMusicDrawer(true)} />
+            </Box>
+            {liveStreamMode === "My Party" ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "rgba(96, 100, 106, 0.4)",
+                  borderRadius: "10px",
+                  width: "2rem !important",
+                  height: "2rem !important",
+                }}
+              >
+                <VideoCallSharpIcon sx={{ fontSize: "1.4rem", color: "white", fontWeight: "bold" }} />
+              </Box>
+            ) : (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "transparent",
+                  borderRadius: "10px",
+                  width: "2rem !important",
+                  height: "2rem !important",
+                }}
+              />
+            )}
+          </Stack>
 
-        <Box
-          sx={{
-            width: "100%",
-            position: "relative",
-            top: "-154px",
-            borderColor: "red",
-            maxHeight: "60%",
-            marginTop: "2rem",
-            height: "100%",
-            overflow: "hidden",
-            // background: "blue",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+          {/* Live Chat Section */}
           <Box
             sx={{
-              flex: "1",
-              width: "90%",
+              width: "100%",
               position: "relative",
-              paddingLeft: "9px",
-              bottom: "1px",
-              maxHeight: "500px",
-              overflowY: "hidden",
-              // background: "red",
+              top: "-154px",
+              borderColor: "red",
+              maxHeight: "60%",
+              marginTop: "2rem",
+              height: "100%",
+              overflow: "hidden",
+              // background: "blue",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             <Box
               sx={{
-                height: "40%",
-                background: "black",
-                opacity: "1",
-                zIndex: "1000",
+                flex: "1",
+                width: "90%",
+                position: "relative",
+                paddingLeft: "9px",
+                bottom: "1px",
+                maxHeight: "500px",
+                overflowY: "hidden",
+                // background: "red",
               }}
             >
               <Box
                 sx={{
-                  position: "fixed",
-                  height: "25%",
-                  width: "70%",
-                  // background: "blue",
-                  background: "rgb(0, 0, 0)",
-                  background:
-                    "linear-gradient(180deg, black, rgba(0, 0, 0, 0.5), rgb(0, 0, 0, 0.02));",
-                  // background: "rgba(0, 0, 0, 0.5)",
+                  height: "40%",
+                  // background: "black",
                   opacity: "1",
                   zIndex: "1000",
                 }}
-              ></Box>
+              >
+                <Box
+                  sx={{
+                    position: "fixed",
+                    height: "25%",
+                    width: "70%",
+                    // background: "blue",
+                    // background: "rgb(0, 0, 0)",
+                    // background: "linear-gradient(180deg, black, rgba(0, 0, 0, 0.5), rgb(0, 0, 0, 0.02));",
+                    // background: "rgba(0, 0, 0, 0.5)",
+                    opacity: "1",
+                    zIndex: "1000",
+                  }}
+                ></Box>
+              </Box>
+              {liveChatData.map((chatItem) => liveChatItem(chatItem))}
+              <div ref={myRef} />
             </Box>
-            {liveChatData.map((chatItem) => liveChatItem(chatItem))}
-            <div ref={myRef} />
           </Box>
-        </Box>
-        {/* /////////////////////////// work here /////////////////////////////// */}
+          {/* /////////////////////////// work here /////////////////////////////// */}
 
-        <Box
-          sx={{
-            position: "fixed",
-            alignItems: "center",
-            bottom: 0,
-            color: "white",
-            background: "none",
-            width: "95%",
-            margin: "1.5rem auto 1rem auto",
-            marginBottom: "",
-            flexDirection: "row",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "1em 1em",
-            // display: "none",
-          }}
-        >
-          <TextField
-            id="outlined-select-currency"
-            fullWidth
-            placeholder="Message here"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <SendSharpIcon />
-                </InputAdornment>
-              ),
-            }}
-            value={liveChat}
-            onChange={handleSetLiveChat}
+          <Box
             sx={{
-              "& .css-nnbavb": { float: "left" },
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "20px",
-                border: "2px solid white",
-                outline: "none",
-                // borderColor: "white",
-                color: "white !important",
-                marginLeft: "-5px",
-              },
-              "& .MuiInputAdornment-root": { color: "white" },
-              "& .MuiOutlinedInput-notchedOutline": { borderColor: "white" },
+              position: "fixed",
+              alignItems: "center",
+              bottom: 0,
+              color: "white",
+              background: "none",
+              width: "95%",
+              margin: "1.5rem auto 1rem auto",
+              marginBottom: "",
+              flexDirection: "row",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "1em 1em",
+              // display: "none",
             }}
-          />
-          <FavoriteSharpIcon
-            sx={{ color: "white", marginLeft: ".8rem", fontSize: "3rem" }}
-            id="coins"
-          />
-        </Box>
-        {/* <LiveChat messages={liveChatData} setMessages={setLiveChatData} /> */}
-        <LiveStreamDrawer
-          show={toggleLiveStreamMode}
-          handleSetLiveStreamMode={handleSetLiveStreamMode}
-          toggleDrawer={handleToggleLiveStreamMode}
-        />
-        <GuestDrawer show={toggleGuestDrawer} toggleDrawer={setoggleGuestDrawer} />
-        <AddGuestDrawer show={toggleAddGuestDrawer} toggleDrawer={handleToggleAddGuestDrawer} />
-        <GiftGoalDrawer show={toggleGiftGoalDrawer} toggleDrawer={handleToggleGiftGoalDrawer} />
-        <MusicDrawer show={toggleMusicDrawer} toggleDrawer={handleToggleMusicDrawer} />
-      </Container>
+          >
+            <TextField
+              id="outlined-select-currency"
+              fullWidth
+              placeholder="Message here"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <SendSharpIcon />
+                  </InputAdornment>
+                ),
+              }}
+              value={liveChat}
+              onChange={handleSetLiveChat}
+              sx={{
+                "& .css-nnbavb": { float: "left" },
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "20px",
+                  border: "2px solid white",
+                  outline: "none",
+                  // borderColor: "white",
+                  color: "white !important",
+                  marginLeft: "-5px",
+                },
+                "& .MuiInputAdornment-root": { color: "white" },
+                "& .MuiOutlinedInput-notchedOutline": { borderColor: "white" },
+              }}
+            />
+            <FavoriteSharpIcon sx={{ color: "white", marginLeft: ".8rem", fontSize: "3rem" }} id="coins" />
+          </Box>
+          {/* <LiveChat messages={liveChatData} setMessages={setLiveChatData} /> */}
+          <LiveStreamDrawer show={toggleLiveStreamMode} handleSetLiveStreamMode={handleSetLiveStreamMode} toggleDrawer={handleToggleLiveStreamMode} />
+          <GuestDrawer show={toggleGuestDrawer} toggleDrawer={setoggleGuestDrawer} />
+          <AddGuestDrawer show={toggleAddGuestDrawer} toggleDrawer={handleToggleAddGuestDrawer} />
+          <GiftGoalDrawer show={toggleGiftGoalDrawer} toggleDrawer={handleToggleGiftGoalDrawer} />
+          <MusicDrawer show={toggleMusicDrawer} toggleDrawer={handleToggleMusicDrawer} />
+        </Container>
+      </div>
     </>
   );
 };
